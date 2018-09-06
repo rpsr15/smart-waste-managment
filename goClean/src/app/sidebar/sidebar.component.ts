@@ -15,7 +15,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'table', title: 'Groups',  icon:'ti-view-list-alt', class: '' },
     
    
-    { path: 'maps', title: 'Maps',  icon:'ti-map', class: '' },
+   
     
 ];
 

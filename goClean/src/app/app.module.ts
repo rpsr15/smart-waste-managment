@@ -36,7 +36,7 @@ import { NotificationsComponent }   from './notifications/notifications.componen
     SidebarModule,
     NavbarModule,
     FooterModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCh6OO_hNeqm_-zg_zcENn2sfJeAOirGM0'})
 
   ],
   providers: [],

@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-
+import * as Chartist from 'chartist';
 declare var google: any;
 
 @Component({
