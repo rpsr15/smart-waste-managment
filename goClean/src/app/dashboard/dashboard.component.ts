@@ -1,18 +1,71 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
-
+import { latLng, tileLayer, icon, marker, polyline } from 'leaflet';
 declare var $:any;
-declare let L:any;
+
 @Component({
     selector: 'dashboard-cmp',
     moduleId: module.id,
-    templateUrl: 'dashboard.component.html'
+    templateUrl: 'dashboard.component.html',
+    styleUrls: ['dashboard.component.css']
 })
 
 export class DashboardComponent implements OnInit{
-  
+
+    p1 = marker([ -37.715456, 145.040575 ], {
+        icon: icon({
+            iconSize: [ 25, 25 ],
+            iconAnchor: [ 13, 41 ],
+            iconUrl: 'src/assets/img/bin1.png',
+            shadowUrl: 'leaflet/marker-shadow.png'
+        })
+    });
+    p2 = marker([ -37.721867, 145.044221 ], {
+        icon: icon({
+            iconSize: [ 25, 25 ],
+            iconAnchor: [ 13, 41 ],
+            iconUrl: 'src/assets/img/bin2.png',
+            shadowUrl: 'leaflet/marker-shadow.png'
+        })
+    });
+    p3 = marker([ -37.724082, 145.045605 ], {
+        icon: icon({
+            iconSize: [ 25, 25 ],
+            iconAnchor: [ 13, 41 ],
+            iconUrl: 'src/assets/img/bin3.png',
+            shadowUrl: 'leaflet/marker-shadow.png'
+        })
+    });
+    p4 = marker([ -37.723010, 145.048450 ], {
+        icon: icon({
+            iconSize: [ 25, 25 ],
+            iconAnchor: [ 13, 41 ],
+            iconUrl: 'src/assets/img/bin3.png',
+            shadowUrl: 'leaflet/marker-shadow.png'
+        })
+    });
+    p5 = marker([ -37.715456, 145.040575 ], {
+        icon: icon({
+            iconSize: [ 25, 25 ],
+            iconAnchor: [ 13, 41 ],
+            iconUrl: 'src/assets/img/garbage.png',
+            shadowUrl: 'leaflet/marker-shadow.png'
+        })
+    });
+
+    options = {
+        layers: [
+            tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }) , this.p1 , this.p2, this.p3, this.p4
+        ],
+        zoom: 15,
+        center: latLng([ -37.720761, 145.047955 ])
+    };
     ngOnInit(){
-      
+
+
+
         var dataSales = {
           labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
           series: [
@@ -20,7 +73,7 @@ export class DashboardComponent implements OnInit{
             [67, 152, 193, 240, 387, 435, 535, 642, 744],
             [23, 113, 67, 108, 190, 239, 307, 410, 410]
           ]
-          
+
         };
 
 
@@ -105,8 +158,6 @@ export class DashboardComponent implements OnInit{
           series: [62, 32, 6]
         });
 
-
-        const map = L.map('map').setView([51.505, -0.09], 13);
 
     }
 }

@@ -18,6 +18,8 @@ import { IconsComponent }   from './icons/icons.component';
 import { MapsComponent }   from './maps/maps.component';
 import { NotificationsComponent }   from './notifications/notifications.component';
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { CcComponent } from './cc/cc.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { NotificationsComponent }   from './notifications/notifications.componen
     TypographyComponent,
     IconsComponent,
     MapsComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    CcComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { NotificationsComponent }   from './notifications/notifications.componen
     SidebarModule,
     NavbarModule,
     FooterModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCh6OO_hNeqm_-zg_zcENn2sfJeAOirGM0'})
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCh6OO_hNeqm_-zg_zcENn2sfJeAOirGM0'}),
+    LeafletModule.forRoot()
 
   ],
   providers: [],
