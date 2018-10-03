@@ -1,5 +1,7 @@
 import {Position} from 'geojson';
 
+const areasEnum  = Object.freeze({'location1': 'location1', 'location2': 'location2'});
+
 
 export class Bin {
     private capacity: number;
@@ -15,7 +17,7 @@ export class Bin {
         this.hardwareId = hardwareId;
         this.location_area = location_area;
         this.tags = tags;
-    }
+}
 
     getCapacity() {
         return this.capacity;
