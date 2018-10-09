@@ -1,12 +1,12 @@
+<div class="map"
 
-            
+     leaflet
+     [leafletOptions]="options"
+     (leafletMapReady)="onMapReady($event)"
+     (leafletMapZoom)="onZoomLevelChange($event)">
 
-                           <div class="map"
-
-                           leaflet
-                           [leafletOptions]="options">
-
-                           </div>
+</div>
+<app-bin-data></app-bin-data>
 
         <!---->
         <!---->

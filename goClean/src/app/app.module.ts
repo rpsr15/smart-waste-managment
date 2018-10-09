@@ -10,9 +10,9 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 
 import { NguiMapModule} from '@ngui/map';
 
-import { DashboardComponent }   from './dashboard/dashboard.component';
-import { UserComponent }   from './user/user.component';
-import { TableComponent }   from './table/table.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserComponent } from './user/user.component';
+import { TableComponent } from './table/table.component';
 import { TypographyComponent }   from './typography/typography.component';
 import { IconsComponent }   from './icons/icons.component';
 import { MapsComponent }   from './maps/maps.component';
@@ -20,6 +20,10 @@ import { NotificationsComponent }   from './notifications/notifications.componen
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { CcComponent } from './cc/cc.component';
+import { LeafletComponent } from './dashboard/leaflet/leaflet.component';
+import {HttpClientModule} from '@angular/common/http';
+import {BinService} from './services/bin.service';
+import { BinDataComponent } from './dashboard/bin-data/bin-data.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,8 @@ import { CcComponent } from './cc/cc.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    CcComponent
+    CcComponent,
+    BinDataComponent
   ],
   imports: [
     BrowserModule,
@@ -40,10 +45,10 @@ import { CcComponent } from './cc/cc.component';
     NavbarModule,
     FooterModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCh6OO_hNeqm_-zg_zcENn2sfJeAOirGM0'}),
-    LeafletModule.forRoot()
+    LeafletModule.forRoot(), HttpClientModule
 
   ],
-  providers: [],
+  providers: [BinService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

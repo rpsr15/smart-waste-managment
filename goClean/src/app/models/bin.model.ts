@@ -1,17 +1,16 @@
-import {Position} from 'geojson';
 
 const areasEnum  = Object.freeze({'location1': 'location1', 'location2': 'location2'});
 
 
 export class Bin {
     private capacity: number;
-    private location: Position;
+    private location: {lat: number, lon: number};
     private hardwareId: string;
     private location_area: string;
     private tags: string[];
 
 
-    constructor(capacity: number, location: Position, hardwareId: string, location_area: string, tags: string[]) {
+    constructor(capacity: number, location: {lat: number, lon: number}, hardwareId: string, location_area: string, tags: string[]) {
         this.capacity = capacity;
         this.location = location;
         this.hardwareId = hardwareId;
