@@ -15,9 +15,15 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let row of tableData1.dataRows">
+                                <td><input type="checkbox" name="rememberLogin"  ngModel></td>
                                 <td *ngFor="let cell of row">{{cell}}</td>
                             </tr>
                         </tbody>
+                        <!--<tbody>-->
+                        <!--<tr *ngFor="let row of userAry">-->
+                            <!--{{row.getEmail()}}-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
                     </table>
 
                 </div>

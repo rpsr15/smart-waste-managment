@@ -17,28 +17,41 @@ export class TableComponent implements OnInit{
     public tableData1: TableData;
     public tableData2: TableData;
 
+    public userAry:User[] = [];
+
+    public superArray:any[] = [];
+
+    public temp:User;
+
     constructor(private userService: UserService){
-    //private user: User[] = null;
+
     }
 
     ngOnInit(){
-        this.userService.getUserData().then((userData)=>{
-            console.log(userData);
+       this.userService.getUserData().then((userData: User[])=>{
+          //console.log(userData);
+          this.userAry = userData;
+            for(var i:number=0;i<userData.length;i++){
+            let stringArray:string[] = [];
+                    stringArray.push(userData[i].getfirstName()+" "+userData[i].getlastName());
+                    stringArray.push(userData[i].getEmail());
+                   let bak: string = String(userData[i].getNotifed());
+                   stringArray.push(bak);
+              this.superArray.push(stringArray);
+            }
+
+
+
         });
 
 
 
 
+
+
         this.tableData1 = {
-            headerRow: [ 'ID', 'Name', 'Email', 'isNotified', 'Status'],
-            dataRows: [
-                ['1', 'Dakota Rice', 'rice@india.com', '✔', 'Active'],
-                ['2', 'Minerva Hooper', 'Curaçao@china.com', '✔', 'Active'],
-                ['3', 'Sage Rodriguez', 'chau@gmai.com', '✔', 'Deleted'],
-                ['4', 'Philip Chaney', 'tut@gmail.com', '✔', 'Active'],
-                ['5', 'Doris Greene', 'doris@outlook.com', '✘', 'Deleted'],
-                ['6', 'Mason Porter', 'porter@latrobe.edu.au', '✔', 'Deleted']
-            ]
+            headerRow: [ 'Select', 'Name', 'Email', 'isNotified'],
+            dataRows: this.superArray
         };
         this.tableData2 = {
             headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
@@ -51,5 +64,13 @@ export class TableComponent implements OnInit{
                 ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
             ]
         };
+
+       // for(var i=0;i<this.userAry.length;i++) {
+       //     console.log("THIS")
+       //     console.log(this.userAry[i]);
+       // }
+
     }
+
+
 }

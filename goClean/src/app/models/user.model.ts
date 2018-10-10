@@ -14,5 +14,15 @@ export class User {
     getEmail(){
         return this.email;
     }
+    getfirstName(){
+        return this.firstName;
+    }
 
+    getlastName(){
+        return this.lastName;
+    }
+
+    getNotifed(){
+        return this.notifed;
+    }
 }
