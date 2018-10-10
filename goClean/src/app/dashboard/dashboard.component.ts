@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {latLng, tileLayer, icon, marker, Map} from 'leaflet';
 import {BinService} from '../services/bin.service';
+import {Bin} from '../models/bin.model';
 
 declare var $: any;
 
@@ -12,6 +13,8 @@ declare var $: any;
 })
 
 export class DashboardComponent implements OnInit {
+     bins: Bin[];
+     binArea: string[];
 
     onMapReady(map: Map) {
         console.log('the map is ready');
@@ -75,9 +78,11 @@ export class DashboardComponent implements OnInit {
         center: latLng([ -37.720761, 145.047955 ])
     };
     constructor(private binService: BinService) {
-        this.binService.getBinData().then((binData) => {
-        console.log(binData);
-    });}
+        this.binService.getBinData().then((binData: Bin[]) => {
+        this.bins = binData;
+        console.log(this.bins);
+    }); }
+
     ngOnInit() {
 
 
