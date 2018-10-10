@@ -18,6 +18,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import {HttpClientModule} from '@angular/common/http';
 import {BinService} from './services/bin.service';
 import { BinDataComponent } from './dashboard/bin-data/bin-data.component';
+import {UserService} from "./services/user.service";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { BinDataComponent } from './dashboard/bin-data/bin-data.component';
     LeafletModule.forRoot(), HttpClientModule
 
   ],
-  providers: [BinService],
+  providers: [BinService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,7 +4,7 @@ import {Bin} from '../models/bin.model';
 
 @Injectable()
 export class BinService {
-    binsURL = 'https://bindata-application.herokuapp.com/api/bins/data';
+    binsURL = 'https://bindata-app.herokuapp.com/api/bins/data';
 
     createBinFromJson(jsonObject: object) {
         const capacity = +jsonObject['capacity'];
