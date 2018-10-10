@@ -21,7 +21,8 @@ export class TableComponent implements OnInit{
 
     public superArray:any[] = [];
 
-    public temp:User;
+    public notifyArray:any[] = [];
+
 
     constructor(private userService: UserService){
 
@@ -65,11 +66,16 @@ export class TableComponent implements OnInit{
             ]
         };
 
-       // for(var i=0;i<this.userAry.length;i++) {
-       //     console.log("THIS")
-       //     console.log(this.userAry[i]);
-       // }
 
+
+    }
+    handleChange(data){
+        this.notifyArray.push(data);
+    }
+
+    sendNotification(){
+        console.log("Here is data of users to be notified");
+        console.log(this.notifyArray);
     }
 
 

@@ -6,6 +6,7 @@
                     <h4 class="title">Members</h4>
                     <p class="category">Manage members here</p>
                 </div>
+                <button type="button" class="btn btn-primary btn-round" style="margin-left: 90%;" (click)="sendNotification()">Success</button>
                 <div class="content table-responsive table-full-width">
                     <table class="table table-striped">
                         <thead>
@@ -13,17 +14,20 @@
                                 <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr *ngFor="let row of tableData1.dataRows">
-                                <td><input type="checkbox" name="rememberLogin"  ngModel></td>
-                                <td *ngFor="let cell of row">{{cell}}</td>
-                            </tr>
-                        </tbody>
                         <!--<tbody>-->
-                        <!--<tr *ngFor="let row of userAry">-->
-                            <!--{{row.getEmail()}}-->
-                        <!--</tr>-->
+                            <!--<tr *ngFor="let row of tableData1.dataRows">-->
+                                <!--<td><input type="checkbox" name="rememberLogin"  ngModel></td>-->
+                                <!--<td *ngFor="let cell of row">{{cell}}</td>-->
+                            <!--</tr>-->
                         <!--</tbody>-->
+                        <tbody>
+                        <tr *ngFor="let row of userAry">
+                            <td><input type="checkbox"  [checked]="row.getNotifed()" (change)="handleChange(row)" ngModel></td>
+                            <td>{{row.getfirstName()}} {{row.getlastName()}}<td>
+                            <td>{{row.getEmail()}}<td>
+                            <td>{{row.getNotifed()}}<td>
+                        </tr>
+                        </tbody>
                     </table>
 
                 </div>
