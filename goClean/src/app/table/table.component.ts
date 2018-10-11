@@ -22,6 +22,7 @@ export class TableComponent implements OnInit{
     public superArray:any[] = [];
 
     public notifyArray:any[] = [];
+    public editMode:boolean = false;
 
 
     constructor(private userService: UserService){
@@ -54,17 +55,17 @@ export class TableComponent implements OnInit{
             headerRow: [ 'Select', 'Name', 'Email', 'isNotified'],
             dataRows: this.superArray
         };
-        this.tableData2 = {
-            headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
-            dataRows: [
-                ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
-                ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
-                ['3', 'Sage Rodriguez', '$56,142', 'Netherlands', 'Baileux' ],
-                ['4', 'Philip Chaney', '$38,735', 'Korea, South', 'Overland Park' ],
-                ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
-                ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
-            ]
-        };
+        // this.tableData2 = {
+        //     headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
+        //     dataRows: [
+        //         ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
+        //         ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
+        //         ['3', 'Sage Rodriguez', '$56,142', 'Netherlands', 'Baileux' ],
+        //         ['4', 'Philip Chaney', '$38,735', 'Korea, South', 'Overland Park' ],
+        //         ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
+        //         ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
+        //     ]
+        // };
 
 
 
@@ -73,9 +74,14 @@ export class TableComponent implements OnInit{
         this.notifyArray.push(data);
     }
 
+    enableEdit(){
+        this.editMode = true;
+    }
+
     sendNotification(){
-        console.log("Here is data of users to be notified");
-        console.log(this.notifyArray);
+
+        // console.log("Here is data of users to be notified");
+        // console.log(this.notifyArray);
     }
 
 

@@ -3,15 +3,24 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
+                   <div class="col-md-8">
                     <h4 class="title">Members</h4>
                     <p class="category">Manage members here</p>
+                   </div>
+                    <div class="col-md-4">
+                        <button *ngIf="!editMode" type="button" class="btn btn-primary btn-round pull-right"  (click)="enableEdit()">Edit</button>
+                        <button *ngIf="editMode" type="button" class="btn btn-primary btn-round pull-right"  (click)="sendNotification()">Send</button>
+                    </div>
                 </div>
-                <button type="button" class="btn btn-primary btn-round" style="margin-left: 90%;" (click)="sendNotification()">Success</button>
                 <div class="content table-responsive table-full-width">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                <!--<th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>-->
+                                <th *ngIf="editMode">Select</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Is-Notified</th>
                             </tr>
                         </thead>
                         <!--<tbody>-->
@@ -20,15 +29,23 @@
                                 <!--<td *ngFor="let cell of row">{{cell}}</td>-->
                             <!--</tr>-->
                         <!--</tbody>-->
+                        <!--<tbody>-->
+                        <!--<tr *ngFor="let row of userAry">-->
+                            <!--<td *ngIf="editMode"><input type="checkbox"  [checked]="row.getNotifed()" (change)="handleChange(row)" ngModel></td>-->
+                            <!--<td>{{row.getfirstName()}}<td>-->
+                            <!--<td>{{row.getEmail()}}<td>-->
+                            <!--<td>{{row.getNotifed()}}<td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
                         <tbody>
-                        <tr *ngFor="let row of userAry">
-                            <td><input type="checkbox"  [checked]="row.getNotifed()" (change)="handleChange(row)" ngModel></td>
-                            <td>{{row.getfirstName()}} {{row.getlastName()}}<td>
-                            <td>{{row.getEmail()}}<td>
-                            <td>{{row.getNotifed()}}<td>
+                            <tr *ngFor="let row of superArray">
+                            <td *ngIf="editMode"><input type="checkbox"  [checked]="row.getNotifed()" (change)="handleChange(row)" ngModel></td>
+                            <td *ngFor="let cell of row">{{cell}}</td>
                         </tr>
                         </tbody>
                     </table>
+
+
 
                 </div>
             </div>
