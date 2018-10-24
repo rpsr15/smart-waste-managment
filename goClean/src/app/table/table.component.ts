@@ -23,23 +23,23 @@ export class TableComponent implements OnInit{
 
     public notifyArray:any[] = [];
     public editMode:boolean = false;
-
+    public notifySent:boolean = false;
 
     constructor(private userService: UserService){
 
     }
 
     ngOnInit(){
-       this.userService.getUserData().then((userData: User[])=>{
-          //console.log(userData);
-          this.userAry = userData;
+        this.userService.getUserData().then((userData: User[])=>{
+            //console.log(userData);
+            this.userAry = userData;
             for(var i:number=0;i<userData.length;i++){
-            let stringArray:string[] = [];
-                    stringArray.push(userData[i].getfirstName()+" "+userData[i].getlastName());
-                    stringArray.push(userData[i].getEmail());
-                   let bak: string = String(userData[i].getNotifed());
-                   stringArray.push(bak);
-              this.superArray.push(stringArray);
+                let stringArray:string[] = [];
+                stringArray.push(userData[i].getfirstName()+" "+userData[i].getlastName());
+                stringArray.push(userData[i].getEmail());
+                let bak: string = String(userData[i].getNotifed());
+                stringArray.push(bak);
+                this.superArray.push(stringArray);
             }
 
 
@@ -79,9 +79,12 @@ export class TableComponent implements OnInit{
     }
 
     sendNotification(){
-
-        // console.log("Here is data of users to be notified");
-        // console.log(this.notifyArray);
+        if(this.editMode) {
+            this.editMode = false;
+            this.notifySent = true;
+        }
+        console.log("Here is data of users to be notified");
+        console.log(this.notifyArray);
     }
 
 
