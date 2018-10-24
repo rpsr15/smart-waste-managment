@@ -18,6 +18,12 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import {HttpClientModule} from '@angular/common/http';
 import {BinService} from './services/bin.service';
 import { BinDataComponent } from './dashboard/bin-data/bin-data.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster';
+import {LeafletMarkerClusterDirective} from '@asymmetrik/ngx-leaflet-markercluster/dist/leaflet-markercluster/leaflet-markercluster.directive';
+
+
 
 @NgModule({
   declarations: [
@@ -38,7 +44,8 @@ import { BinDataComponent } from './dashboard/bin-data/bin-data.component';
     NavbarModule,
     FooterModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCh6OO_hNeqm_-zg_zcENn2sfJeAOirGM0'}),
-    LeafletModule.forRoot(), HttpClientModule
+    LeafletModule.forRoot(), HttpClientModule,
+      FormsModule, ReactiveFormsModule, NgMultiSelectDropDownModule.forRoot()
 
   ],
   providers: [BinService],

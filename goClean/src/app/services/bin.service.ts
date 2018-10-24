@@ -4,7 +4,7 @@ import {Bin} from '../models/bin.model';
 
 @Injectable()
 export class BinService {
-    binsURL = 'https://bindata-application.herokuapp.com/api/bins/data';
+    binsURL = 'https://bindata-app.herokuapp.com/api/bins/data';
 
     createBinFromJson(jsonObject: object) {
         const capacity = +jsonObject['capacity'];
@@ -18,10 +18,17 @@ export class BinService {
 
     constructor(private httpService: HttpClient) {}
 
-     getBinData() {
+    getLocations() {
+        const promise = new Promise((resolve, reject) => {
+            resolve(['LTU Bundoora Campus', 'Bundoora', 'Heidelberg']);
+        });
+        return promise;
+    }
+
+    getBinDataForLocation(location: string) {
 
         const promise = new Promise((resolve, reject) => {
-            const binsData = [];
+            const binsData: Bin[] = [];
             this.httpService.get(this.binsURL).subscribe(
                 (data) => {
                     const myObjStr = JSON.stringify(data);
@@ -29,7 +36,30 @@ export class BinService {
                     const k = Object.keys(bins);
                     for ( const bin in bins) {
                         const strIndex = <string> bin;
-                        const binObj = bins[strIndex];
+                        const binObj = bins[strIndex] as Bin;
+                        binsData.push(this.createBinFromJson(binObj));
+                    }
+
+                    resolve(binsData);
+
+                }
+            );
+        });
+        return promise;
+    }
+
+     getBinData() {
+
+        const promise = new Promise((resolve, reject) => {
+            const binsData: Bin[] = [];
+            this.httpService.get(this.binsURL).subscribe(
+                (data) => {
+                    const myObjStr = JSON.stringify(data);
+                    const bins = JSON.parse(myObjStr) as Object;
+                    const k = Object.keys(bins);
+                    for ( const bin in bins) {
+                        const strIndex = <string> bin;
+                        const binObj = bins[strIndex] as Bin;
                         binsData.push(this.createBinFromJson(binObj));
                     }
 
