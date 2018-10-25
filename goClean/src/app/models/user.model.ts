@@ -3,6 +3,7 @@ export class User {
     private firstName: string;
     private lastName: string;
     private notifed: boolean;
+    private password: string;
 
     constructor(email:string,firstName:string,lastName:string,notifed:boolean){
         this.email = email;
@@ -14,6 +15,11 @@ export class User {
     getEmail(){
         return this.email;
     }
+
+    getPassword(){
+        return this.password;
+    }
+
     getfirstName(){
         return this.firstName;
     }

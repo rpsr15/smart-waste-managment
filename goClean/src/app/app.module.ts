@@ -19,6 +19,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {BinService} from './services/bin.service';
 import { BinDataComponent } from './dashboard/bin-data/bin-data.component';
 import {UserService} from "./services/user.service";
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import {FormsModule} from "@angular/forms";
+import {AuthService} from "./services/auth.service";
+import {AuthenticationService} from "./services/authentication.service";
+
 
 @NgModule({
   declarations: [
@@ -30,7 +36,10 @@ import {UserService} from "./services/user.service";
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    BinDataComponent
+    BinDataComponent,
+    LoginComponent,
+    HomeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -38,11 +47,12 @@ import {UserService} from "./services/user.service";
     SidebarModule,
     NavbarModule,
     FooterModule,
+    FormsModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCh6OO_hNeqm_-zg_zcENn2sfJeAOirGM0'}),
     LeafletModule.forRoot(), HttpClientModule
 
   ],
-  providers: [BinService, UserService],
+  providers: [BinService, UserService, AuthService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

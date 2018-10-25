@@ -7,6 +7,8 @@ import { TypographyComponent }   from './typography/typography.component';
 import { IconsComponent }   from './icons/icons.component';
 import { MapsComponent }   from './maps/maps.component';
 import { NotificationsComponent }   from './notifications/notifications.component';
+import {RouteGuard} from "./route-guard";
+import {LoginComponent} from "./login/login.component";
 
 
 export const AppRoutes: Routes = [
@@ -15,17 +17,18 @@ export const AppRoutes: Routes = [
         redirectTo: 'dashboard',
         pathMatch: 'full',
     },
+
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
     },
     {
         path: 'user',
-        component: UserComponent
+        component: UserComponent,
     },
     {
         path: 'table',
-        component: TableComponent
+        component: TableComponent,
     },
     {
         path: 'typography',
@@ -42,5 +45,9 @@ export const AppRoutes: Routes = [
     {
         path: 'notifications',
         component: NotificationsComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     }
-]
+];

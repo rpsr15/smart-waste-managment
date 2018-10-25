@@ -39,6 +39,12 @@ export class NavbarComponent implements OnInit{
         }
         return 'Dashboard';
     }
+
+    logout(){
+        console.log('loggging out');
+        localStorage.removeItem('currentUser');
+    }
+
     sidebarToggle(){
         var toggleButton = this.toggleButton;
         var body = document.getElementsByTagName('body')[0];
