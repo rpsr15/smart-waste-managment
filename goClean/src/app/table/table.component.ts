@@ -35,7 +35,7 @@ export class TableComponent implements OnInit{
             this.userAry = userData;
             for(var i:number=0;i<userData.length;i++){
                 let stringArray:string[] = [];
-                stringArray.push(userData[i].getfirstName()+" "+userData[i].getlastName());
+                stringArray.push(userData[i].getName());
                 stringArray.push(userData[i].getEmail());
                 let bak: string = String(userData[i].getNotifed());
                 stringArray.push(bak);
@@ -90,6 +90,9 @@ export class TableComponent implements OnInit{
         }
         console.log("Here is data of users to be notified");
         console.log(this.notifyArray);
+
+
+
     }
 
 

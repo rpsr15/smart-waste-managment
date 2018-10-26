@@ -1,14 +1,12 @@
 export class User {
     private email: string;
-    private firstName: string;
-    private lastName: string;
+    private name: string;
     private notifed: boolean;
     private password: string;
 
-    constructor(email:string,firstName:string,lastName:string,notifed:boolean){
+    constructor(email:string,name:string,notifed:boolean){
         this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.notifed = notifed;
     }
 
@@ -20,12 +18,8 @@ export class User {
         return this.password;
     }
 
-    getfirstName(){
-        return this.firstName;
-    }
-
-    getlastName(){
-        return this.lastName;
+    getName(){
+        return this.name;
     }
 
     getNotifed(){
