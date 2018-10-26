@@ -71,7 +71,12 @@ export class TableComponent implements OnInit{
 
     }
     handleChange(data){
-        this.notifyArray.push(data);
+        //console.log(data.email);
+        let temp = {email:data.email};
+        this.notifyArray.push(temp);
+
+
+        console.log(this.notifyArray);
     }
 
     enableEdit(){

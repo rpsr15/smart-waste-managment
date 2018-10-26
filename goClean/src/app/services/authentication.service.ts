@@ -14,23 +14,34 @@ export class AuthenticationService {
     };
 
     login(email: string, password: string) {
-        console.log('SUCCESS');
-        console.log(email,password);
+        console.log('IN LOGIN');
+        // console.log(email,password);
 
-        this.http.post("https://bindata-app.herokuapp.com/api/login",
-            {
-                "email": "abhi@gmail.com",
-                "password": "qwerty"
-            },this.httpOptions)
-            .subscribe(
-                data => {
-                    console.log("POST Request is successful ", data);
-                    localStorage.setItem('currentUser', 'active');
-                },
-                error => {
-                    console.log("Error", error);
-                }
-            );
+
+        return this.http.post("https://bindata-app.herokuapp.com/api/login",{
+            "email": email,
+            "password": password
+        },this.httpOptions)
+            .pipe(map((response: Response) => response));
+
+
+
+
+        // this.http.post("https://bindata-app.herokuapp.com/api/login",
+        //     {
+        //         "email": email,
+        //         "password": password
+        //     },this.httpOptions)
+        //     .subscribe(
+        //         data => {
+        //             console.log("POST Request is successful ", data);
+        //             localStorage.setItem('currentUser', 'active');
+        //         },
+        //         error => {
+        //             console.log("Error", error);
+        //         }
+        //     );
+
 
 
 
@@ -54,5 +65,33 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
     }
 
+    signUp(name:string,email: string, password: string){
+
+        console.log('IN SIGNUP');
+
+        return this.http.post("https://bindata-app.herokuapp.com/api/signUp",{
+            "name":name,
+            "email": email,
+            "password": password
+        },this.httpOptions)
+            .pipe(map((response: Response) => response));
+
+        // this.http.post("https://bindata-app.herokuapp.com/api/signUp",
+        //     {
+        //         "name":name,
+        //         "email": email,
+        //         "password": password
+        //     },this.httpOptions)
+        //     .subscribe(
+        //         data => {
+        //             console.log("POST Request is successful ", data);
+        //
+        //         },
+        //         error => {
+        //             console.log("Error", error);
+        //         }
+        //     );
+
+    }
 
 }

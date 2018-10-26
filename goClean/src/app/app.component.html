@@ -13,7 +13,7 @@
                 <div class="signin-form">
                     <h2 *ngIf="!isSignUp" class="form-title">Login</h2>
                     <h2 *ngIf="isSignUp" class="form-title">Sign Up</h2>
-                    <form method="POST" class="register-form" id="login-form" (ngSubmit)="onSubmitLogin(f)" #f="ngForm">
+                    <form method="POST" class="register-form" id="login-form"  #f="ngForm">
                         <div *ngIf="isSignUp" class="form-group">
                             <div class="labelTest" for="name"><i class="zmdi zmdi-account material-icons-name"></i></div>
                             <input type="text" name="name" id="name" ngModel placeholder="Your Name"/>
@@ -36,7 +36,12 @@
 
                 </div>
             </div>
+            <div *ngIf="showAlert" class="alert alert-{{role}} alert-dismissible" role="alert">
+                <a href="#" (click)="dismissAlert()" style="right: 11px;" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{msg}}
+            </div>
         </div>
+
     </section>
     <!--<div class="container">-->
         <!--<div class="row">-->

@@ -15,6 +15,9 @@ export class AppComponent implements OnInit{
 
   logStatus:boolean = false;
   isSignUp:boolean = false;
+  showAlert:boolean = false;
+  msg:string;
+  role:string;
   username;
   password;
   authenticationService:AuthenticationService;
@@ -37,12 +40,22 @@ export class AppComponent implements OnInit{
 
 
     onSubmitLogin(form: NgForm){
-       this.logStatus = true;
+       //this.logStatus = true;
         console.log("Hello login");
         // console.log(form.value);
         // console.log(form.value.email);
         // console.log(form.value.your_pass);
-        this.authenticationService.login(form.value.email,form.value.your_pass);
+        this.authenticationService.login(form.value.email,form.value.your_pass)
+            .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
+                    this.logStatus = true;
+                    form.resetForm();
+                },
+                error => { console.log('IN RETURN COMPONENT error',error); // Error if any
+                    form.resetForm();
+                    this.msg = 'Email or Password is incorrect';
+                    this.role = 'danger';
+                    this.showAlert  = true;
+                });
            // this.authenticationService.test();
     }
 
@@ -53,14 +66,31 @@ export class AppComponent implements OnInit{
         console.log(form.value);
         // console.log(form.value.email);
         // console.log(form.value.your_pass);
+        this.authenticationService.signUp(form.value.name,form.value.email,form.value.your_pass)
+            .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
+                form.resetForm();
+                    this.msg = 'SignUp Successful';
+                this.role = 'success';
+                this.showAlert  = true;
+                },
+                error => { console.log('IN RETURN COMPONENT error',error); // Error if any
+                    form.resetForm();
+                    this.msg = 'User Already Exist';
+                    this.role = 'danger';
+                    this.showAlert  = true;
+            });
 
+    };
+
+    dismissAlert(){
+        this.showAlert =false;
     }
 
     signUpSelected(){
       this.isSignUp = true;
-    }
+    };
 
     logInSelected(){
       this.isSignUp = false;
-    }
+    };
 }
