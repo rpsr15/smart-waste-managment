@@ -1,0 +1,1011 @@
+{
+
+ "8aeeb6fe-bdb9-400d-baea-6a1fd158bb61" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a11",
+ "level":"0"
+}
+},
+ "dad96227-c34f-49c8-9194-2d55d21a1ec9" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a10",
+ "level":"0"
+}
+},
+ "ea5ff2d3-b59e-4709-a030-e2a43f1d9959" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a13",
+ "level":"0"
+}
+},
+ "c7bd1eeb-1c59-4602-8b28-110cde708bdf" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a12",
+ "level":"0"
+}
+},
+ "7bd21330-48b3-420a-a61a-aa6552be5128" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a15",
+ "level":"0"
+}
+},
+ "8f02c312-99e3-45ee-af0e-e7abebf610db" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a14",
+ "level":"0"
+}
+},
+ "0d3c4bb3-dc7e-437b-b5be-ceab191e3b44" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a16",
+ "level":"0"
+}
+},
+ "2f41a9e0-51c0-4e5c-b948-780293ea90cf" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a1",
+ "level":"0"
+}
+},
+ "94b288c1-840e-49fd-b924-765f6c6ad9f3" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a2",
+ "level":"0"
+}
+},
+ "ed0197dc-1f67-4e44-9af2-36d9913982ee" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a3",
+ "level":"0"
+}
+},
+ "893c0dfc-5275-4290-bc1c-648a2d5b4ce5" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a4",
+ "level":"0"
+}
+},
+ "c179604d-1065-49a3-8c95-439612c6e7ee" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a5",
+ "level":"0"
+}
+},
+ "37020501-345e-469f-893e-59439416233d" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a6",
+ "level":"0"
+}
+},
+ "c9ead888-a948-4c88-bd27-43b3ac677b29" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a7",
+ "level":"0"
+}
+},
+ "7281d74e-c9e6-4e2a-a6d3-2431943d7845" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a8",
+ "level":"0"
+}
+},
+ "336a3f73-aaab-4f04-b0f2-49ab509bab33" : {
+ "metadata": {
+ "time": "2018-10-25T00:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a9",
+ "level":"0"
+}
+},
+ "e1a142ad-ca0e-43d8-8362-d7347f2bb431" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a11",
+ "level":"1"
+}
+},
+ "823eb8f2-3594-4e72-9a5e-b25f8ffe08fb" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a10",
+ "level":"1"
+}
+},
+ "a8654e22-de49-4f19-ab0a-6ed63e423fc5" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a13",
+ "level":"1"
+}
+},
+ "785d9949-409c-4ec5-b698-0d0eb406ed64" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a12",
+ "level":"1"
+}
+},
+ "6ee31d32-97c2-48e3-9f0b-7478aae1de93" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a15",
+ "level":"1"
+}
+},
+ "ff4689dc-d028-4bf0-97f7-0f4d548342dc" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a14",
+ "level":"1"
+}
+},
+ "586d4cd5-7744-4722-8aab-36fb8eb15c86" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a16",
+ "level":"1"
+}
+},
+ "52acfc4f-ca25-4dd2-bec3-c777371935f9" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a1",
+ "level":"1"
+}
+},
+ "4b5a9d09-bd1c-4e9b-9528-573e936e667c" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a2",
+ "level":"1"
+}
+},
+ "0baa8865-9a06-4485-84b4-edd829cab065" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a3",
+ "level":"1"
+}
+},
+ "e90fd1e0-f378-4f42-a23e-c2bfd5e6ff93" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a4",
+ "level":"1"
+}
+},
+ "e55ecf85-9b6e-4916-bea9-38ccbb00701c" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a5",
+ "level":"1"
+}
+},
+ "b89191dd-4f81-4c4d-96d9-c4487c76c664" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a6",
+ "level":"1"
+}
+},
+ "f0470e6f-566d-4034-acb7-e01d168ded3e" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a7",
+ "level":"1"
+}
+},
+ "b7ba3c39-ec17-4f21-91fe-39384c9f524f" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a8",
+ "level":"1"
+}
+},
+ "a73430d4-593d-4971-b298-b2119a651d74" : {
+ "metadata": {
+ "time": "2018-10-25T02:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a9",
+ "level":"1"
+}
+},
+ "a3b0371c-9129-48cb-bca8-1dd13be1c54d" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a11",
+ "level":"2"
+}
+},
+ "65ebb237-404c-4d46-ae1a-0ca2827afbd7" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a10",
+ "level":"2"
+}
+},
+ "0985095d-ed9e-4a15-8340-48ca7d3d4fd4" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a13",
+ "level":"2"
+}
+},
+ "62a98c25-3e5c-4d94-ab1b-a5615aa3d74f" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a12",
+ "level":"2"
+}
+},
+ "2fb4aede-c809-45bd-a540-4aeb39556728" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a15",
+ "level":"2"
+}
+},
+ "9261f61a-84da-4a9c-bc6e-3a7e6d3a6524" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a14",
+ "level":"2"
+}
+},
+ "fa84722f-fc1a-468e-8c59-596db49f9e37" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a16",
+ "level":"2"
+}
+},
+ "8cc60f75-bac8-4ad4-9428-8b16ba8be62c" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a1",
+ "level":"2"
+}
+},
+ "3edbd5ee-c38c-4530-8c04-404a3abb12ab" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a2",
+ "level":"2"
+}
+},
+ "1904a8c5-51a7-4b67-bf10-77caf7c7c94f" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a3",
+ "level":"2"
+}
+},
+ "acc848fc-3d61-451e-aa94-ac09552b10a0" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a4",
+ "level":"2"
+}
+},
+ "b2e75d14-9aae-4b74-9541-31d3b5aec21a" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a5",
+ "level":"2"
+}
+},
+ "258f21c9-b03e-417a-a5c9-e405d6655cb8" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a6",
+ "level":"2"
+}
+},
+ "c3571414-2b63-4922-afd0-61f52b589587" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a7",
+ "level":"2"
+}
+},
+ "0add79b5-6c4b-4ba9-b02a-31d3235e7221" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a8",
+ "level":"2"
+}
+},
+ "1ff31e7a-e7c6-4693-bb57-05cb9d51fa60" : {
+ "metadata": {
+ "time": "2018-10-25T04:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a9",
+ "level":"2"
+}
+},
+ "7a3174c6-2e18-4658-b7fa-17d31a2369d7" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a11",
+ "level":"0"
+}
+},
+ "9026ee4d-9c0d-4a93-86c6-3c7cd8c10d1f" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a10",
+ "level":"0"
+}
+},
+ "8f2e9540-a4ae-4847-bfe0-b31ce20ed39c" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a13",
+ "level":"0"
+}
+},
+ "8b8b6cc5-62dc-47d6-8494-ebcf1b09db00" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a12",
+ "level":"0"
+}
+},
+ "23ff3f77-7a43-4d21-b41c-3d816671b67e" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a15",
+ "level":"0"
+}
+},
+ "e63ddc34-ffc3-4ddc-9c1a-a8e847fc939a" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a14",
+ "level":"0"
+}
+},
+ "a6506d0c-96bf-41d8-b07b-3b9be7b5f3d1" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a16",
+ "level":"0"
+}
+},
+ "fcabf043-2c0d-4c77-ba1f-554c533b828e" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a1",
+ "level":"0"
+}
+},
+ "1b56f7d3-a990-44ae-9a2b-dbaf5e2c284a" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a2",
+ "level":"0"
+}
+},
+ "20e78075-c968-4d50-84b9-e9504b52ccbf" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a3",
+ "level":"0"
+}
+},
+ "49db269c-a8cd-472f-a9fe-169ab5a04ab8" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a4",
+ "level":"0"
+}
+},
+ "f6fcc75c-a682-4cf4-8d8a-d67e618321ac" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a5",
+ "level":"0"
+}
+},
+ "7c68137f-45d9-4294-ae1b-17558e19a97d" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a6",
+ "level":"0"
+}
+},
+ "0383db26-8147-48bb-b5ae-ef489cfc1614" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a7",
+ "level":"0"
+}
+},
+ "03678f36-e069-4925-aaf1-58bb5e30def9" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a8",
+ "level":"0"
+}
+},
+ "4f876dd3-8fb6-4101-8df2-f97f248979e5" : {
+ "metadata": {
+ "time": "2018-10-25T06:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a9",
+ "level":"0"
+}
+},
+ "29da6b93-edb6-4bf1-86fc-5da42077c7f6" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a11",
+ "level":"3"
+}
+},
+ "237dbc0f-c15e-4d04-b164-a79419580737" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a10",
+ "level":"3"
+}
+},
+ "c21a7c02-e365-46e8-a72f-3fb1f8bc171b" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a13",
+ "level":"3"
+}
+},
+ "84d1b39d-2958-464d-a1c2-48e4a9dfc296" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a12",
+ "level":"3"
+}
+},
+ "c92cf1aa-4b97-4ba9-a9ae-54c0697835b1" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a15",
+ "level":"3"
+}
+},
+ "9a4e11a9-c5aa-43b0-8c5f-848068cea3ca" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a14",
+ "level":"3"
+}
+},
+ "6e035f6b-0686-4ec4-ada0-c5dca174cfa8" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a16",
+ "level":"3"
+}
+},
+ "85d88f96-55bb-40e0-9500-9fe4d745b66b" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a1",
+ "level":"3"
+}
+},
+ "a8de144e-c2d9-48a7-9ba0-ab4e9c61c66b" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a2",
+ "level":"3"
+}
+},
+ "6a2b1893-dd63-4e33-bdaf-7618d9dbab9d" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a3",
+ "level":"3"
+}
+},
+ "e9a1029e-add7-4e7a-8812-b306610768c5" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a4",
+ "level":"3"
+}
+},
+ "3237299e-a5dc-46fe-b5bb-9a03ca96755d" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a5",
+ "level":"3"
+}
+},
+ "a9645b70-c607-4c87-9333-d385d9c6e317" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a6",
+ "level":"3"
+}
+},
+ "5ee03d24-6576-4148-b85e-f2b3ecd95965" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a7",
+ "level":"3"
+}
+},
+ "dc2d0da9-8b43-4a83-9782-9159d2ea0eee" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a8",
+ "level":"3"
+}
+},
+ "3a41ebb6-aca7-4c12-a942-04d289367a60" : {
+ "metadata": {
+ "time": "2018-10-25T08:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a9",
+ "level":"3"
+}
+},
+ "827087fd-d12a-45a9-be6d-ac17551cf97f" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a11",
+ "level":"0"
+}
+},
+ "fddb57d8-f763-4d54-8983-a69e878ba4c3" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a10",
+ "level":"0"
+}
+},
+ "51c484bd-a19f-4df2-bcc0-c92c0a8f04f1" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a13",
+ "level":"0"
+}
+},
+ "6ce2b484-f861-4467-a0ac-d41b3af00528" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a12",
+ "level":"0"
+}
+},
+ "279c7d24-c647-443a-8d95-c9132cf451df" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a15",
+ "level":"0"
+}
+},
+ "0ed1ff9e-82e5-4572-9436-d159dbd6b8fb" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a14",
+ "level":"0"
+}
+},
+ "14de4678-4f6e-4154-8a61-cf609ccb2166" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a16",
+ "level":"0"
+}
+},
+ "fb213de4-b42b-46f4-a0bd-968a2f12e7d2" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a1",
+ "level":"0"
+}
+},
+ "c28618dc-2e14-4888-b150-718cb639b527" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a2",
+ "level":"0"
+}
+},
+ "e432e416-89d9-44ea-a2b7-821a715e1ca1" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a3",
+ "level":"0"
+}
+},
+ "8deb3934-1521-4aeb-ae35-a507e25904a5" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a4",
+ "level":"0"
+}
+},
+ "1ef764a2-41da-466d-ae14-4b67aeb1f168" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a5",
+ "level":"0"
+}
+},
+ "a65bed24-fe84-4dd7-8a4b-9f3f159b4f57" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a6",
+ "level":"0"
+}
+},
+ "f1e48d7e-a8a6-4a5d-ae91-6c31a0236943" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a7",
+ "level":"0"
+}
+},
+ "1210e68a-7a64-4017-bf11-ab656f447ce6" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a8",
+ "level":"0"
+}
+},
+ "4396ac41-8a74-4b6d-81f6-afe946aac095" : {
+ "metadata": {
+ "time": "2018-10-25T10:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a9",
+ "level":"0"
+}
+},
+ "1b355c7b-80ba-4214-9191-99bd7f2a3c78" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a11",
+ "level":"2"
+}
+},
+ "ab2b2136-666d-43bf-82ea-638d3ba5b319" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a10",
+ "level":"2"
+}
+},
+ "1d0f7493-1471-433d-8083-f3e3a727bb84" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a13",
+ "level":"2"
+}
+},
+ "eb457b71-f63d-41f2-9fc2-26904d67e328" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a12",
+ "level":"2"
+}
+},
+ "8636078b-16d3-491a-b779-a43c136b83a3" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a15",
+ "level":"2"
+}
+},
+ "de7d8b18-0f80-41cb-94d9-db74bd8bfa18" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a14",
+ "level":"2"
+}
+},
+ "c0ce1957-56ad-482d-96c5-c9c937338ba5" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a16",
+ "level":"2"
+}
+},
+ "3d442082-e679-4415-b4ec-b84778734f71" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a1",
+ "level":"2"
+}
+},
+ "a5ba0548-85c2-47e7-bbda-12b3458bbcc3" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a2",
+ "level":"2"
+}
+},
+ "454bd142-4b5b-435e-a6ba-b904708cf721" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a3",
+ "level":"2"
+}
+},
+ "941bf8a9-a1f4-420e-86f4-14a352afee78" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a4",
+ "level":"2"
+}
+},
+ "76e4dfdd-0258-467f-8812-227e50b121ff" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a5",
+ "level":"2"
+}
+},
+ "fddbaa84-2ca0-42f0-8c39-4439b95e98b6" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a6",
+ "level":"2"
+}
+},
+ "99d9b77c-a784-43ba-9853-aaa4c72257f3" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a7",
+ "level":"2"
+}
+},
+ "b2c74630-7f08-46c1-bde2-18225d2cd155" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a8",
+ "level":"2"
+}
+},
+ "85c559b3-7eba-486e-8d43-524de100a475" : {
+ "metadata": {
+ "time": "2018-10-25T12:00" 
+},
+ "payload_fields": {
+ "hardware_id":"a9",
+ "level":"2"
+}
+}
+}

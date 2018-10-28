@@ -99,15 +99,16 @@ export class DashboardComponent implements OnInit {
             
         }
 
-        console.log(this.selectedBins);
-        //
+        // console.log(this.selectedBins);
+        // //
 
-        console.log('update map success');
-        if (this.zoom >= 14) {
-            this.showZoomedMarkers();
-        } else {
-            this.showAggregatedMarkers();
-        }
+        // console.log('update map success');
+        // if (this.zoom >= 14) {
+        //     this.showZoomedMarkers();
+        // } else {
+        //     this.showAggregatedMarkers();
+        // }
+        this.showZoomedMarkers();
     }
 
     showAggregatedMarkers() {
@@ -145,12 +146,76 @@ export class DashboardComponent implements OnInit {
             });
             p.on('click', this.onMarkerClick.bind(this));
 
-            // const customPopup = ``;
-            // const customOptions = {
-            //         maxWidth: 500,
+            const binID = 'adf';
+            const binCapacityLeft = '23';
+            const binMax = '120';
+            const binLocation = 'LTU Bundoora';
+            const binOrganeBackground = '#F5CBA7';
+            const binSafeBackground = '#D5F5E3';
+              
+            const  binRedBackground = '#FADBD8';
+            const customPopup = `<!DOCTYPE html>
+            <html>
+            <head>
+            
+            <style>
+            .card {
+                margin-bottom: 5px;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;
+                width: 100%;
+            }
+            
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            }
+            .leaflet-popup-content {
+                width: 180px;
+                margin: 5px 5px;
+                
+            }
+            .h6 {
+                margin: 5px;
+            }
+            .container {
+                padding: 1px;
+                width: auto;
+            }
+            </style>
+            </head>
+            <body>
+            <div class="card" style="background-color: #47c1c8;">
+              
+              <div class="container" style="padding: 5px;" >
+                <h6 style="color: #37506a;">${binID}</h6>
+                <h7 style="color: #2C3E50;">${ binLocation }</h7>
+                
+                
+              </div>
+              
+            </div>
+            <div class="card" style="background-color: ${binSafeBackground  };">
+              
+              <div class="container" style="padding: 5px;" >
+                
+              <h8 style="color:#283747;">Maximum Capacity:<span> <p style="margin: 0px; font-family: sans-serif;">
+              ${ binMax } </p></span></h8>
+              
+              <h8 style="color:#283747;">Capacity Left: <span><p style="margin: 0px; font-family: sans-serif;"">
+               ${ binCapacityLeft }</p></span></h8>
+                
+              </div>
+              
+            </div>
+            
+            
+            </body>
+            </html> 
+            `;
+            // const customOptions = {,
             //         className : 'custom'
             //     };
-            p.bindPopup('hello world');
+            p.bindPopup(customPopup);
             this.layers.push(p);
         }
 
