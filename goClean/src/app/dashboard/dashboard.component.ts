@@ -154,6 +154,7 @@ export class DashboardComponent implements OnInit {
             const binSafeBackground = '#D5F5E3';
               
             const  binRedBackground = '#FADBD8';
+            const randomImageNumber = Math.floor(Math.random() * 3) + 1  ;
             const customPopup = `<!DOCTYPE html>
             <html>
             <head>
@@ -181,32 +182,49 @@ export class DashboardComponent implements OnInit {
                 padding: 1px;
                 width: auto;
             }
+           
+            
+            .binID {
+	            color:#48cfad;
+	            font-size:18px;
+	            font-weight:300;
+            }
+            .binDetails {
+                color: #FFFFFF;
+                font-weight: bold;
+            }
+
             </style>
             </head>
             <body>
-            <div class="card" style="background-color: #47c1c8;">
+            <div class="card" style="background-color: #47C1C8">
               
               <div class="container" style="padding: 5px;" >
-                <h6 style="color: #37506a;">${binID}</h6>
-                <h7 style="color: #2C3E50;">${ binLocation }</h7>
+                <p class="binDetails" style = "margin:0px; font-size: 12px">${binID}</p>
+                <p class="binDetails" style = "margin:0px; font-size: 12px">${ binLocation }</p>
                 
                 
               </div>
               
             </div>
-            <div class="card" style="background-color: ${binSafeBackground  };">
-              
-              <div class="container" style="padding: 5px;" >
-                
-              <h8 style="color:#283747;">Maximum Capacity:<span> <p style="margin: 0px; font-family: sans-serif;">
-              ${ binMax } </p></span></h8>
-              
-              <h8 style="color:#283747;">Capacity Left: <span><p style="margin: 0px; font-family: sans-serif;"">
-               ${ binCapacityLeft }</p></span></h8>
-                
-              </div>
-              
+            <div class="card" style="padding:5px;" >
+            
+                <div class="container">
+                    <div class="container" style="float:left; width:50%">
+                        <img src="src/assets/img/binimg${randomImageNumber}.png" style="border-radius:5px" width="70" height="80"></img>
+                    </div>
+                    <div class="container" style="float:left; width:50%">
+                    <div>Max Capacity:</div>
+                    <div style="color:#47C1C8; font-size:16px; font-weight: bold">120</div>
+                    <div>Capacity Left:</div>
+                    <div style="color:#47C1C8; font-size:16px; font-weight: bold">12</div>
+                    </div>
+                </div>
+           
+
+
             </div>
+           
             
             
             </body>
