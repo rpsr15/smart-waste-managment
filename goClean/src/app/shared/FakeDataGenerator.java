@@ -3,12 +3,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Scanner;
+import java.util.TimeZone;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Random;
 import java.util.HashMap;
+import java.util.Locale;
 import java.time.*;
 import java.util.UUID;
+import java.util.Date;
 
 // empty bins every sunday
 public class FakeDataGenerator {
@@ -16,52 +20,62 @@ public class FakeDataGenerator {
 
         Map<String, Integer> bins = new HashMap<>();
 
-        bins.put("a1", 0);
-        bins.put("a2", 0);
-        bins.put("a3", 0);
-        bins.put("a4", 0);
-        bins.put("a5", 0);
-        bins.put("a6", 0);
-        bins.put("a7", 0);
-        bins.put("a8", 0);
-        bins.put("a9", 0);
-        bins.put("a10", 0);
-        bins.put("a11", 0);
-        bins.put("a12", 0);
-        bins.put("a13", 0);
-        bins.put("a14", 0);
-        bins.put("a15", 0);
-        bins.put("a16", 0);
+        bins.put("a1", 120);
+        bins.put("a2", 120);
+        bins.put("a3", 120);
+        bins.put("a4", 120);
+        bins.put("a5", 120);
+        bins.put("a6", 120);
+        bins.put("a7", 120);
+        bins.put("a8", 120);
+        bins.put("a9", 120);
+        bins.put("a10", 120);
+        bins.put("a11", 120);
+        bins.put("a12", 120);
+        bins.put("a13", 120);
+        bins.put("a14", 120);
+        bins.put("a15", 120);
+        bins.put("a16", 120);
 
         LocalDateTime currentDate = LocalDateTime.now();
         Writer wr = null;
         int binMax = 120;
-        int binCurrent = 0;
+        int binLeft = 120;
 
         try {
             wr = new FileWriter("binReadings.json");
             // start json
             wr.write("{\n");
 
-            LocalDateTime date = LocalDate.of(2018, 10, 25).atTime(00, 00);
+            LocalDateTime date = LocalDate.of(2018, 10, 10).atTime(00, 00);
             Random random = new Random();
             while (date.plusHours(2).compareTo(currentDate) < 0) {
 
                 // generate unique key
 
-                int randomNumber = random.nextInt(3 + 1 - 0) + 0;
-
                 for (Map.Entry<String, Integer> entry : bins.entrySet()) {
+                    // if sunday and between 5 am to 8 am empty the bin
+                    if (date.getDayOfWeek().equals(DayOfWeek.SUNDAY) && (date.getHour() >= 5 && date.getHour() <= 7)) {
+                        entry.setValue(120);
+                    }
+
+                    int randomNumber = random.nextInt(3 + 1 - 0) + 0;
+
                     String uniqueID = UUID.randomUUID().toString();
                     String binID = entry.getKey();
-                    binCurrent = entry.getValue();
-                    binCurrent = binCurrent + randomNumber;
-                    if (binCurrent >= binMax) {
-                        binCurrent = binMax;
+                    binLeft = entry.getValue();
+                    binLeft = binLeft - randomNumber;
+                    if (binLeft <= 0) {
+                        binLeft = 0;
                     }
+                    Date out = Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMMM yyyy HH:mm:ss z");
+                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                     wr.write(String.format(
                             "\n \"%s\" : {\n \"metadata\": {\n \"time\": \"%s\" \n},\n \"payload_fields\": {\n \"hardware_id\":\"%s\",\n \"level\":\"%s\"\n}\n},",
-                            uniqueID, date.toString(), binID, binCurrent));
+                            uniqueID, sdf.format(out), binID, binLeft));
+
+                    entry.setValue(binLeft);
                 }
                 date = date.plusHours(2);
             }

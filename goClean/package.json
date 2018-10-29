@@ -24,6 +24,7 @@
     "@asymmetrik/ngx-leaflet": "^4.0.0",
     "@asymmetrik/ngx-leaflet-markercluster": "^1.0.0",
     "@ngui/map": "0.30.3",
+    "@swimlane/ngx-charts": "^9.0.0",
     "@types/googlemaps": "3.30.13",
     "@types/leaflet.markercluster": "^1.0.3",
     "arrive": "2.4.1",

@@ -5,6 +5,7 @@ import {Bin} from '../models/bin.model';
 @Injectable()
 export class BinService {
     binsURL = 'https://bindata-app.herokuapp.com/api/bins/data';
+    locationsURL = 'https://bindata-app.herokuapp.com/api/getLocations';
 
     createBinFromJson(jsonObject: object) {
         const capacity = +jsonObject['capacity'];
@@ -17,10 +18,20 @@ export class BinService {
     }
 
     constructor(private httpService: HttpClient) {}
-
+     parseObject(obj) {
+         const locations = [];
+        for (const v in obj) { 
+           locations.push(obj[v]);
+         }
+         return locations;
+    }
     getLocations() {
         const promise = new Promise((resolve, reject) => {
-            resolve(['LTU Bundoora Campus', 'Bundoora', 'Heidelberg']);
+            this.httpService.get(this.locationsURL).subscribe(
+                (data: Object) => {
+                    resolve(this.parseObject(data));
+                }
+            );
         });
         return promise;
     }

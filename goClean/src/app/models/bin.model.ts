@@ -11,7 +11,8 @@ export class Bin {
     private currentLevel: number;
 
 
-    constructor(capacity: number, location: {latitude: number, longitude: number}, hardwareId: string, location_area: string, tags: string[]) {
+    constructor(capacity: number, location: {latitude: number, longitude: number},
+         hardwareId: string, location_area: string, tags: string[]) {
         this.capacity = capacity;
         this.location = location;
         this.hardwareId = hardwareId;

@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
 
 
         this.binService.getLocations().then((locations: [String]) => {
+
             this.locations = locations;
             this.areaList = this.locations;
             this.selectedAreas = this.locations;
@@ -57,6 +58,8 @@ export class DashboardComponent implements OnInit {
                 this.staticBinInfo = binData;
                 this.selectedBins = this.staticBinInfo;
                 this.updateMap();
+
+        
             });
 
             console.log('get data success');
@@ -68,34 +71,31 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
 
-        // this.dropdownSettings = {
-        //     singleSelection: false,
-        //     idField: 'item_id',
-        //     textField: 'item_text',
-        //     selectAllText: 'Select All',
-        //     unSelectAllText: 'UnSelect All',
-        //     itemsShowLimit: 3,
-        //     allowSearchFilter: true
-        // };
+        this.dropdownSettings = {
+            singleSelection: false,
+            idField: 'item_id',
+            textField: 'item_text',
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            itemsShowLimit: 1,
+            allowSearchFilter: true
+        };
     }
 
     // filters bins based on location selected and then creates marker to show on the map
     updateMap() {
+
+
         this.selectedBins = [];
         // filter bins for selected locations
             console.log(this.staticBinInfo.length);
         for (let i = 0; i < this.staticBinInfo.length; i++) {
 
-            // if ( this.selectedAreas.indexOf(this.staticBinInfo[i].getLocationArea()) !== -1) {
-            //     this.selectedBins.push(this.staticBinInfo[i]);
-            // }
             const result = this.selectedAreas.indexOf(this.staticBinInfo[i].getLocationArea()) !== -1 ;
             if (result) {
-                //console.log(this.staticBinInfo[i]);
-                this.selectedBins.push(this.staticBinInfo[i]);
+               this.selectedBins.push(this.staticBinInfo[i]);
 
             }
-            //console.log(this.staticBinInfo[i].getLocationArea());
             
         }
 
@@ -152,13 +152,11 @@ export class DashboardComponent implements OnInit {
             const binLocation = 'LTU Bundoora';
             const binOrganeBackground = '#F5CBA7';
             const binSafeBackground = '#D5F5E3';
-              
             const  binRedBackground = '#FADBD8';
             const randomImageNumber = Math.floor(Math.random() * 3) + 1  ;
             const customPopup = `<!DOCTYPE html>
             <html>
             <head>
-            
             <style>
             .card {
                 margin-bottom: 5px;
@@ -166,14 +164,12 @@ export class DashboardComponent implements OnInit {
                 transition: 0.3s;
                 width: 100%;
             }
-            
             .card:hover {
                 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
             }
             .leaflet-popup-content {
                 width: 180px;
                 margin: 5px 5px;
-                
             }
             .h6 {
                 margin: 5px;
@@ -182,8 +178,6 @@ export class DashboardComponent implements OnInit {
                 padding: 1px;
                 width: auto;
             }
-           
-            
             .binID {
 	            color:#48cfad;
 	            font-size:18px;
@@ -198,18 +192,13 @@ export class DashboardComponent implements OnInit {
             </head>
             <body>
             <div class="card" style="background-color: #47C1C8">
-              
               <div class="container" style="padding: 5px;" >
                 <p class="binDetails" style = "margin:0px; font-size: 12px">${binID}</p>
                 <p class="binDetails" style = "margin:0px; font-size: 12px">${ binLocation }</p>
-                
-                
               </div>
-              
             </div>
             <div class="card" style="padding:5px;" >
-            
-                <div class="container">
+              <div class="container">
                     <div class="container" style="float:left; width:50%">
                         <img src="src/assets/img/binimg${randomImageNumber}.png" style="border-radius:5px" width="70" height="80"></img>
                     </div>
@@ -220,19 +209,9 @@ export class DashboardComponent implements OnInit {
                     <div style="color:#47C1C8; font-size:16px; font-weight: bold">12</div>
                     </div>
                 </div>
-           
-
-
             </div>
-           
-            
-            
             </body>
-            </html> 
-            `;
-            // const customOptions = {,
-            //         className : 'custom'
-            //     };
+            </html> `;
             p.bindPopup(customPopup);
             this.layers.push(p);
         }
@@ -254,8 +233,6 @@ export class DashboardComponent implements OnInit {
         this.updateMap();
     }
     onSelectAll (items: any) {
-        //this.updateMap();
-        console.log('on select all');
         this.selectedAreas = this.locations;
         this.updateMap();
 
