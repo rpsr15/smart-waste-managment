@@ -9,6 +9,7 @@ export class Bin {
     private location_area: string;
     private tags: string[];
     private currentLevel: number;
+    private lastUpdated: Date;
 
 
     constructor(capacity: number, location: {latitude: number, longitude: number},
@@ -21,6 +22,14 @@ export class Bin {
         this.currentLevel = 0;
     }
 
+    getLastUpdated() {
+        return this.lastUpdated;
+    }
+
+    setLastUpdated(time: Date) {
+        this.lastUpdated = time;
+    }
+
     setCurrentLevel(level: number) {
         this.currentLevel = level;
     }
@@ -28,8 +37,6 @@ export class Bin {
     getCurrentLevel() {
         return this.currentLevel;
     }
-
-
 
     getCapacity() {
         return this.capacity;

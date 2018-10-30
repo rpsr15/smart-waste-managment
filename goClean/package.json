@@ -38,6 +38,7 @@
     "leaflet.markercluster": "^1.4.1",
     "moment": "2.22.2",
     "ng-multiselect-dropdown": "^0.2.1",
+    "ng6-socket-io": "^1.0.3",
     "rxjs": "6.3.2",
     "zone.js": "0.8.26"
   },

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {latLng, tileLayer, icon, marker, Map, circle, polygon, Popup, Layer} from 'leaflet';
 import {BinService} from '../services/bin.service';
 import {Bin} from '../models/bin.model';
-import * as L from 'leaflet';
 import 'leaflet.markercluster';
+import { SocketService } from 'app/services/socket.service';
 
 
 
@@ -18,10 +18,13 @@ declare var $: any;
 
 export class DashboardComponent implements OnInit {
 
+
+     ioConnection: any;
      zoom = 13;
-     iconGreen = 'src/assets/img/marker-green.png';
+     iconGreen = 'src/assets/img/markers/final-marker-green.png';
+     iconOrange = 'src/assets/img/markers/final-marker-orange.png';
      markerShadow = 'src/assets/img/marker-shadow.png';
-     iconRed = 'src/assets/img/map-marker-red.png';
+     iconRed = 'src/assets/img/markers/final-marker-red.png';
         // iconOrange =
      areaList = [];
      locations: String[];
@@ -43,30 +46,29 @@ export class DashboardComponent implements OnInit {
         center: latLng([ -37.720761, 145.047955 ])
     };
 
-    constructor(private binService: BinService) {
 
 
+    constructor(private binService: BinService, private socketService: SocketService) {
 
-        this.binService.getLocations().then((locations: [String]) => {
-
-            this.locations = locations;
-            this.areaList = this.locations;
-            this.selectedAreas = this.locations;
-
-            this.binService.getBinData().then(
-                (binData: Bin[]) => {
-                this.staticBinInfo = binData;
-                this.selectedBins = this.staticBinInfo;
-                this.updateMap();
-
-        
-            });
-
-            console.log('get data success');
-
-        });
+        this.socketService.initSocket();
+        this.ioConnection = this.socketService.onNewReading().subscribe(
+            (message) => {
+                // subscribe to real-time bin readings
+            console.log('message receiced');
+            console.log(message);
+            this.updateMap();
+        }
+        );
 
 
+    }
+
+    getBin(binID: String) {
+        for (const bin of this.staticBinInfo) {
+            if (bin.getHarwareID() === binID) {
+                return bin;
+            }
+        }
     }
 
     ngOnInit() {
@@ -80,6 +82,59 @@ export class DashboardComponent implements OnInit {
             itemsShowLimit: 1,
             allowSearchFilter: true
         };
+
+
+
+        this.binService.getLocations().then((locations: [String]) => {
+
+            this.locations = locations;
+            this.areaList = this.locations;
+            this.selectedAreas = this.locations;
+            console.log('got locatinos');
+            console.log(locations);
+
+            this.binService.getBinData().then(
+                (binData: Bin[]) => {
+                    //console.log('got static bin data');
+                    //console.log(binData);
+                    this.staticBinInfo = binData;
+                    this.binService.getBinReadings().then(
+                        (readings) => {
+                            for (const key in readings) {
+
+                                const date = new Date(readings[key].metadata.time);
+                                const hID = readings[key].payload_fields.hardware_id;
+                                const level = readings[key].payload_fields.level;
+                                //console.log(date, hID, level);
+
+                                 const bin = this.getBin(hID);
+                                 //console.log('before');
+                                //
+                                 //console.log(bin);
+                                 bin.setCurrentLevel(level);
+                                 bin.setLastUpdated(date);
+
+
+
+                            }
+
+                            //console.log(this.staticBinInfo);
+
+
+
+                            this.selectedBins = this.staticBinInfo;
+
+                            this.updateMap();
+                        }
+                    );
+
+                });
+
+
+
+        });
+
+
     }
 
     // filters bins based on location selected and then creates marker to show on the map
@@ -88,7 +143,7 @@ export class DashboardComponent implements OnInit {
 
         this.selectedBins = [];
         // filter bins for selected locations
-            console.log(this.staticBinInfo.length);
+           // console.log(this.staticBinInfo.length);
         for (let i = 0; i < this.staticBinInfo.length; i++) {
 
             const result = this.selectedAreas.indexOf(this.staticBinInfo[i].getLocationArea()) !== -1 ;
@@ -96,7 +151,7 @@ export class DashboardComponent implements OnInit {
                this.selectedBins.push(this.staticBinInfo[i]);
 
             }
-            
+
         }
 
         // console.log(this.selectedBins);
@@ -120,36 +175,60 @@ export class DashboardComponent implements OnInit {
         //     this.layers[i] = [];
         // }
         // for ( let i = 0; this.selectedBins.length ; i++) {
-            
+
         // }
     }
 
     showZoomedMarkers() {
-        console.log('start zoomed');
+       // console.log('start zoomed');
         // use selectedBins to show markers
         this.layers = [];
 
         for (let i = 0 ; i < this.selectedBins.length ; i++) {
             // console.log(+this.selectedBins[i].getLocation().latitude);
             // console.log(+this.selectedBins[i].getLocation().longitude);
-            let iconString = this.iconGreen;
-            if (+this.selectedBins[i].getCapacity() >= 200) {
-                iconString = this.iconRed;
+
+
+            const binID = this.selectedBins[i].getHarwareID();
+            let binCapacityLeft = +this.selectedBins[i].getCurrentLevel();
+            let binMax = +this.selectedBins[i].getCapacity();
+            const lastTime = this.selectedBins[i].getLastUpdated();
+
+            // check Nan
+
+
+            if (isNaN(binCapacityLeft) || isNaN(binMax)) {
+                binCapacityLeft = 56;
+                binMax = 120;
+                console.log('ERROR: Min capacity left invalid');
             }
+            let percent =  ( 100.0 * binCapacityLeft) / binMax  ;
+            let iconString = this.iconGreen;
+            if (percent >= 60.0) {
+                // 80% empty so use green
+                iconString = this.iconGreen;
+            } else if (percent >= 20.0) {
+                // use orange
+                iconString = this.iconOrange;
+            } else {
+                // use red
+                iconString = this.iconRed;
+
+            }
+
+
             const p = marker([ +this.selectedBins[i].getLocation().latitude, +this.selectedBins[i].getLocation().longitude ], {
                 icon: icon({
-                    iconSize: [ 35, 40 ],
-                    iconAnchor: [ 17, 40 ],
+                    iconSize: [ 30, 50 ],
+                    iconAnchor: [ 15, 50 ],
                     iconUrl: iconString,
                     shadowUrl: this.markerShadow
                 })
             });
             p.on('click', this.onMarkerClick.bind(this));
 
-            const binID = 'adf';
-            const binCapacityLeft = '23';
-            const binMax = '120';
-            const binLocation = 'LTU Bundoora';
+
+            const binLocation = this.selectedBins[i].getLocationArea();
             const binOrganeBackground = '#F5CBA7';
             const binSafeBackground = '#D5F5E3';
             const  binRedBackground = '#FADBD8';
@@ -195,6 +274,7 @@ export class DashboardComponent implements OnInit {
               <div class="container" style="padding: 5px;" >
                 <p class="binDetails" style = "margin:0px; font-size: 12px">${binID}</p>
                 <p class="binDetails" style = "margin:0px; font-size: 12px">${ binLocation }</p>
+                <p class="binDetails" style = "margin:0px; font-size: 8px">Last Updated: ${ lastTime.toDateString() }</p>
               </div>
             </div>
             <div class="card" style="padding:5px;" >
@@ -204,10 +284,11 @@ export class DashboardComponent implements OnInit {
                     </div>
                     <div class="container" style="float:left; width:50%">
                     <div>Max Capacity:</div>
-                    <div style="color:#47C1C8; font-size:16px; font-weight: bold">120</div>
+                    <div style="color:#47C1C8; font-size:16px; font-weight: bold">${ binMax}</div>
                     <div>Capacity Left:</div>
-                    <div style="color:#47C1C8; font-size:16px; font-weight: bold">12</div>
+                    <div style="color:#47C1C8; font-size:16px; font-weight: bold">${ binCapacityLeft}</div>
                     </div>
+                    
                 </div>
             </div>
             </body>
@@ -216,8 +297,8 @@ export class DashboardComponent implements OnInit {
             this.layers.push(p);
         }
 
-        console.log(this.layers.length);
-        console.log(this.layers);
+        //console.log(this.layers.length);
+        //console.log(this.layers);
     }
 
     onMarkerClick(t) {
@@ -265,7 +346,16 @@ export class DashboardComponent implements OnInit {
     //     this.updateMap();
         console.log(map);
     }
+    testClick(x) {
+        console.log('button clicked');
 
+
+        this.binService.getBinData().then(
+            (d) => {
+                console.log(d);
+            }
+        );
+    }
 
 
 }

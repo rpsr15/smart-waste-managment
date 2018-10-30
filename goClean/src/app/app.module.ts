@@ -10,18 +10,17 @@ import { NguiMapModule} from '@ngui/map';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
 import { TableComponent } from './table/table.component';
-import { TypographyComponent }   from './typography/typography.component';
-import { IconsComponent }   from './icons/icons.component';
-import { MapsComponent }   from './maps/maps.component';
-import { NotificationsComponent }   from './notifications/notifications.component';
+import { TypographyComponent } from './typography/typography.component';
+import { IconsComponent } from './icons/icons.component';
+import { MapsComponent } from './maps/maps.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import {HttpClientModule} from '@angular/common/http';
 import {BinService} from './services/bin.service';
 import { BinDataComponent } from './dashboard/bin-data/bin-data.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster';
-import {LeafletMarkerClusterDirective} from '@asymmetrik/ngx-leaflet-markercluster/dist/leaflet-markercluster/leaflet-markercluster.directive';
+import {SocketService} from './services/socket.service';
 
 
 
@@ -48,7 +47,7 @@ import {LeafletMarkerClusterDirective} from '@asymmetrik/ngx-leaflet-markerclust
       FormsModule, ReactiveFormsModule, NgMultiSelectDropDownModule.forRoot()
 
   ],
-  providers: [BinService],
+  providers: [BinService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
