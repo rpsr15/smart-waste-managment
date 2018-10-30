@@ -45,8 +45,8 @@
                 </div>
             </div>
             <div *ngIf="notifySent" class="alert alert-success alert-dismissible" role="alert">
-                <a href="#" style="right: 11px;" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                This is a success alert—check it out!
+                <a href="#" (click)="dismissAlert()" style="right: 11px;" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{msg}}
             </div>
         </div>
 

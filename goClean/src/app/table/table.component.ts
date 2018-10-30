@@ -22,6 +22,7 @@ export class TableComponent implements OnInit{
     public superArray:any[] = [];
 
     public notifyArray:any[] = [];
+    public msg:string;
     public editMode:boolean = false;
     public notifySent:boolean = false;
 
@@ -86,13 +87,24 @@ export class TableComponent implements OnInit{
     sendNotification(){
         if(this.editMode) {
             this.editMode = false;
-            this.notifySent = true;
+
         }
         console.log("Here is data of users to be notified");
         console.log(this.notifyArray);
 
+        this.userService.postUserEmail(this.notifyArray)
+            .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
+                    this.msg = 'User are updated successfully';
+                    this.notifySent = true;
+                },
+                error => { console.log('IN RETURN COMPONENT error',error); // Error if any
 
+                });
 
+    }
+
+    dismissAlert(){
+        this.notifySent =false; 
     }
 
 

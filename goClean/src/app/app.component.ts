@@ -42,9 +42,7 @@ export class AppComponent implements OnInit{
     onSubmitLogin(form: NgForm){
        //this.logStatus = true;
         console.log("Hello login");
-        // console.log(form.value);
-        // console.log(form.value.email);
-        // console.log(form.value.your_pass);
+
         this.authenticationService.login(form.value.email,form.value.your_pass)
             .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
                     localStorage.setItem('currentUser', 'active');
@@ -65,8 +63,7 @@ export class AppComponent implements OnInit{
 
         console.log("Hello signup");
         console.log(form.value);
-        // console.log(form.value.email);
-        // console.log(form.value.your_pass);
+
         this.authenticationService.signUp(form.value.name,form.value.email,form.value.your_pass)
             .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
                     form.resetForm();
