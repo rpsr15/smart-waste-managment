@@ -48,14 +48,6 @@ export class BinService {
             this.httpService.get(this.binReadingsURL).subscribe(
                 (data) => {
 
-                    console.log(data);
-                    // const myObjStr = JSON.stringify(data);
-                    // const bins = JSON.parse(myObjStr) as Object;
-                    // const k = Object.keys(bins);
-                    // for ( const bin in bins) {
-                    //     const strIndex = <string> bin;
-                    //     const binObj = bins[strIndex] as Bin;
-                    //     binsData.push(this.createBinFromJson(binObj));
                     // }
 
                     resolve(data);
