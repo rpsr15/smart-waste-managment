@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {latLng, tileLayer, icon, marker, Map, circle, polygon, Popup, Layer, LayerGroup} from 'leaflet';
+import {latLng, tileLayer, icon, marker, Map, circle, polygon, Popup, Layer, LayerGroup, DivIcon, DivIconOptions} from 'leaflet';
 import {BinService} from '../services/bin.service';
 import {Bin} from '../models/bin.model';
 import 'leaflet.markercluster';
@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
      map: Map;
      ioConnection: any;
      zoom = 13;
+     iconGreenBloop = 'src/assets/img/markers/green-bloop.png';
      iconGreen = 'src/assets/img/markers/final-marker-green.png';
      iconOrange = 'src/assets/img/markers/final-marker-orange.png';
      markerShadow = 'src/assets/img/marker-shadow.png';
@@ -34,6 +35,7 @@ export class DashboardComponent implements OnInit {
      dropdownSettings = {};
      layers = [];
      layerGroup: LayerGroup = new LayerGroup();
+     aggregatedLayerGroup: LayerGroup = new LayerGroup();
 
 
 
@@ -43,17 +45,13 @@ export class DashboardComponent implements OnInit {
                 attribution: '&copy; OpenStreetMap contributors'
             })
         ],
-        zoom: this.zoom, minZoom: 11, maxZoom: 15,
+        zoom: this.zoom, minZoom: 10, maxZoom: 16,
         center: latLng([ -37.720761, 145.047955 ])
     };
 
 
 
-    constructor(private binService: BinService, private socketService: SocketService) {
-
-
-
-    }
+    constructor(private binService: BinService, private socketService: SocketService) {}
 
     getBin(binID: String) {
         for (const bin of this.staticBinInfo) {
@@ -70,8 +68,6 @@ export class DashboardComponent implements OnInit {
         this.ioConnection = this.socketService.onNewReading().subscribe(
             (readings) => {
                 // subscribe to real-time bin readings
-                console.log('message receiced');
-                console.log(readings);
 
                 //update readings
                 for (const key in readings) {
@@ -162,33 +158,94 @@ export class DashboardComponent implements OnInit {
 
         // console.log(this.selectedBins);
         // //
+        console.log('update map based on zoom', this.zoom);
+        if (this.zoom >= 13) {
 
-        // console.log('update map success');
-        // if (this.zoom >= 14) {
-        //     this.showZoomedMarkers();
-        // } else {
-        //     this.showAggregatedMarkers();
-        // }
-        this.showZoomedMarkers();
+            this.showZoomedMarkers();
+        } else {
+            this.showAggregatedMarkers();
+        }
     }
 
     showAggregatedMarkers() {
         console.log('show affrefated markers');
-        // aggregate markers based on area
-        // const layers = [];
-        // // initialize layers corresponding to each area
-        // for ( let i = 0; this.selectedAreas ; i++) {
-        //     this.layers[i] = [];
-        // }
-        // for ( let i = 0; this.selectedBins.length ; i++) {
+        // console.log('selctd bins');
+        // console.log(this.selectedBins, this.selectedAreas);
+        this.aggregatedLayerGroup.clearLayers();
+        this.layerGroup.removeFrom(this.map);
 
-        // }
+        const clusterDetails = [];
+
+        const binInfo = this.selectedBins;
+        for (const key in this.selectedAreas) {
+
+            const location = this.selectedAreas[key];
+
+            let sumLat = 0.0;
+            let sumLon = 0.0;
+            let sumPercent = 0.0;
+            let locationCount = 0;
+
+            //console.log(location);
+            for (const k in binInfo) {
+                //console.log(binInfo[k]);
+                if (binInfo[k].getLocationArea() === location) {
+                    locationCount++;
+                    const lat = +binInfo[k].getLocation().latitude;
+                    const lon = +binInfo[k].getLocation().longitude;
+                    const per = +binInfo[k].getCurrentLevel();
+                    sumLat += lat;
+                    sumLon += lon;
+                    sumPercent = sumPercent + ((isNaN(per)) ? 0 : per);
+
+                }
+
+            }
+
+            const avgLat = sumLat / locationCount;
+            const avgLon = sumLon / locationCount;
+            const avgPercent = sumPercent / locationCount;
+            const mapAccess = this.map;
+            // console.log('here');
+            // console.log(avgLat, avgLon, avgPercent, location);
+            // add marker
+            const ic = new DivIcon({html: `<div style="position: relative; text-align: center; color:white">
+                <img width="60" height="60" src=${this.iconGreenBloop} >
+  
+                <p style="position: absolute; top:30%; left:15%; font-size: 16px; font-weight: bold">${avgPercent}</p>
+                    </div>`, className:'tet', iconSize:[60, 60], iconAnchor:[30, 30]});
+
+            const p = marker([ avgLat, avgLon ], {
+                icon: ic
+            });
+            p.bindPopup(`<p style="margin: 0px; font-size: 10px">Average Percent left in ${locationCount} bins:</p>
+            <p style="margin: 0px; font-size: 10px; font-weight: bold"> ${avgPercent}%</p><p style="margin: 0px; font-size: 10px"> Location: ${location}</p>`);
+            p.on('mouseover', function (e) {
+                this.openPopup();
+            });
+            p.on('mouseout', function (e) {
+                this.closePopup();
+            });
+
+            p.on('click', function (e) {
+                mapAccess.flyTo([avgLat, avgLon], 13);
+            });
+
+            this.aggregatedLayerGroup.addLayer(p);
+        }
+        this.aggregatedLayerGroup.addTo(this.map);
+
+
+    }
+
+    zoomTo(latlng) {
+        this.map.flyTo(latlng, 13);
     }
 
     showZoomedMarkers() {
        console.log('start zoomed');
         // use selectedBins to show markers
-
+        this.aggregatedLayerGroup.removeFrom(this.map);
         this.layerGroup.clearLayers();
 
         for (let i = 0 ; i < this.selectedBins.length ; i++) {
@@ -339,18 +396,26 @@ export class DashboardComponent implements OnInit {
 
     onMapReady(map: Map) {
 
+
         this.map = map;
+        this.zoom = map.getZoom();
+
     }
 
-    onZoomLevelChange(map: Object) {
-    //   const zoomLevel = +map.target._animateToZoom;
-    //     console.log(zoomLevel);
-    //     this.zoom = zoomLevel;
-    //     this.updateMap();
-        console.log(map);
+    onZoomLevelChange(map) {
+
+        const newZoom = +map.target._zoom;
+        console.log('old zoom', this.zoom, 'new zoom', newZoom);
+        // show zoomed if zoom changes from 12 to 13
+        if ( (newZoom === 13) || (newZoom === 12)) {
+            this.zoom = newZoom;
+            console.log('changing type');
+            this.updateMap();
+        }
     }
+
     testClick(x) {
-        console.log('button clicked');
+        console.log('onZoomLevelChangebutton clicked');
 
 
         this.binService.getBinData().then(
