@@ -75,7 +75,8 @@ export class UserService {
     }
 
     updateProfile(data:any){
-        return this.httpService.post("https://bindata-app.herokuapp.com/api/updateProfile",data,this.httpOptions)
+        let mydata = JSON.stringify(data.value);
+        return this.httpService.post("https://bindata-app.herokuapp.com/api/updateProfile",mydata,this.httpOptions)
             .pipe(map((response: Response) => response));
 
     }

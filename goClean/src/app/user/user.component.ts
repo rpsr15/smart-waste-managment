@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { latLng, tileLayer, icon, marker, polyline } from 'leaflet';
-import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
+import {FormBuilder, FormGroup, NgForm, FormsModule} from "@angular/forms";
 import {UserService} from "../services/user.service";
 import {User} from "../models/user.model";
 
@@ -13,14 +13,21 @@ import {User} from "../models/user.model";
 export class UserComponent implements OnInit{
     private showArray: any =[];
 
-    profileForm:FormGroup;
+    // profileForm:FormGroup;
 
-    test = {
-        "email":"this@gmail.com"
-    };
+    address;
+    city;
+    country;
+    email;
+    firstName;
+    lastName;
+    name;
+    postalCode;
+    userName;
+
 
     constructor(private userService:UserService,private formBuilder:FormBuilder){
-        formBuilder
+
     }
 
 
@@ -28,9 +35,7 @@ export class UserComponent implements OnInit{
     ngOnInit(){
         this.getProfileData();
 
-        this.profileForm = this.formBuilder.group({
-            email:[this.test.email]
-        });
+
     }
 
     p1 = marker([ -37.715456, 145.040575 ], {
@@ -85,23 +90,24 @@ export class UserComponent implements OnInit{
                 for (const key in data) {
                     const user = data[key];
                     if(loggedInUser == user.email){
-                        let test = {
-                            "address": user.address,
-                            "city": user.city,
-                            "country": user.country,
-                            "email": user.email,
-                            "firstName": user.firstName,
-                            "lastName": user.lastName,
-                            "name": user.name,
-                            "password": user.password,
-                            "postalCode": user.postalCode,
-                            "userName": user.userName
-                        };
-                        this.showArray.push(test);
+
+                            this.address=user.address;
+                            this.city= user.city;
+                                this.country = user.country;
+                                this.email= user.email;
+                                this.firstName= user.firstName;
+                                this.lastName= user.lastName;
+                                this.name=user.name;
+
+                                this.postalCode=user.postalCode;
+                                this.userName=user.userName;
+
+
+                        //this.showArray.push(test);
                     }
                 }
 
-                console.log('User Detail array',this.showArray);
+                // console.log('User Detail array',this.showArray);
 
                 },
                 error => { console.log('IN RETURN PROFILE COMPONENT error',error); // Error if any
@@ -140,7 +146,7 @@ export class UserComponent implements OnInit{
         //         "postalCode": form.value.postalCode
         //     }
         // ];
-        console.log(form);
+        // console.log('new one',form.value);
         this.userService.updateProfile(form)
             .subscribe(data => { console.log('IN RETURN PROFILE COMPONENT success',data) // Data which is returned by call
 
