@@ -47,11 +47,38 @@ export class UserService {
         return promise;
     }
 
+
+    getProfileData(){
+        return this.httpService.get("https://bindata-app.herokuapp.com/api/getUsers")
+            .pipe(map((response: Response) => response));
+
+    }
+
     postUserEmail(data:any){
         console.log('IN SIGNUP');
         return this.httpService.post("https://bindata-app.herokuapp.com/api/storeUser",data,this.httpOptions)
             .pipe(map((response: Response) => response));
 
     }
+
+    getNotication(){
+        console.log('IN GET NOTIFICATION');
+        return this.httpService.get("https://bindata-app.herokuapp.com/api/getNotifications")
+            .pipe(map((response: Response) => response));
+    }
+
+    postReadNoti(data:any){
+
+        return this.httpService.post("https://bindata-app.herokuapp.com/api/readNotifications",data,this.httpOptions)
+            .pipe(map((response: Response) => response));
+
+    }
+
+    updateProfile(data:any){
+        return this.httpService.post("https://bindata-app.herokuapp.com/api/updateProfile",data,this.httpOptions)
+            .pipe(map((response: Response) => response));
+
+    }
+
 
 }

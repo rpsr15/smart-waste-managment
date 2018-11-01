@@ -18,18 +18,20 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="ti-bell"></i>
-                            <p class="notification">5</p>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="#notificationMenu">
+                         <div [ngStyle]="{'color': unreadCount>0 ? 'red':''}">
+                          <i class="ti-bell"></i>
+                            <p class="notification">{{unreadCount}}</p>
                             <p>Notifications</p>
                             <b class="caret"></b>
+                         </div>
                       </a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Notification 1</a></li>
-                        <li><a href="#">Notification 2</a></li>
-                        <li><a href="#">Notification 3</a></li>
-                        <li><a href="#">Notification 4</a></li>
-                        <li><a href="#">Another notification</a></li>
+                      <ul class="dropdown-menu" >
+                          <!--<div *ngFor="let noti of notificationArray ">-->
+                        <li *ngFor="let noti of showArray">
+                            <a [ngStyle]="{'background-color': noti.status=='read' ? 'antiquewhite':''}" role="button" (click)="deleteNotification(noti)">{{noti.message}}</a>
+                        </li>
+
                       </ul>
                 </li>
                 <li>

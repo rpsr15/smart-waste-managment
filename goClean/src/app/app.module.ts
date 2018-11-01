@@ -21,7 +21,7 @@ import { BinDataComponent } from './dashboard/bin-data/bin-data.component';
 import {UserService} from "./services/user.service";
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "./services/auth.service";
 import {AuthenticationService} from "./services/authentication.service";
 
@@ -48,6 +48,7 @@ import {AuthenticationService} from "./services/authentication.service";
     NavbarModule,
     FooterModule,
     FormsModule,
+    ReactiveFormsModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCh6OO_hNeqm_-zg_zcENn2sfJeAOirGM0'}),
     LeafletModule.forRoot(), HttpClientModule
 

@@ -4,6 +4,7 @@ export class User {
     private notifed: boolean;
     private password: string;
 
+
     constructor(email:string,name:string,notifed:boolean){
         this.email = email;
         this.name = name;
