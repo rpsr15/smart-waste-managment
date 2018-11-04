@@ -12,7 +12,7 @@ export class BinDataComponent implements OnInit {
   constructor(private binService: BinService) { }
   bins: Bin[];
   ngOnInit() {
-    this.binService.getBinData();
+
 
   }
 

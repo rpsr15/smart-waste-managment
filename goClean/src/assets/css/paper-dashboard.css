@@ -533,7 +533,7 @@ hr {
 }
 .sidebar[data-active-color="danger"] .nav li.active > a,
 .off-canvas-sidebar[data-active-color="danger"] .nav li.active > a {
-  color: #DD0330;
+  color:#47C1C8;
   opacity: 1;
 }
 

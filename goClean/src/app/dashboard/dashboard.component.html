@@ -1,17 +1,41 @@
-<div class="row" style="margin-bottom: 8px; margin-right: 0px">
-    <input class="pull-right"
-           type="text"  placeholder="Pincode/area">
+    <div class="row" style="margin-bottom: 8px; width: 100%; text-align: right"   >
+
+
+
+
+            <div class="pull-right" style="width: 20vw;    background-color: white">
+                <ng-multiselect-dropdown
+                [placeholder]="'area'"
+                [data]="areaList"
+                [(ngModel)]="selectedAreas"
+                [settings]="dropdownSettings"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                (onDeSelect)="onItemDeSelect($event)"
+                (onDeSelectAll)="onItemDeSelectAll($event)"
+                
+                >
+                </ng-multiselect-dropdown>
+            </div>
+
+
+
+
 </div>
-<div class="row">
+<div class="row" style="width: 100%">
     <div class="map"
 
          leaflet
+         [(leafletZoom)] = "zoom"
          [leafletOptions]="options"
+
          (leafletMapReady)="onMapReady($event)"
-         (leafletMapZoom)="onZoomLevelChange($event)">
+         (leafletMapZoomEnd)="onZoomLevelChange($event)">
 
     </div>
 </div>
+
+    <button (click)="testClick()">click me</button>
 
 
 <app-bin-data></app-bin-data>
