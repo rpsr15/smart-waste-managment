@@ -11,17 +11,11 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="ti-panel"></i>
-                        <p>Stats</p>
-                    </a>
-                </li>
+
                 <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="#notificationMenu">
                          <div [ngStyle]="{'color': unreadCount>0 ? 'red':''}">
                           <i class="ti-bell"></i>
-                            <p class="notification">{{unreadCount}} </p>
                             <p>Notifications</p>
                             <b class="caret"></b>
                          </div>
@@ -34,12 +28,7 @@
 
                       </ul>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="ti-settings"></i>
-                        <p>Settings</p>
-                    </a>
-                </li>
+
                 <li>
                     <a href="#" (click)="logout()">
                         <i class="ti-share"></i>

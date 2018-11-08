@@ -573,18 +573,18 @@ if(false) {}
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!***************************************************************!*\
   !*** multi ./src/styles.css ./src/assets/leaflet/leaflet.css ***!
   \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/rpsr15/public-waste-management/goClean/src/styles.css */"./src/styles.css");
-module.exports = __webpack_require__(/*! /Users/rpsr15/public-waste-management/goClean/src/assets/leaflet/leaflet.css */"./src/assets/leaflet/leaflet.css");
+__webpack_require__(/*! /Users/rpsr15/Documents/projects/public-waste-management/goClean/src/styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! /Users/rpsr15/Documents/projects/public-waste-management/goClean/src/assets/leaflet/leaflet.css */"./src/assets/leaflet/leaflet.css");
 
 
 /***/ })
 
-},[[2,"runtime"]]]);
+},[[3,"runtime"]]]);
 //# sourceMappingURL=styles.js.map

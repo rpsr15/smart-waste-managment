@@ -5992,21 +5992,22 @@ __webpack_require__.r(__webpack_exports__);
  * Need to import at least one locale-data with intl.
  */
 // import 'intl/locale-data/jsonp/en';
+window.global = window;
 
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!********************************!*\
   !*** multi ./src/polyfills.ts ***!
   \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/rpsr15/public-waste-management/goClean/src/polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! /Users/rpsr15/Documents/projects/public-waste-management/goClean/src/polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })
 
-},[[1,"runtime"]]]);
+},[[2,"runtime"]]]);
 //# sourceMappingURL=polyfills.js.map

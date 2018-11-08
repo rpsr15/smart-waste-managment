@@ -8,6 +8,7 @@ export class BinService {
     binsURL = 'https://bindata-app.herokuapp.com/api/bins/data';
     locationsURL = 'https://bindata-app.herokuapp.com/api/getLocations';
     binReadingsURL = 'https://bindata-app.herokuapp.com/api/getLatestData';
+    allBinReadingsURL = 'https://bindata-app.herokuapp.com/api/allBins';
 
     createBinFromJson(jsonObject: object) {
         const capacity = +jsonObject['capacity'];
@@ -58,6 +59,21 @@ export class BinService {
         });
         return promise;
         }
+
+    getAllReadings() {
+
+        const promise = new Promise((resolve, reject) => {
+
+            this.httpService.get(this.allBinReadingsURL).subscribe(
+                (data) => {
+
+                    resolve(data);
+
+                }
+            );
+        });
+        return promise;
+    }
 
     //get static data of the bins
      getBinData() {

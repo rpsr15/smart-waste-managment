@@ -7,6 +7,7 @@ import { IconsComponent } from './icons/icons.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import {RouteGuard} from './route-guard';
 import {LoginComponent} from './login/login.component';
+import {StatsComponent} from './stats/stats.component';
 
 
 export const AppRoutes: Routes = [
@@ -39,5 +40,9 @@ export const AppRoutes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'stats',
+        component: StatsComponent
     }
 ];
