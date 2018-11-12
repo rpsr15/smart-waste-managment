@@ -14,7 +14,9 @@ export class UserComponent implements OnInit{
     private showArray: any =[];
 
     // profileForm:FormGroup;
-
+    msg:string;
+    role:string;
+    showAlert:boolean = false;
     address;
     city;
     country;
@@ -149,13 +151,19 @@ export class UserComponent implements OnInit{
         // console.log('new one',form.value);
         this.userService.updateProfile(form)
             .subscribe(data => { console.log('IN RETURN PROFILE COMPONENT success',data) // Data which is returned by call
-
+                    this.role = 'success';
+                    this.showAlert  = true;
+                    this.msg = "Profile has been updated successfully.";
                 },
                 error => { console.log('IN RETURN PROFILE COMPONENT error',error); // Error if any
 
                 });
 
     }
+    dismissAlert(){
+        this.showAlert =false;
+    }
+
 
     // options = {
     //     layers: [

@@ -3,6 +3,7 @@ import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {UserService} from "../../services/user.service";
+import {SocketService} from "../../services/socket.service";
 
 @Component({
     moduleId: module.id,
@@ -22,7 +23,7 @@ export class NavbarComponent implements OnInit{
 
     @ViewChild("navbar-cmp") button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private userService:UserService) {
+    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private userService:UserService, private socketService: SocketService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
