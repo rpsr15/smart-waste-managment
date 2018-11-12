@@ -54,7 +54,7 @@ export class NavbarComponent implements OnInit{
                         this.notificationArray=[];
                         // this.showArray=[];
                         this.notificationArray.push(test);
-                        console.log('NOTIFICATION NEW',this.notificationArray);
+                        //console.log('NOTIFICATION NEW',this.notificationArray);
                         this.showNoti();
 
                     }
@@ -83,7 +83,7 @@ export class NavbarComponent implements OnInit{
 
 
 
-       console.log('SHOW ARRAY',this.showArray);
+       //console.log('SHOW ARRAY',this.showArray);
 
 
     }

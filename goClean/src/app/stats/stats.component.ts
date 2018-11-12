@@ -16,7 +16,7 @@ export class StatsComponent implements OnInit {
 
 
     readings = [];
-    //{String:[{}]}
+    // {String:[{}]}
     locations: String[];
     staticBinInfo;
     allReadings;
@@ -192,7 +192,7 @@ export class StatsComponent implements OnInit {
 
     getLocation(binLocation) {
         for (let i = 0; i < this.locations.length; i++) {
-            if (this.locations[i] === binLocation){
+            if (this.locations[i] === binLocation) {
                 return this.readings[i];
             }
         }
@@ -213,6 +213,7 @@ export class StatsComponent implements OnInit {
       this.binService.getLocations().then((locations: [String]) => {
 
           this.locations = locations;
+         // console.log('got location', locations);
           for (let i = 0; i < this.locations.length ; i++) {
               this.readings[i] = [ {
                   name: 'Monday',
@@ -248,25 +249,32 @@ export class StatsComponent implements OnInit {
                   this.staticBinInfo = binData;
                   this.allReadings = binData;
 
-
+                   // console.log('got static info', binData);
                   this.binService.getAllReadings().then(
                       (readings) => {
+                          // console.log('got r eadigns', readings);
                           for (const key in readings) {
 
                               const date = new Date(readings[key].metadata.time);
+                              if (date == null) {
+                                  console.log('date error');
+                                  // level = 0;
+                              }
                               const hID = readings[key].payload_fields.hardware_id;
                               let level = +readings[key].payload_fields.level;
-                                if(isNaN(level)) {
+                                if (isNaN(level) || level == null) {
                                     level = 0;
                                 }
                               const binLocation = this.getBinLocation(hID);
                               const dayOfWeek = this.weekdays[date.getDay()];
                               const loc = this.getLocation(binLocation);
+                              //console.log(hID, level, binLocation, loc);
                               for (const key in loc) {
-                                  //console.log(loc[key].name);
+                                  // console.log(loc[key].name);
                                   if (loc[key].name === dayOfWeek) {
                                     let val = +loc[key].value;
-                                    if (isNaN(val)) {
+                                    if (isNaN(val) || val == null) {
+                                        console.log('val error');
                                         val = 0;
                                     }
                                     let cnt = +loc[key].count;
@@ -283,22 +291,26 @@ export class StatsComponent implements OnInit {
 
 
                           }
-                          let dd = [];
+                          const dd = [];
+                          console.log(this.readings.length, 'readings lenghth');
                           for (let i = 0; i < this.readings.length ; i++) {
-                              //console.log(this.readings[i]);
-                              for(const key in this.readings[i]) {
+                              // console.log(this.readings[i]);
+                              for (const key in this.readings[i]) {
                                   const dict = this.readings[i][key];
-                                  //console.log(dict);
-                                   let val = +dict.value;
-                                  let cnt = +dict.count;
-                                  const avg = val / cnt;
+                                  // console.log(dict);
+                                   const val = +dict.value;
+                                  const cnt = +dict.count;
+                                  let avg = val / cnt;
+                                  if(isNaN(avg)){
+                                      avg = 0;
+                                  }
                                   dict.value = avg;
                                  // console.log(val,cnt,avg);
                               }
                               dd.push({name: this.locations[i], series: this.readings[i]});
                           }
                           this.multi = dd;
-                          //console.log(this.multi);
+                          console.log(this.multi);
                       }
                   );
                   // console.log('got static bin data');
