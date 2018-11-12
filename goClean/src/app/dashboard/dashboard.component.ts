@@ -22,6 +22,8 @@ export class DashboardComponent implements OnInit {
      ioConnection: any;
      zoom = 13;
      iconGreenBloop = 'src/assets/img/markers/green-bloop.png';
+     iconOragneBloop = 'src/assets/img/markers/orange-bloop.png';
+     iconRedBloop = 'src/assets/img/markers/red-bloop.png';
      iconGreen = 'src/assets/img/markers/final-marker-green.png';
      iconOrange = 'src/assets/img/markers/final-marker-orange.png';
      markerShadow = 'src/assets/img/marker-shadow.png';
@@ -62,8 +64,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-
-
+        // connect to the socket
         this.socketService.initSocket();
         this.ioConnection = this.socketService.onNewReading().subscribe(
             (readings) => {
@@ -209,8 +210,18 @@ export class DashboardComponent implements OnInit {
             // console.log('here');
             // console.log(avgLat, avgLon, avgPercent, location);
             // add marker
+            let iconPath = this.iconGreenBloop;
+            if(avgPercent >= 50) {
+                iconPath = this.iconGreenBloop;
+
+            } else if(avgPercent >= 20) {
+                iconPath = this.iconOragneBloop;
+            } else {
+                // shored
+                iconPath = this.iconRedBloop;
+            }
             const ic = new DivIcon({html: `<div style="position: relative; text-align: center; color:white">
-                <img width="60" height="60" src=${this.iconGreenBloop} >
+                <img width="60" height="60" src=${iconPath} >
   
                 <p style="position: absolute; top:30%; left:15%; font-size: 16px; font-weight: bold">${avgPercent}</p>
                     </div>`, className:'tet', iconSize:[60, 60], iconAnchor:[30, 30]});
@@ -252,9 +263,13 @@ export class DashboardComponent implements OnInit {
             const binID = this.selectedBins[i].getHarwareID();
             let binCapacityLeft = +this.selectedBins[i].getCurrentLevel();
             let binMax = +this.selectedBins[i].getCapacity();
-            const lastTime = this.selectedBins[i].getLastUpdated();
+            let lastTime = this.selectedBins[i].getLastUpdated();
 
             // check Nan
+            if( lastTime == null) {
+                console.log('lastTime not defined for', binID);
+                lastTime = new Date();
+            }
 
 
             if (isNaN(binCapacityLeft) || isNaN(binMax)) {
