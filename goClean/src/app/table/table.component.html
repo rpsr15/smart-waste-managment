@@ -27,7 +27,7 @@
 
                         <tbody>
                         <tr *ngFor="let row of userAry">
-                            <td><input type="checkbox" [disabled]="!editMode"  [checked]="row.getNotifed()" (change)="handleChange(row)" ngModel></td>
+                            <td><input type="checkbox" [disabled]="!editMode"  [checked]="row.notifed" (change)="handleChange(row)" ngModel></td>
                             <td>{{row.getName()}}<td>
                             <td>{{row.getEmail()}}<td>
                             <!--<td>{{row.getNotifed()}}<td>-->

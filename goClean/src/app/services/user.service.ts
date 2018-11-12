@@ -81,5 +81,15 @@ export class UserService {
 
     }
 
+    getNotifiedUsers(){
+        return this.httpService.get("https://bindata-app.herokuapp.com/api/getnotifiedUsers")
+            .pipe(map((response: Response) => response));
+    }
+
+    deleteNotification(data:any){
+        return this.httpService.post("https://bindata-app.herokuapp.com/api/deleteNotifications",data,this.httpOptions)
+            .pipe(map((response: Response) => response));
+    }
+
 
 }

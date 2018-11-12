@@ -66,7 +66,7 @@ export class AppComponent implements OnInit{
         console.log(form.value);
 
         this.authenticationService.signUp(form.value.name,form.value.email,form.value.your_pass)
-            .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
+            .subscribe(data => { console.log('IN RETURN COMPONENT success',data); // Data which is returned by call
                     form.resetForm();
                     this.msg = 'SignUp Successful';
                     this.role = 'success';

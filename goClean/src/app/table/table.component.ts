@@ -24,53 +24,64 @@ export class TableComponent implements OnInit{
     public notifyArray:any[] = [];
     public msg:string;
     public editMode:boolean = false;
-    public notifySent:boolean = false;
+    notifySent:boolean = false;
+
+    listOfNotifiedUsers= [];
 
     constructor(private userService: UserService){
 
+    }
+
+    getUser(email) {
+        for (let i = 0; i < this.userAry.length ; i++) {
+            //console.log('matching',this.userAry[i].getEmail(),'with',email.email);
+            if (this.userAry[i].getEmail() === email) {
+                //console.log(this.userAry[i]);
+                return this.userAry[i];
+            }
+        }
     }
 
     ngOnInit(){
         this.userService.getUserData().then((userData: User[])=>{
             //console.log(userData);
             this.userAry = userData;
-            for(var i:number=0;i<userData.length;i++){
-                let stringArray:string[] = [];
-                stringArray.push(userData[i].getName());
-                stringArray.push(userData[i].getEmail());
-                let bak: string = String(userData[i].getNotifed());
-                stringArray.push(bak);
-                this.superArray.push(stringArray);
-            }
 
+            console.log('USER DATA',this.userAry);
+            this.userService.getNotifiedUsers().subscribe((data: Object) => {
+                //console.log(data);
+                for( let key in data) {
+
+                    const email = data[key];
+                    ///console.log('mf',email);
+                    const user = this.getUser(email.email);
+                    user.setNotifed(true);
+
+                }
+                console.log(this.userAry);
+            });
 
 
         });
-
-
-
-
-
-
         this.tableData1 = {
             headerRow: [ 'Select', 'Name', 'Email', 'isNotified'],
             dataRows: this.superArray
         };
-        // this.tableData2 = {
-        //     headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
-        //     dataRows: [
-        //         ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
-        //         ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
-        //         ['3', 'Sage Rodriguez', '$56,142', 'Netherlands', 'Baileux' ],
-        //         ['4', 'Philip Chaney', '$38,735', 'Korea, South', 'Overland Park' ],
-        //         ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
-        //         ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
-        //     ]
-        // };
 
 
 
     }
+
+
+
+    getNotified(user:any):boolean{
+
+
+
+        return true;
+    }
+
+
     handleChange(data){
         //console.log(data.email);
         let temp = {email:data.email};

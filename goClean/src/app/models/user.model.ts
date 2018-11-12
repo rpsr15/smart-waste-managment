@@ -26,4 +26,8 @@ export class User {
     getNotifed(){
         return this.notifed;
     }
+
+    setNotifed(val){
+        this.notifed = val;
+    }
 }
