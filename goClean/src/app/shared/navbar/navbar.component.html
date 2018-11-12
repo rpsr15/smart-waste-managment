@@ -16,15 +16,14 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="#notificationMenu">
                          <div [ngStyle]="{'color': unreadCount>0 ? 'red':''}" >
                           <i class="ti-bell"></i>
-                            <p>Notifications</p>
+                            <p>{{unreadCount}} Notifications</p>
                             <b class="caret"></b>
                          </div>
                       </a>
                       <ul class="dropdown-menu ofix">
                           <!--<div *ngFor="let noti of notificationArray ">-->
                         <li *ngFor="let noti of showArray">
-                            <a [ngStyle]="{'background-color': noti.status=='read' ? 'antiquewhite':''}" role="button" (click)="deleteNotification(noti)" >{{noti.message}}  </a>
-                            <button type="button" class="close" (click)="crossNotification(noti)"  style="position: absolute;top: 8px;right: 2px;">&times;</button>
+                            <a [ngStyle]="{'background-color': noti.status=='Unread' ? 'antiquewhite':'white'}" role="button" (click)="deleteNotification(noti)" >{{noti.message}}  </a>
                         </li>
                       </ul>
                 </li>
