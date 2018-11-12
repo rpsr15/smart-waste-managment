@@ -36,6 +36,18 @@ public class FakeDataGenerator {
         bins.put("a14", 120);
         bins.put("a15", 120);
         bins.put("a16", 120);
+        bins.put("a17", 120);
+        bins.put("a18", 120);
+        bins.put("a19", 120);
+        bins.put("a20", 120);
+        bins.put("a21", 120);
+        bins.put("a22", 120);
+        bins.put("a23", 120);
+        bins.put("a24", 120);
+        bins.put("a25", 120);
+        bins.put("a26", 120);
+        bins.put("a27", 120);
+        bins.put("a28", 120);
 
         LocalDateTime currentDate = LocalDateTime.now();
         Writer wr = null;
@@ -47,7 +59,7 @@ public class FakeDataGenerator {
             // start json
             wr.write("{\n");
 
-            LocalDateTime date = LocalDate.of(2018, 10, 10).atTime(00, 00);
+            LocalDateTime date = LocalDate.of(2018, 11, 02).atTime(00, 00);
             Random random = new Random();
             while (date.plusHours(2).compareTo(currentDate) < 0) {
 
@@ -55,7 +67,9 @@ public class FakeDataGenerator {
 
                 for (Map.Entry<String, Integer> entry : bins.entrySet()) {
                     // if sunday and between 5 am to 8 am empty the bin
-                    if (date.getDayOfWeek().equals(DayOfWeek.SUNDAY) && (date.getHour() >= 5 && date.getHour() <= 7)) {
+                    // System.out.println(DayOfWeek.values()[random.nextInt(6)]);
+                    if (date.getDayOfWeek().equals(DayOfWeek.values()[random.nextInt(6)])
+                            && (date.getHour() >= 5 && date.getHour() <= 7)) {
                         entry.setValue(120);
                     }
 
