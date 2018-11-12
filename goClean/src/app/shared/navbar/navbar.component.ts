@@ -3,6 +3,7 @@ import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {UserService} from "../../services/user.service";
+import {SocketService} from "../../services/socket.service";
 
 @Component({
     moduleId: module.id,
@@ -22,7 +23,7 @@ export class NavbarComponent implements OnInit{
 
     @ViewChild("navbar-cmp") button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private userService:UserService) {
+    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private userService:UserService, private socketService: SocketService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -68,8 +69,10 @@ export class NavbarComponent implements OnInit{
     showNoti(){
         // this.notificationArray=[];
         let loggedInUser = localStorage.getItem('currentUser');
+        // console.log(this.notificationArray);
 
-        this.notificationArray.forEach((e) => {
+        for(var i=0;i<this.notificationArray.length;i++){
+            let e = this.notificationArray[i];
             if(loggedInUser == e.email){
                 //console.log('Before push ',e);
                 if(e.status=='Unread'){
@@ -79,11 +82,28 @@ export class NavbarComponent implements OnInit{
 
                 this.showArray.push(e);
             }
-        });
+
+        }
+
+        // this.notificationArray.forEach((e) => {
+        //     if(loggedInUser == e.email){
+        //         //console.log('Before push ',e);
+        //         if(e.status=='Unread'){
+        //             this.unreadCount++;
+        //         }
+        //
+        //
+        //         this.showArray.push(e);
+        //     }
+        //  });
 
 
+        <<<<<<< HEAD
 
+        // console.log('SHOW ARRAY',this.showArray);
+        =======
         //console.log('SHOW ARRAY',this.showArray);
+    >>>>>>> 284f87068c624204720cff98e0050b39697432d0
 
 
     }
@@ -95,7 +115,8 @@ export class NavbarComponent implements OnInit{
         };
 
         this.userService.postReadNoti(data)
-            .subscribe(data => { console.log('IN RETURN COMPONENT post noti success',data) // Data which is returned by call
+            .subscribe(data => {
+                    // console.log('IN RETURN COMPONENT post noti success',data) // Data which is returned by call
                     this.unreadCount=0;
                     this.showArray=[];
                     this.getNotification();
@@ -105,6 +126,25 @@ export class NavbarComponent implements OnInit{
                 });
 
     }
+    crossNotification(noti){
+        console.log(noti);
+        let data = {
+            "id":noti.id
+        };
+
+        this.userService.deleteNotification(data)
+            .subscribe(data => { console.log('IN RETURN COMPONENT DELETE noti success',data) // Data which is returned by call
+                    this.unreadCount=0;
+                    this.showArray=[];
+                    this.getNotification();
+                },
+                error => { console.log('IN RETURN COMPONENT post DELETE error',error); // Error if any
+
+                });
+
+    }
+
+
 
     getTitle(){
         var titlee = window.location.pathname;
