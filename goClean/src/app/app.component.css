@@ -61,9 +61,10 @@
     margin-bottom: 50px;
     text-align: center;
 }
-.img {
+.logoImg {
     max-width: 100%;
     height: auto;
+    border-radius: 5%;
 }
 .signup-image-link {
     font-size: 14px;

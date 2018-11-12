@@ -71,6 +71,7 @@ export class AppComponent implements OnInit{
                     this.msg = 'SignUp Successful';
                     this.role = 'success';
                     this.showAlert  = true;
+                    this.isSignUp = false;
                 },
                 error => { console.log('IN RETURN COMPONENT error',error); // Error if any
                     form.resetForm();
