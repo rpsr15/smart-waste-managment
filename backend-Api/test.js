@@ -313,7 +313,7 @@ readBin.on("value", function(snapshot) {
           biggest = binData[k];
           first = 1;
         }
-        else if(binData[k].metadata.time > biggest.metadata.time)
+        else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
         {
           biggest = binData[k];
         }
@@ -323,3 +323,7 @@ readBin.on("value", function(snapshot) {
   }
   console.log(bin);
 });
+
+console.log(Date.parse("31 October 2018"));
+
+//console.log("31 October 2018" > "1 November 2018");

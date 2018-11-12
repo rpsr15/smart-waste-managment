@@ -189,52 +189,52 @@ app.post('/api/login', function(req, res)
   });
 
    app.get("/api/getLatestData", function(req, res){
-    readBin.on("value", function(snapshot) {
-     var data = snapshot.val();
-     var keys = Object.keys(data);
-     var binData = [];
-     var binIds = [];
-     for(var i = 0; i < keys.length; i++)
-     {
-        var x =  keys[i];
-        binData[i] = data[x];
-     }
-
-     for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
-     {
-        var y =  keys[j];
-        binIds[j] = data[y].payload_fields.hardware_id;
-     }
-
-       const unique = (value, index, self) => {
-       return self.indexOf(value) === index;
-     }
-      const uniqueIds = binIds.filter(unique);      //Taking unique binIds
-
-      var count = 0;
-      var bin = [];
-
-
-      for(var i = 0; i < uniqueIds.length; i++)
+     readBin.on("value", function(snapshot) {
+      var data = snapshot.val();
+      var keys = Object.keys(data);
+      var binData = [];
+      var binIds = [];
+      for(var i = 0; i < keys.length; i++)
       {
-        var first = 0;
-        for(var k = 0; k < binData.length; k++)
-        {
-          if(binData[k].payload_fields.hardware_id == uniqueIds[i])
-          {
-            if(first == 0)
-            {
-              biggest = binData[k];
-              first = 1;
-            }
-            else if(binData[k].metadata.time >= biggest.metadata.time )
-            {
-              biggest = binData[k];
-            }
-          }
-        }
-        bin[i] = biggest;
+         var x =  keys[i];
+         binData[i] = data[x];
       }
+
+      for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
+      {
+         var y =  keys[j];
+         binIds[j] = data[y].payload_fields.hardware_id;
+      }
+
+        const unique = (value, index, self) => {
+        return self.indexOf(value) === index;
+      }
+       const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+       //console.log("Unique ids: " + uniqueIds);
+
+       var count = 0;
+       var bin = [];
+
+       for(var i = 0; i < uniqueIds.length; i++)
+       {
+         var first = 0;
+         for(var k = 0; k < binData.length; k++)
+         {
+           if(binData[k].payload_fields.hardware_id == uniqueIds[i])
+           {
+             if(first == 0)
+             {
+               biggest = binData[k];
+               first = 1;
+             }
+             else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
+             {
+               biggest = binData[k];
+             }
+           }
+         }
+         bin[i] = biggest;
+       }
       res.send(bin);
     });
 });
@@ -242,54 +242,54 @@ app.post('/api/login', function(req, res)
 
 //Read latest bin data real-time
 
-    readBin.on("value", function(snapshot) {
-     var data = snapshot.val();
-     var keys = Object.keys(data);
-     var binData = [];
-     var binIds = [];
-     for(var i = 0; i < keys.length; i++)
-     {
-        var x =  keys[i];
-        binData[i] = data[x];
-     }
+readBin.on("value", function(snapshot) {
+ var data = snapshot.val();
+ var keys = Object.keys(data);
+ var binData = [];
+ var binIds = [];
+ for(var i = 0; i < keys.length; i++)
+ {
+    var x =  keys[i];
+    binData[i] = data[x];
+ }
 
-     for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
-     {
-        var y =  keys[j];
-        binIds[j] = data[y].payload_fields.hardware_id;
-     }
+ for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
+ {
+    var y =  keys[j];
+    binIds[j] = data[y].payload_fields.hardware_id;
+ }
 
-       const unique = (value, index, self) => {
-       return self.indexOf(value) === index;
-     }
-      const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+   const unique = (value, index, self) => {
+   return self.indexOf(value) === index;
+ }
+  const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+  //console.log("Unique ids: " + uniqueIds);
 
-      var count = 0;
-      var bin = [];
+  var count = 0;
+  var bin = [];
 
-
-      for(var i = 0; i < uniqueIds.length; i++)
+  for(var i = 0; i < uniqueIds.length; i++)
+  {
+    var first = 0;
+    for(var k = 0; k < binData.length; k++)
+    {
+      if(binData[k].payload_fields.hardware_id == uniqueIds[i])
       {
-        var first=0;
-        for(var k = 0; k < binData.length; k++)
+        if(first == 0)
         {
-          if(binData[k].payload_fields.hardware_id == uniqueIds[i])
-          {
-            if(first==0)
-            {
-              biggest = binData[k];
-              first=1;
-            }
-            else if(binData[k].metadata.time >= biggest.metadata.time )
-            {
-              biggest = binData[k];
-            }
-          }
+          biggest = binData[k];
+          first = 1;
         }
-        bin[i] = biggest;
+        else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
+        {
+          biggest = binData[k];
+        }
       }
+    }
+    bin[i] = biggest;
+  }
     io.emit('binReadings', bin );
-    });
+});
 
 
 
@@ -353,15 +353,15 @@ app.post('/api/login', function(req, res)
            biggest = binData[k];
            first = 1;
          }
-         else if(binData[k].metadata.time >= biggest.metadata.time)
+         else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
          {
              biggest = binData[k];
          }
+
        }
      }
      bin[i] = biggest;
    }
-
        let promiseToGetUsers =  new Promise(function(resolve, reject){
        notificationUsers.once("value", function(snapshot){
        var data = snapshot.val();
