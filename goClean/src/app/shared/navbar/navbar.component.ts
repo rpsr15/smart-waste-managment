@@ -98,12 +98,6 @@ export class NavbarComponent implements OnInit{
         //  });
 
 
-        <<<<<<< HEAD
-
-        // console.log('SHOW ARRAY',this.showArray);
-        =======
-        //console.log('SHOW ARRAY',this.showArray);
-    >>>>>>> 284f87068c624204720cff98e0050b39697432d0
 
 
     }
