@@ -3,7 +3,6 @@ import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {UserService} from "../../services/user.service";
-import {SocketService} from "../../services/socket.service";
 
 @Component({
     moduleId: module.id,
@@ -23,7 +22,7 @@ export class NavbarComponent implements OnInit{
 
     @ViewChild("navbar-cmp") button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private userService:UserService, private socketService: SocketService) {
+    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private userService:UserService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -39,7 +38,7 @@ export class NavbarComponent implements OnInit{
     getNotification(){
         this.userService.getNotication()
             .subscribe(data => {
-                // console.log('IN RETURN COMPONENT Notification success',data) // Data which is returned by call
+                    // console.log('IN RETURN COMPONENT Notification success',data) // Data which is returned by call
                     // console.log('GET DATA',data);
 
                     for (const key in data) {
@@ -69,10 +68,8 @@ export class NavbarComponent implements OnInit{
     showNoti(){
         // this.notificationArray=[];
         let loggedInUser = localStorage.getItem('currentUser');
-        // console.log(this.notificationArray);
 
-        for(var i=0;i<this.notificationArray.length;i++){
-            let e = this.notificationArray[i];
+        this.notificationArray.forEach((e) => {
             if(loggedInUser == e.email){
                 //console.log('Before push ',e);
                 if(e.status=='Unread'){
@@ -82,24 +79,11 @@ export class NavbarComponent implements OnInit{
 
                 this.showArray.push(e);
             }
-
-        }
-
-       // this.notificationArray.forEach((e) => {
-       //     if(loggedInUser == e.email){
-       //         //console.log('Before push ',e);
-       //         if(e.status=='Unread'){
-       //             this.unreadCount++;
-       //         }
-       //
-       //
-       //         this.showArray.push(e);
-       //     }
-       //  });
+        });
 
 
 
-       // console.log('SHOW ARRAY',this.showArray);
+        //console.log('SHOW ARRAY',this.showArray);
 
 
     }
@@ -107,12 +91,11 @@ export class NavbarComponent implements OnInit{
     deleteNotification(noti){
         console.log(noti);
         let data = {
-          "id":noti.id
+            "id":noti.id
         };
 
         this.userService.postReadNoti(data)
-            .subscribe(data => {
-                // console.log('IN RETURN COMPONENT post noti success',data) // Data which is returned by call
+            .subscribe(data => { console.log('IN RETURN COMPONENT post noti success',data) // Data which is returned by call
                     this.unreadCount=0;
                     this.showArray=[];
                     this.getNotification();
@@ -122,25 +105,6 @@ export class NavbarComponent implements OnInit{
                 });
 
     }
-    crossNotification(noti){
-        console.log(noti);
-        let data = {
-            "id":noti.id
-        };
-
-        this.userService.deleteNotification(data)
-            .subscribe(data => { console.log('IN RETURN COMPONENT DELETE noti success',data) // Data which is returned by call
-                    this.unreadCount=0;
-                    this.showArray=[];
-                    this.getNotification();
-                },
-                error => { console.log('IN RETURN COMPONENT post DELETE error',error); // Error if any
-
-                });
-
-    }
-
-
 
     getTitle(){
         var titlee = window.location.pathname;

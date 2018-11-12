@@ -211,10 +211,10 @@ export class DashboardComponent implements OnInit {
             // console.log(avgLat, avgLon, avgPercent, location);
             // add marker
             let iconPath = this.iconGreenBloop;
-            if(avgPercent >= 50) {
+            if (avgPercent >= 50) {
                 iconPath = this.iconGreenBloop;
 
-            } else if(avgPercent >= 20) {
+            } else if (avgPercent >= 20) {
                 iconPath = this.iconOragneBloop;
             } else {
                 // shored
