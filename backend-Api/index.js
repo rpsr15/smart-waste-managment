@@ -1,6 +1,7 @@
 var app = require("express")();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+io.origins('*:*');
 var serviceAccount = require('./keys.json');
 var firebase = require("firebase");
 var morgan = require('morgan');
@@ -313,7 +314,6 @@ readBin.on("value", function(snapshot) {
  });
 
  //Method for sending email and sending notification to the user (Real time)
-
  readBin.on("value", function(snapshot) {
   var data = snapshot.val();
   var keys = Object.keys(data);
@@ -326,7 +326,7 @@ readBin.on("value", function(snapshot) {
      binData[i] = data[x];
   }
 
-  for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
+  for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing in binids array
   {
      var y =  keys[j];
      binIds[j] = data[y].payload_fields.hardware_id;
@@ -339,7 +339,6 @@ readBin.on("value", function(snapshot) {
 
    var count = 0;
    var bin = [];
-
 
    for(var i = 0; i < uniqueIds.length; i++)
    {
@@ -357,11 +356,21 @@ readBin.on("value", function(snapshot) {
          {
              biggest = binData[k];
          }
-
        }
      }
-     bin[i] = biggest;
+     bins[i] = biggest;
    }
+
+       for(var j = 0; j < bins.length; j++)
+       {
+         if(bins[j].payload_fields.level <= 24)
+         {
+           bin[j] = bins[j];
+         }
+       }
+       bin = bin.filter(Boolean)
+       console.log(bin);
+
        let promiseToGetUsers =  new Promise(function(resolve, reject){
        notificationUsers.once("value", function(snapshot){
        var data = snapshot.val();
@@ -376,56 +385,40 @@ readBin.on("value", function(snapshot) {
    });
 
 
-   promiseToGetUsers.then(function(user){
-     var count = 0;
-     var lowLevel = [];
-     for(var i = 0; i < bin.length; i++)
+    promiseToGetUsers.then(function(user){
+     function sendMail(id, level)
      {
-       if(bin[i].payload_fields.level <= 24)
+       for(let j = 0; j < user.length; j++)
        {
-         lowLevel[i] = bin[i];
-       }
+           msg.to = user[j].email;
+           msg.text = `This is to inform you that BIN ID ${id} has ${level}% space left`;
+           //console.log(location);
+           smtpTransport.sendMail(msg, function(err){
+           if(!err)
+           {
+             console.log(`BIN ID ${id} has ${level}% space left`);
+             console.log('Sending to ' + to.email + ' success: ');
+           }
+         });
+         notifications.push({
+         email: user[j].email,
+         status: msg.status,
+         message: `BIN ID ${id} has ${level}% space left`
+       });
+      }
      }
 
-       var filteredLowLevel = lowLevel.filter(function (el) {
-       return el != null;
+     for(let i = 0; i < bin.length; i++)
+     {
+       var id = bin[i].payload_fields.hardware_id;
+       var level = Math.round((bin[i].payload_fields.level/120)*100);
+       let promiseToSendMail =  new Promise(function(resolve, reject){
+           sendMail(id, level);
+           resolve();
        });
-       //console.log(filteredLowLevel);
-       function sendMail(id, level)
-       {
-         for(let j = 0; j < user.length; j++)
-         {
-             msg.to = user[j].email;
-             msg.text = `This is to inform you that BIN ID ${id} has ${level}% space left`;
-             //console.log(location);
-             smtpTransport.sendMail(msg, function(err){
-             if(!err)
-             {
-               console.log(`BIN ID ${id} has ${level}% space left`);
-               console.log('Sending to ' + to.email + ' success: ');
-             }
-           });
-           notifications.push({
-           email: user[j].email,
-           status: msg.status,
-           message: `BIN ID ${id} is ${level}% left `
-         });
-        }
-       }
-
-
-       for(let i = 0; i < filteredLowLevel.length; i++)
-       {
-         var id = filteredLowLevel[i].payload_fields.hardware_id;
-         var level = Math.round((filteredLowLevel[i].payload_fields.level/120)*100);
-         let promiseToSendMail =  new Promise(function(resolve, reject){
-             sendMail(id, level);
-             resolve();
-         });
-         promiseToSendMail.then(function(){
-         });
-       }
-
+       promiseToSendMail.then(function(){
+       });
+     }
    });
  });
 
@@ -512,6 +505,24 @@ app.post('/api/deleteNotifications', function(req, res)
     }
   });
 });
+
+//Api to push the data in the bin reading for testing
+app.post("/api/pushBinData", function(req,res){
+  var data = req.body;
+  console.log(data);
+  readBin.push(data);
+
+});
+
+
+//Api to push notification Users for testing
+app.post("/api/pushNotificationUser", function(req,res){
+  var data = req.body;
+  console.log(data);
+  notificationUser.push(data);
+});
+
+
 
 /*
 app.get("/api/sendEmail", function(req,res){

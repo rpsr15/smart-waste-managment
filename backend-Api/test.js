@@ -271,7 +271,7 @@ readBin.once("value", function(snapshot){
   });
 */
 
-
+/*
 readBin.on("value", function(snapshot) {
  var data = snapshot.val();
  var keys = Object.keys(data);
@@ -298,9 +298,6 @@ readBin.on("value", function(snapshot) {
   var count = 0;
   var bin = [];
 
-
-
-
   for(var i = 0; i < uniqueIds.length; i++)
   {
     var first = 0;
@@ -321,9 +318,155 @@ readBin.on("value", function(snapshot) {
     }
     bin[i] = biggest;
   }
-  console.log(bin);
-});
 
-console.log(Date.parse("31 October 2018"));
+  for(var j = 0; j < bin.length; j++)
+  {
+    if(bin[j].payload_fields.level <= 24)
+    {
+        console.log(bin[j]);
+    }
+  }
+
+});
+*/
+
+//database.ref(`notifications`).remove();
+
+
+//database.ref(`notificationUser/-LRBYGE51xiAZ7iJlsQK`).remove();
+//console.log(Date.parse("31 October 2018"));
+
+
 
 //console.log("31 October 2018" > "1 November 2018");
+
+
+
+//------------------------------------------------
+/*
+
+readBin.on("value", function(snapshot) {
+ var data = snapshot.val();
+ var keys = Object.keys(data);
+ var binData = [];
+ var binIds = [];
+ var user = [];
+ for(var i = 0; i < keys.length; i++)
+ {
+    var x =  keys[i];
+    binData[i] = data[x];
+ }
+
+ for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
+ {
+    var y =  keys[j];
+    binIds[j] = data[y].payload_fields.hardware_id;
+ }
+
+   const unique = (value, index, self) => {
+   return self.indexOf(value) === index;
+ }
+  const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+
+  var count = 0;
+  var bin = [];
+  var bins = []
+
+  for(var i = 0; i < uniqueIds.length; i++)
+  {
+    var first=0;
+    for(var k = 0; k < binData.length; k++)
+    {
+      if(binData[k].payload_fields.hardware_id == uniqueIds[i])
+      {
+        if(first==0)
+        {
+          biggest = binData[k];
+          first = 1;
+        }
+        else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
+        {
+            biggest = binData[k];
+        }
+      }
+    }
+    bins[i] = biggest;
+  }
+
+      for(var j = 0; j < bins.length; j++)
+      {
+        if(bins[j].payload_fields.level <= 24)
+        {
+          bin[j] = bins[j];
+        }
+      }
+      bin = bin.filter(Boolean)
+      console.log(bin);
+
+      let promiseToGetUsers =  new Promise(function(resolve, reject){
+      notificationUsers.once("value", function(snapshot){
+      var data = snapshot.val();
+      var keys = Object.keys(data);
+      for(var i = 0; i < keys.length; i++)
+      {
+        var k =  keys[i];
+        user[i] = data[k];        //Storing the users in the array from object
+      }
+      resolve(user);
+    });
+  });
+
+
+  promiseToGetUsers.then(function(user){
+    var count = 0;
+    var lowLevel = [];
+   /* for(var i = 0; i < bin.length; i++)
+    {
+      if(bin[i].payload_fields.level <= 24)
+      {
+        lowLevel[i] = bin[i];
+      }
+    }*/
+
+
+      /*var filteredLowLevel = lowLevel.filter(function (el) {
+      return el != null;
+    });*/
+      //console.log(filteredLowLevel);
+      function sendMail(id, level)
+      {
+        for(let j = 0; j < user.length; j++)
+        {
+            msg.to = user[j].email;
+            msg.text = `This is to inform you that BIN ID ${id} has ${level}% space left`;
+            //console.log(location);
+            smtpTransport.sendMail(msg, function(err){
+            if(!err)
+            {
+              console.log(`BIN ID ${id} has ${level}% space left`);
+              console.log('Sending to ' + to.email + ' success: ');
+            }
+          });
+          notifications.push({
+          email: user[j].email,
+          status: msg.status,
+          message: `BIN ID ${id} has ${level}% space left`
+        });
+       }
+      }
+
+
+      for(let i = 0; i < bin.length; i++)
+      {
+        var id = bin[i].payload_fields.hardware_id;
+        var level = Math.round((bin[i].payload_fields.level/120)*100);
+        let promiseToSendMail =  new Promise(function(resolve, reject){
+            sendMail(id, level);
+            resolve();
+        });
+        promiseToSendMail.then(function(){
+        });
+      }
+
+  });
+}); */
