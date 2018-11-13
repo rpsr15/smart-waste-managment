@@ -28,7 +28,6 @@ var config = {                                          //Setting up database
  var user = database.ref("users");
  var readBin = database.ref("binReadings");
  var location = database.ref("locations");
- var notificationUsers = database.ref("notificationUser");
  var notifications = database.ref("notifications");
  var notificationUser = database.ref("notificationUser");
 
@@ -283,7 +282,7 @@ readBin.on("value", function(snapshot) {
         }
         else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
         {
-          biggest = binData[k];     //Get the latest record 
+          biggest = binData[k];     //Get the latest record
         }
       }
     }
@@ -296,21 +295,39 @@ readBin.on("value", function(snapshot) {
 
 //API that stores the users in the notificationUser that will be passed by the admin
  app.post("/api/storeUser", function(req,res){
-   var emails = req.body;
-   var email;
-   var keys = Object.keys(emails);
-   var count = 0;
-   for(var i = 0; i < keys.length; i++)
-   {
-     var k =  keys[i];
-     email = emails[k];
-     notificationUsers.push(email);       //Pushing emails who are subscribed to notificationUser
-     if(count == 0)
+   notificationUser.once("value", function(snapshot){
+     var input = req.body;
+     var data = snapshot.val();
+     if(data != null)
      {
-       res.status(200).json({message: "Success: User have been stored.", result: true})
+        var keys = Object.keys(data);
      }
-     count++;
-   }
+     var keysInput = Object.keys(input);
+     var userSent = [];
+     var isNotified;
+     var count = 0;
+     for(var i = 0; i < keysInput.length; i++)
+     {
+       var k = keysInput[i];
+       userSent[i] = input[k];
+       isNotified = input[k].notified;
+       if(isNotified == "true")
+       {
+          notificationUser.push(userSent[i]);
+       }
+       else
+       {
+         for(var j = 0; j < keys.length; j++)
+         {
+           var l = keys[j];
+           if(data[l].email == input[k].email)
+           {
+             database.ref(`notificationUser/${l}`).remove();
+           }
+         }
+       }
+     }
+   });
  });
 
  //Method for sending email and sending notification to the user (Real time)
@@ -339,6 +356,7 @@ readBin.on("value", function(snapshot) {
 
    var count = 0;
    var bin = [];
+   var bins = [];
 
    for(var i = 0; i < uniqueIds.length; i++)
    {
@@ -372,7 +390,7 @@ readBin.on("value", function(snapshot) {
        console.log(bin);
 
        let promiseToGetUsers =  new Promise(function(resolve, reject){
-       notificationUsers.once("value", function(snapshot){
+       notificationUser.once("value", function(snapshot){
        var data = snapshot.val();
        var keys = Object.keys(data);
        for(var i = 0; i < keys.length; i++)
