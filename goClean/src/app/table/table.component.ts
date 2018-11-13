@@ -58,7 +58,7 @@ export class TableComponent implements OnInit{
                     user.setNotifed(true);
 
                 }
-                console.log(this.userAry);
+                //console.log('GETTING DATA',this.userAry);
             });
 
 
@@ -79,19 +79,26 @@ export class TableComponent implements OnInit{
     handleChange(data){
         console.log('DATA',data);
         // let temp = {email:data.email};
-        this.notifyArray = this.userAry;
-
-        if(data.notifed == true){
-            console.log("in true that removing");
-            this.notifyArray = this.notifyArray.filter(function (orgData) {
-               return orgData.email != data.email;
-            });
+        if(data.notifed){
+            data.setNotifed(false);
         }else{
-            console.log("in false that adding");
-            this.notifyArray.push(data);
+            data.setNotifed(true);
         }
 
-        console.log('change data',this.notifyArray);
+        // console.log(this.userAry);
+        // this.notifyArray = this.userAry;
+        //
+        // if(data.notifed == true){
+        //     console.log("in true that removing");
+        //     this.notifyArray = this.notifyArray.filter(function (orgData) {
+        //        return orgData.email != data.email;
+        //     });
+        // }else{
+        //     console.log("in false that adding");
+        //     this.notifyArray.push(data);
+        // }
+        //
+        // console.log('change data',this.notifyArray);
     }
 
     enableEdit(){
@@ -99,15 +106,25 @@ export class TableComponent implements OnInit{
     }
 
     sendNotification(){
-        if(this.editMode) {
-            this.editMode = false;
-
-        }
+        // if(this.editMode) {
+        //     this.editMode = false;
+        //
+        // }
         console.log("Here is data of users to be notified");
+        for (let i = 0; i < this.userAry.length ; i++) {
+            if(this.userAry[i].getNotifed()==true){
+                this.notifyArray.push(this.userAry[i]);
+            }
+        }
+
+
+
+
         console.log(this.notifyArray);
 
         this.userService.postUserEmail(this.notifyArray)
             .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
+                    this.editMode = false;
                     this.msg = 'User are updated successfully';
                     this.notifySent = true;
                 },

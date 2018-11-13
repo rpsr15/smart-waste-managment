@@ -105,7 +105,7 @@ export class NavbarComponent implements OnInit{
         // this.notificationArray=[];
         let loggedInUser = localStorage.getItem('currentUser');
         // console.log(this.notificationArray);
-        console.log('ARRAY IN SHOW NOTI',this.notificationArray);
+       // console.log('ARRAY IN SHOW NOTI',this.notificationArray);
 
 
             let e = notification;
@@ -122,7 +122,7 @@ export class NavbarComponent implements OnInit{
 }
 
     deleteNotification(noti){
-        console.log(noti);
+        //console.log(noti);
         let data = {
             "id":noti.id
         };
@@ -140,7 +140,7 @@ export class NavbarComponent implements OnInit{
 
     }
     crossNotification(noti){
-        console.log(noti);
+        //console.log(noti);
         let data = {
             "id":noti.id
         };
