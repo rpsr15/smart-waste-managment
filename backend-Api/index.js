@@ -448,8 +448,9 @@ app.get("/api/getnotifiedUsers", function(req,res){
 
 
 //Real time get notificationUser
-  notifications.once("value", function(snapshot){
+  notifications.on("value", function(snapshot){
     var data = snapshot.val();
+    console.log(data);
     io.emit('notifications', data );
   });
 

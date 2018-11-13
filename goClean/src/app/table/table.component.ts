@@ -74,21 +74,24 @@ export class TableComponent implements OnInit{
 
 
 
-    getNotified(user:any):boolean{
-
-
-
-        return true;
-    }
 
 
     handleChange(data){
-        //console.log(data.email);
-        let temp = {email:data.email};
-        this.notifyArray.push(temp);
+        console.log('DATA',data);
+        // let temp = {email:data.email};
+        this.notifyArray = this.userAry;
 
+        if(data.notifed == true){
+            console.log("in true that removing");
+            this.notifyArray = this.notifyArray.filter(function (orgData) {
+               return orgData.email != data.email;
+            });
+        }else{
+            console.log("in false that adding");
+            this.notifyArray.push(data);
+        }
 
-        console.log(this.notifyArray);
+        console.log('change data',this.notifyArray);
     }
 
     enableEdit(){

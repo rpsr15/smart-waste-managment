@@ -13,9 +13,13 @@ export class SocketService {
         this.socket = socketIo(SERVER_URL);
     }
 
-    public onNewNotification(): Observable<String> {
-        return new Observable<String>(observer => {
-            this.socket.on('notification', (data: String) => observer.next(data));
+    public onNewNotification(): Observable<Object> {
+        return new Observable<Object>(observer => {
+
+            this.socket.on('notifications', (data) => {
+                console.log('check chek');
+                observer.next(data);
+            });
         });
     }
 

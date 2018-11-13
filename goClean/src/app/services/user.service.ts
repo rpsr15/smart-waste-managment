@@ -11,7 +11,7 @@ export class UserService {
     createUserFromJson(jsonObject: object) {
         const email = jsonObject['email'];
         const name = jsonObject['name'];
-        const notified = jsonObject['notified'];
+        const notified = false;
         const newUser = new User(email,name,notified);
         return newUser;
     }

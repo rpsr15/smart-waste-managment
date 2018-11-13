@@ -18,7 +18,10 @@ export class NavbarComponent implements OnInit{
     private toggleButton;
     private sidebarVisible: boolean;
     private notificationArray=[];
-    private showArray=[];
+    private realTimeArray = [];
+    private notificationObject;
+    showArray=[];
+    ioConnection;
     unreadCount = 0;
 
     @ViewChild("navbar-cmp") button;
@@ -27,36 +30,68 @@ export class NavbarComponent implements OnInit{
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
-        this.getNotification();
+
     }
 
     ngOnInit(){
+        this.getNotification();
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         var navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+
+        this.socketService.initSocket();
+        this.ioConnection = this.socketService.onNewNotification().subscribe(
+            (data)=>{
+                this.showArray = [];
+                this.unreadCount = 0;
+                for (const key in data) {
+                    const notif = data[key];
+                    // console.log(key);
+                    // console.log(notif);
+                    let notification = {
+                        "id":key,
+                        "email":notif.email,
+                        "message":notif.message,
+                        "status":notif.status
+                    };
+                    this.filterNotification(notification);
+
+
+                }
+            }
+        );
+
     }
+
+    comparer(otherArray){
+        return function(current){
+            return otherArray.filter(function(other){
+                return other.email == current.email
+            }).length == 0;
+        }
+    }
+
+
 
     getNotification(){
         this.userService.getNotication()
             .subscribe(data => {
                     // console.log('IN RETURN COMPONENT Notification success',data) // Data which is returned by call
                     // console.log('GET DATA',data);
-
+                    this.showArray = [];
+                    this.unreadCount = 0;
                     for (const key in data) {
                         const notif = data[key];
                         // console.log(key);
                         // console.log(notif);
-                        let test = {
+                        let notification = {
                             "id":key,
                             "email":notif.email,
                             "message":notif.message,
                             "status":notif.status
                         };
-                        this.notificationArray=[];
-                        // this.showArray=[];
-                        this.notificationArray.push(test);
-                        //console.log('NOTIFICATION NEW',this.notificationArray);
-                        this.showNoti();
+                        this.filterNotification(notification);
+
 
                     }
 
@@ -66,13 +101,14 @@ export class NavbarComponent implements OnInit{
                 });
     }
 
-    showNoti(){
+    filterNotification(notification){
         // this.notificationArray=[];
         let loggedInUser = localStorage.getItem('currentUser');
         // console.log(this.notificationArray);
+        console.log('ARRAY IN SHOW NOTI',this.notificationArray);
 
-        for(var i=0;i<this.notificationArray.length;i++){
-            let e = this.notificationArray[i];
+
+            let e = notification;
             if(loggedInUser == e.email){
                 //console.log('Before push ',e);
                 if(e.status=='Unread'){
@@ -83,24 +119,7 @@ export class NavbarComponent implements OnInit{
                 this.showArray.push(e);
             }
 
-        }
-
-        // this.notificationArray.forEach((e) => {
-        //     if(loggedInUser == e.email){
-        //         //console.log('Before push ',e);
-        //         if(e.status=='Unread'){
-        //             this.unreadCount++;
-        //         }
-        //
-        //
-        //         this.showArray.push(e);
-        //     }
-        //  });
-
-
-
-
-    }
+}
 
     deleteNotification(noti){
         console.log(noti);
