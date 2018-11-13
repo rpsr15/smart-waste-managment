@@ -230,7 +230,7 @@ app.post('/api/login', function(req, res)
              }
              else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
              {
-               biggest = binData[k];
+               biggest = binData[k];      //Get the latest record
              }
            }
          }
@@ -283,7 +283,7 @@ readBin.on("value", function(snapshot) {
         }
         else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
         {
-          biggest = binData[k];
+          biggest = binData[k];     //Get the latest record 
         }
       }
     }
@@ -522,79 +522,6 @@ app.post("/api/pushNotificationUser", function(req,res){
   notificationUser.push(data);
 });
 
-
-
-/*
-app.get("/api/sendEmail", function(req,res){
-   readBin.once("value", function(snapshot, errorData) {
-   var data = snapshot.val();
-   var keys = Object.keys(data);
-   //var count = 0;
-   var user = [];
-   for(var i = 0; i < keys.length; i++)
-   {
-     var k =  keys[i];
-     var level = data[k].payload_fields.level;      //Getting level of the bins
-     var id = data[k].payload_fields.hardware_id;
-
-
-     if(level <= 24)                                 //Check if it is greater than 80%
-     {
-       //if(count == 0)
-       //{
-         function getTheUsers()     //Getting all the users who are subsrcibed to notification
-         {
-             return new Promise(function(resolve, reject)
-             {
-               notificationUsers.once("value", function(snapshot){
-             var data = snapshot.val();
-             var keys = Object.keys(data);
-             //console.log( data);
-             for(var i = 0; i < keys.length; i++)
-             {
-               var k =  keys[i];
-               user[i] = data[k];        //Storing the users in the array from object
-             }
-             resolve(user);
-           });
-         })
-         }
-         getTheUsers().then(function(users){
-           users.forEach(function (to, i , array) {       //Loop thru array for sending emails to multiple users
-             msg.to = to.email;
-         smtpTransport.sendMail(msg, function (err) {
-            if (err)
-            {
-             console.log('Sending to ' + to + ' failed: ' + err);
-             return;
-            }
-            else
-            {
-              console.log(`${id} at the ${location} is above 80% full`);
-              console.log('Sending to ' + to.email + ' success: ');
-              res.status(200).json({message: "Success: Successfully sent the emails.", result: true});
-              var location;
-
-                notifications.push({
-                email: to.email,
-                status: msg.status,
-                message: `${id} at the ${location} is above 80% full `
-              });
-            }
-
-           if (i === maillist.length - 1)       //If the length of mail list gets finished, then closing the connection
-           {
-               msg.transport.close();
-           }
-         });
-         });
-
-         });
-     }
-   }
-});
-});
-*/
 
 io.on('connection', function(socket){
     console.log('a user connected');
