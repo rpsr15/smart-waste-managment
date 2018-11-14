@@ -21,7 +21,7 @@ export class TableComponent implements OnInit{
 
     public superArray:any[] = [];
 
-    public notifyArray:any[] = [];
+    public notifyArray;
     public msg:string;
     public editMode:boolean = false;
     notifySent:boolean = false;
@@ -55,6 +55,7 @@ export class TableComponent implements OnInit{
                     const email = data[key];
                     ///console.log('mf',email);
                     const user = this.getUser(email.email);
+                    console.log('USER',user);
                     user.setNotifed(true);
 
                 }
@@ -81,8 +82,10 @@ export class TableComponent implements OnInit{
         // let temp = {email:data.email};
         if(data.notifed){
             data.setNotifed(false);
+            //this.notifyArray.push(data);
         }else{
             data.setNotifed(true);
+            //this.notifyArray.push(data);
         }
 
         // console.log(this.userAry);
@@ -105,31 +108,49 @@ export class TableComponent implements OnInit{
         this.editMode = true;
     }
 
+    random(){
+        return '_' + Math.random().toString(36).substr(2,9);
+    }
+
     sendNotification(){
         // if(this.editMode) {
         //     this.editMode = false;
         //
         // }
+        this.notifyArray = {};
+
         console.log("Here is data of users to be notified");
+
         for (let i = 0; i < this.userAry.length ; i++) {
             if(this.userAry[i].getNotifed()==true){
-                this.notifyArray.push(this.userAry[i]);
+                // console.log('THIS-->',this.userAry[i]);
+                // this.notifyArray.push(this.userAry[i]);
+                var test = {
+                    email:this.userAry[i].getEmail(),
+                    name:this.userAry[i].getName(),
+                    notified:this.userAry[i].getNotifed()
+                };
+                var key = this.random();
+
+                this.notifyArray[key] = test;
             }
         }
 
 
 
 
-        console.log(this.notifyArray);
+
+        console.log('USER ARY SENDING',this.notifyArray);
 
         this.userService.postUserEmail(this.notifyArray)
             .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
+                    this.notifyArray = [];
                     this.editMode = false;
                     this.msg = 'User are updated successfully';
                     this.notifySent = true;
                 },
                 error => { console.log('IN RETURN COMPONENT error',error); // Error if any
-
+                    console.log("ERROR USER ARRAY");
                 });
 
     }
