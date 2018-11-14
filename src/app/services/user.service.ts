@@ -91,5 +91,9 @@ export class UserService {
             .pipe(map((response: Response) => response));
     }
 
+    getAdmins(){
+        return this.httpService.get("https://bindata-app.herokuapp.com/api/getAdmins")
+            .pipe(map((response: Response) => response));
+    }
 
 }
