@@ -43,27 +43,7 @@ export class TableComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.userService.getUserData().then((userData: User[])=>{
-            ////console.log(userData);
-            this.userAry = userData;
-
-            //console.log('USER DATA',this.userAry);
-            this.userService.getNotifiedUsers().subscribe((data: Object) => {
-                ////console.log(data);
-                for( let key in data) {
-
-                    const email = data[key];
-                    /////console.log('mf',email);
-                    const user = this.getUser(email.email);
-                    //console.log('USER',user);
-                    user.setNotifed(true);
-
-                }
-                ////console.log('GETTING DATA',this.userAry);
-            });
-
-
-        });
+        this.getData();
         this.tableData1 = {
             headerRow: [ 'Select', 'Name', 'Email', 'isNotified'],
             dataRows: this.superArray
@@ -73,7 +53,37 @@ export class TableComponent implements OnInit{
 
     }
 
+    getData(){
+        this.userService.getUserData().then((userData: User[])=>{
+            // console.log('USER DATA ---->> ',userData);
+            this.userAry = userData;
 
+            //console.log('USER DATA',this.userAry);
+            this.userService.getNotifiedUsers().subscribe((data: Object) => {
+                ////console.log(data);
+                for( let key in data) {
+
+                    const email = data[key];
+                    /////console.log('mf',email);
+                    let threshold = +email.threshold;
+                    console.log('Threshold',threshold);
+                    //set default threshold value
+                    if(threshold == null) {
+                        threshold = 80;
+                    }
+                    const user = this.getUser(email.email);
+                    console.log('USER',user);
+
+                    user.setNotifed(true);
+                    user.setThreshold(threshold);
+
+                }
+                ////console.log('GETTING DATA',this.userAry);
+            });
+
+
+        });
+    }
 
 
 
@@ -125,10 +135,15 @@ export class TableComponent implements OnInit{
             if(this.userAry[i].getNotifed()==true){
                 // //console.log('THIS-->',this.userAry[i]);
                 // this.notifyArray.push(this.userAry[i]);
+                if(!this.userAry[i].getThreshold()){
+                    this.userAry[i].setThreshold(0)
+                }
+
                 var test = {
                     email:this.userAry[i].getEmail(),
                     name:this.userAry[i].getName(),
-                    notified:this.userAry[i].getNotifed()
+                    notified:this.userAry[i].getNotifed(),
+                    threshold:this.userAry[i].getThreshold()
                 };
                 var key = this.random();
 
@@ -140,14 +155,17 @@ export class TableComponent implements OnInit{
 
 
 
-        //console.log('USER ARY SENDING',this.notifyArray);
+        console.log('USER ARY SENDING',this.notifyArray);
 
+
+        //switch on
         this.userService.postUserEmail(this.notifyArray)
             .subscribe(data => { //console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
                     this.notifyArray = [];
                     this.editMode = false;
                     this.msg = 'User are updated successfully';
                     this.notifySent = true;
+                    this.getData();
                 },
                 error => { //console.log('IN RETURN COMPONENT error',error); // Error if any
                     //console.log("ERROR USER ARRAY");
@@ -156,7 +174,7 @@ export class TableComponent implements OnInit{
     }
 
     dismissAlert(){
-        this.notifySent =false; 
+        this.notifySent =false;
     }
 
 

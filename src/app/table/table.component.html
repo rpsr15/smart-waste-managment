@@ -19,8 +19,8 @@
                             <!--<th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>-->
                             <th>Select</th>
                             <th>Name</th>
-                            <th></th>
-                            <th>Email</th>
+                            <th colspan="1">Email</th>
+                            <th>Threshold</th>
                             <!--<th>Is-Notified</th>-->
                         </tr>
                         </thead>
@@ -28,8 +28,9 @@
                         <tbody>
                         <tr *ngFor="let row of userAry">
                             <td><input type="checkbox" [disabled]="!editMode"  [checked]="row.notifed" (change)="handleChange(row)" ngModel></td>
-                            <td>{{row.name}}<td>
-                            <td>{{row.email}}<td>
+                            <td>{{row.name}}</td>
+                            <td >{{row.email}}</td>
+                            <td><input type="text" class="form-control border-input" name="threshold" [disabled]="!row.notifed" [(ngModel)]="row.threshold" style="max-width: 20%;"></td>
                             <!--<td>{{row.getNotifed()}}<td>-->
                         </tr>
                         </tbody>

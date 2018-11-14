@@ -3,12 +3,21 @@ export class User {
     private name: string;
     private notifed: boolean;
     private password: string;
+    private threshold: number;
 
 
-    constructor(email:string,name:string,notifed:boolean){
+    constructor(email:string,name:string,notifed:boolean, threshold: number){
         this.email = email;
         this.name = name;
         this.notifed = notifed;
+        this.threshold = threshold;
+    }
+
+    getThreshold() {
+        return this.threshold;
+    }
+    setThreshold(threshold:number){
+        this.threshold = threshold;
     }
 
     getEmail(){
