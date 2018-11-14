@@ -224,14 +224,14 @@ export class DashboardComponent implements OnInit {
             const ic = new DivIcon({html: `<div style="position: relative; text-align: center; color:white">
                 <img width="60" height="60" src=${iconPath} >
   
-                <p style="position: absolute; top:30%; left:15%; font-size: 16px; font-weight: bold">${avgPercent}</p>
+                <p style="position: absolute; top:30%; left:33%; font-size: 16px; font-weight: bold">${Math.trunc(avgPercent)}</p>
                     </div>`, className:'tet', iconSize:[60, 60], iconAnchor:[30, 30]});
 
             const p = marker([ avgLat, avgLon ], {
                 icon: ic
             });
             p.bindPopup(`<p style="margin: 0px; font-size: 10px">Average Percent left in ${locationCount} bins:</p>
-            <p style="margin: 0px; font-size: 10px; font-weight: bold"> ${avgPercent}%</p><p style="margin: 0px; font-size: 10px"> Location: ${location}</p>`);
+            <p style="margin: 0px; font-size: 10px; font-weight: bold"> ${Math.trunc(avgPercent)}%</p><p style="margin: 0px; font-size: 10px"> Location: ${location}</p>`);
             p.on('mouseover', function (e) {
                 this.openPopup();
             });

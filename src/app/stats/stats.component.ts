@@ -35,7 +35,7 @@ export class StatsComponent implements OnInit {
     showXAxisLabel = true;
     xAxisLabel = 'Days';
     showYAxisLabel = true;
-    yAxisLabel = 'Avg. Bin Level Left';
+    yAxisLabel = 'Avg. Bin Level Left (for last 30 days)';
 
 
     colorScheme = {
