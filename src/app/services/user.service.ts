@@ -28,7 +28,7 @@ export class UserService {
     getUserData() {
         const promise = new Promise((resolve, reject) => {
             const usersData = [];
-            this.httpService.get('https://bindata-app.herokuapp.com/api/getUsers').subscribe(
+            this.httpService.get('http://localhost:3000/api/getUsers').subscribe(
                 (data) => {
                     const myObjStr = JSON.stringify(data);
                     const users = JSON.parse(myObjStr) as Object;
@@ -49,50 +49,50 @@ export class UserService {
 
 
     getProfileData(){
-        return this.httpService.get("https://bindata-app.herokuapp.com/api/getUsers")
+        return this.httpService.get("http://localhost:3000/api/getUsers")
             .pipe(map((response: Response) => response));
 
     }
 
     postUserEmail(data:any){
         //console.log('IN SIGNUP');
-        return this.httpService.post("https://bindata-app.herokuapp.com/api/storeUser",data,this.httpOptions)
+        return this.httpService.post("http://localhost:3000/api/storeUser",data,this.httpOptions)
             .pipe(map((response: Response) => response));
 
     }
 
     getNotication(){
         //console.log('IN GET NOTIFICATION');
-        return this.httpService.get("https://bindata-app.herokuapp.com/api/getNotifications")
+        return this.httpService.get("http://localhost:3000/api/getNotifications")
             .pipe(map((response: Response) => response));
     }
 
     postReadNoti(data:any){
 
-        return this.httpService.post("https://bindata-app.herokuapp.com/api/readNotifications",data,this.httpOptions)
+        return this.httpService.post("http://localhost:3000/api/readNotifications",data,this.httpOptions)
             .pipe(map((response: Response) => response));
 
     }
 
     updateProfile(data:any){
         let mydata = JSON.stringify(data.value);
-        return this.httpService.post("https://bindata-app.herokuapp.com/api/updateProfile",mydata,this.httpOptions)
+        return this.httpService.post("http://localhost:3000/api/updateProfile",mydata,this.httpOptions)
             .pipe(map((response: Response) => response));
 
     }
 
     getNotifiedUsers(){
-        return this.httpService.get("https://bindata-app.herokuapp.com/api/getnotifiedUsers")
+        return this.httpService.get("http://localhost:3000/api/getnotifiedUsers")
             .pipe(map((response: Response) => response));
     }
 
     deleteNotification(data:any){
-        return this.httpService.post("https://bindata-app.herokuapp.com/api/deleteNotifications",data,this.httpOptions)
+        return this.httpService.post("http://localhost:3000/api/deleteNotifications",data,this.httpOptions)
             .pipe(map((response: Response) => response));
     }
 
     getAdmins(){
-        return this.httpService.get("https://bindata-app.herokuapp.com/api/getAdmins")
+        return this.httpService.get("http://localhost:3000/api/getAdmins")
             .pipe(map((response: Response) => response));
     }
 

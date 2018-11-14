@@ -18,7 +18,7 @@ export class AuthenticationService {
         // //console.log(email,password);
 
 
-        return this.http.post("https://bindata-app.herokuapp.com/api/login",{
+        return this.http.post("http://localhost:3000/api/login",{
             "email": email,
             "password": password
         },this.httpOptions)
@@ -69,7 +69,7 @@ export class AuthenticationService {
 
         //console.log('IN SIGNUP');
 
-        return this.http.post("https://bindata-app.herokuapp.com/api/signUp",{
+        return this.http.post("http://localhost:3000/api/signUp",{
             "name":name,
             "email": email,
             "password": password
