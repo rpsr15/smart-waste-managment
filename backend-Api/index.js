@@ -392,13 +392,18 @@ readBin.on("value", function(snapshot) {
        let promiseToGetUsers =  new Promise(function(resolve, reject){
        notificationUser.once("value", function(snapshot){
        var data = snapshot.val();
-       var keys = Object.keys(data);
+       if(data != null)
+       {
+         var keys = Object.keys(data);
+
        for(var i = 0; i < keys.length; i++)
        {
          var k =  keys[i];
          user[i] = data[k];        //Storing the users in the array from object
        }
+     }
        resolve(user);
+
      });
    });
 
