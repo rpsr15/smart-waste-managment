@@ -307,7 +307,8 @@ readBin.on("value", function(snapshot) {
  app.post("/api/storeUser", function(req,res){
    var data = req.body;
    database.ref('notificationUser').remove();
-   database.ref().child('notificationUser').push(data);
+   database.ref().child('notificationUser').set(data);
+   res.status(200).json({message: "Success: successfully stored the user", result: true});
  });
 
 
