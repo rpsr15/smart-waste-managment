@@ -12,7 +12,8 @@ export class UserService {
         const email = jsonObject['email'];
         const name = jsonObject['name'];
         const notified = false;
-        const newUser = new User(email,name,notified);
+        const threshold = jsonObject['threshold'];
+        const newUser = new User(email,name,notified,threshold);
         return newUser;
     }
 

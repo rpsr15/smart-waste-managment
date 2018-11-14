@@ -49,12 +49,14 @@ app.use(function(req, res, next) {
 
 
 //Method that creates the transport and takes of the user who sends the email
- var smtpTransport = nodemailer.createTransport({
-  service: configuration.getService(),
-  auth: {
-    user: configuration.getUser(),
-    pass: configuration.getPassword()
-  }
+var smtpTransport = nodemailer.createTransport({
+    host: configuration.getService(),
+    secure: false, // TLS requires secureConnection to be false
+    port: 587,
+    auth: {
+        user: configuration.getUser(),
+        pass: configuration.getPassword()
+    }
 });
 
 var msg = {
@@ -316,122 +318,178 @@ readBin.on("value", function(snapshot) {
  });
 
 
- //Method for sending email and sending notification to the user (Real time)
- readBin.on("value", function(snapshot) {
-  var data = snapshot.val();
-  if(data != null)
-  {
-    var keys = Object.keys(data);
-    var binData = [];
-    var binIds = [];
-    var user = [];
-    for(var i = 0; i < keys.length; i++)
+//Method for sending email and sending notification to the user (Real time)
+readBin.once("value", function(snapshot) {
+    var data = snapshot.val();
+    if(data != null)
     {
-       var x =  keys[i];
-       binData[i] = data[x];
-    }
-
-    for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing in binids array
-    {
-       var y =  keys[j];
-       binIds[j] = data[y].payload_fields.hardware_id;
-    }
-
-      const unique = (value, index, self) => {
-      return self.indexOf(value) === index;
-    }
-     const uniqueIds = binIds.filter(unique);      //Taking unique binIds
-
-     var count = 0;
-     var bin = [];
-     var bins = [];
-
-     for(var i = 0; i < uniqueIds.length; i++)
-     {
-       var first=0;
-       for(var k = 0; k < binData.length; k++)
-       {
-         if(binData[k].payload_fields.hardware_id == uniqueIds[i])
-         {
-           if(first==0)
-           {
-             biggest = binData[k];
-             first = 1;
-           }
-           else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
-           {
-               biggest = binData[k];
-           }
-         }
-       }
-       bins[i] = biggest;
-     }
-
-         for(var j = 0; j < bins.length; j++)
-         {
-           if(bins[j].payload_fields.level <= 24)
-           {
-             bin[j] = bins[j];
-           }
-         }
-         bin = bin.filter(Boolean)
-         //console.log(bin);
-
-         let promiseToGetUsers =  new Promise(function(resolve, reject){
-         notificationUser.once("value", function(snapshot){
-         var data = snapshot.val();
-         if(data != null)
-         {
-           var keys = Object.keys(data);
-
-         for(var i = 0; i < keys.length; i++)
-         {
-           var k =  keys[i];
-           user[i] = data[k];        //Storing the users in the array from object
-         }
-       }
-         resolve(user);
-       });
-     });
-
-
-      promiseToGetUsers.then(function(user){
-       function sendMail(id, level)
-       {
-         for(let j = 0; j < user.length; j++)
-         {
-             msg.to = user[j].email;
-             msg.text = `This is to inform you that BIN ID ${id} has ${level}% space left`;
-             ////console.log(location);
-             smtpTransport.sendMail(msg, function(err){
-             if(!err)
-             {
-               //console.log(`BIN ID ${id} has ${level}% space left`);
-               //console.log('Sending to ' + to.email + ' success: ');
-             }
-           });
-           notifications.push({
-           email: user[j].email,
-           status: msg.status,
-           message: `BIN ID ${id} has ${level}% space left`
-         });
+        var keys = Object.keys(data);
+        var binData = [];
+        var binIds = [];
+        var user = [];
+        for(var i = 0; i < keys.length; i++)
+        {
+            var x =  keys[i];
+            binData[i] = data[x];
         }
-       }
 
-       for(let i = 0; i < bin.length; i++)
-       {
-         var id = bin[i].payload_fields.hardware_id;
-         var level = Math.round((bin[i].payload_fields.level/120)*100);
-         let promiseToSendMail =  new Promise(function(resolve, reject){
-             sendMail(id, level);
-             resolve();
-         });
-         promiseToSendMail.then(function(){
-         });
-       }
-     });
- }
- });
+        for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing in binids array
+        {
+            var y =  keys[j];
+            binIds[j] = data[y].payload_fields.hardware_id;
+        }
+
+        const unique = (value, index, self) => {
+            return self.indexOf(value) === index;
+        }
+        const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+
+        var count = 0;
+        var bin = [];
+        var bins = [];
+
+        for(var i = 0; i < uniqueIds.length; i++)
+        {
+            var first=0;
+            for(var k = 0; k < binData.length; k++)
+            {
+                if(binData[k].payload_fields.hardware_id == uniqueIds[i])
+                {
+                    if(first==0)
+                    {
+                        biggest = binData[k];
+                        first = 1;
+                    }
+                    else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
+                    {
+                        biggest = binData[k];
+                    }
+                }
+            }
+            bins[i] = biggest;
+        }
+        console.log(bins);
+        notificationUser.once("value", function(snapshot){
+            database.ref(`notifications`).remove();
+
+            var data = snapshot.val();
+            if(data != null)
+            {
+                //console.log(data);
+                var keys = Object.keys(data);
+                for(var i = 0; i < keys.length; i++)
+                {
+                    var k = keys[i];
+                    var threshold = parseInt(data[k].threshold);
+                    var email = data[k].email;
+
+                    for(var j = 0; j < bins.length; j++)
+                    {
+                        var hardware_id = bins[j].payload_fields.hardware_id;
+                        var level = bins[j].payload_fields.level;
+                        var levelFilled = 120 - bins[j].payload_fields.level;
+                        var percentFilled = (levelFilled*100)/120;
+
+                        if(percentFilled >= threshold)
+                        {
+                            console.log('% filled',percentFilled,'level left',level,'levelfill',levelFilled,'threshold' , threshold, hardware_id, email);
+                            msg.to = email;
+                            msg.text = `This is to inform you that BIN ID ${hardware_id} is ${Math.round(percentFilled)}% filled`;
+
+                            smtpTransport.sendMail(msg, function(err){
+                                if(!err)
+                                {
+                                    console.log(`here BIN ID ${hardware_id} is ${percentFilled}% filled`);
+                                    console.log('Sending to ' + to.email + ' success: ');
+                                    console.log('here');
+                                }
+                                else {
+                                    console.log(err);
+                                    console.log('error sending email');
+                                }
+                            });
+                            notifications.push({
+                                email: email,
+                                status: msg.status,
+                                message: `BIN ID ${hardware_id} is ${percentFilled}% filled`
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    }
+});
+
+
+//start notifcation realtime and email
+readBinChildAddedCount = 0;
+let p = new Promise(function(res,rej){
+    readBin.on("child_added",function(snapshot){
+        //generate notification and send email
+        //console.log("here");
+        if(readBinChildAddedCount != 0) {
+            //console.log("new aded");
+            console.log(snapshot.val());
+            let levelFilled = 120 - snapshot.val().payload_fields.level;
+            let hardware_id = snapshot.val().payload_fields.hardware_id;
+
+            // generate mail and notifcation
+            let promiseToGetUsers =  new Promise(function(resolve, reject){
+                notificationUser.once("value", function(snapshot){
+                    resolve(snapshot.val());
+                });
+            });
+            promiseToGetUsers.then(function(userData){
+                let keys = Object.keys(userData);
+                //console.log(keys);
+                for(var i = 0 ; i < keys.length; i++){
+                    let user = userData[keys[i]];
+                    let threshold = (user.threshold*120)/100;
+
+                    if(levelFilled >= threshold){
+
+                        //send email and generate notification
+                        console.log(user.threshold,threshold,levelFilled,hardware_id);
+                        let percentFilled = Math.round((levelFilled*100)/120);
+                        //add notification
+                        console.log('sending notif');
+                        notifications.push({
+                            email: user.email,
+                            status: msg.status,
+                            message: `The binID${hardware_id} is ${percentFilled}% filled`
+                        });
+
+                        //send email
+                        let msgString = `The binID${hardware_id} is ${percentFilled}% filled`;
+                        smtpTransport.sendMail(msg, function(err){
+                            if(!err)
+                            {
+                                //console.log(`BIN ID ${id} has ${level}% space left`);
+                                //console.log('Sending to ' + to.email + ' success: ');
+                            }
+                        });
+
+
+                    }
+
+                }
+            });
+
+        }
+
+        //do changes
+        res(snapshot.val());
+
+    });
+
+});
+p.then(function(data){
+    console.log('data');
+    readBinChildAddedCount++;
+});
+
+//end notirealtime
 
 
 

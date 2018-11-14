@@ -1,11 +1,11 @@
 exports.getPassword = function() {
-  return "mittal1994";
+  return "GRPdjcua3KWzumKucZ";
 };
 
 exports.getUser = function() {
-  return "jatinmittal2651@gmail.com";
+  return "iepily5bbdoodisv@ethereal.email";
 };
 
 exports.getService = function() {
-  return "Gmail";
+  return "smtp.ethereal.email";
 };
