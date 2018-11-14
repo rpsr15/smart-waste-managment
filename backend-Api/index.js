@@ -30,6 +30,7 @@ var config = {                                          //Setting up database
  var location = database.ref("locations");
  var notifications = database.ref("notifications");
  var notificationUser = database.ref("notificationUser");
+ var admin = database.ref("admins");
 
 
  app.use(function(req, res, next) {
@@ -188,6 +189,15 @@ app.post('/api/login', function(req, res)
     });
   });
 
+  app.get("/api/getAdmins", function(req, res)
+   {
+    admin.once("value")
+    .then(function(snapshot)
+     {
+      res.send(snapshot.val());
+    });
+  });
+
    app.get("/api/getLatestData", function(req, res){
      readBin.on("value", function(snapshot) {
       var data = snapshot.val();
@@ -295,155 +305,129 @@ readBin.on("value", function(snapshot) {
 
 //API that stores the users in the notificationUser that will be passed by the admin
  app.post("/api/storeUser", function(req,res){
-   notificationUser.once("value", function(snapshot){
-     var input = req.body;
-     var data = snapshot.val();
-     if(data != null)
-     {
-        var keys = Object.keys(data);
-     }
-     var keysInput = Object.keys(input);
-     var userSent = [];
-     var isNotified;
-     var count = 0;
-     for(var i = 0; i < keysInput.length; i++)
-     {
-       var k = keysInput[i];
-       userSent[i] = input[k];
-       isNotified = input[k].notified;
-       if(isNotified == "true")
-       {
-          notificationUser.push(userSent[i]);
-       }
-       else
-       {
-         for(var j = 0; j < keys.length; j++)
-         {
-           var l = keys[j];
-           if(data[l].email == input[k].email)
-           {
-             database.ref(`notificationUser/${l}`).remove();
-           }
-         }
-       }
-     }
-   });
+   var data = req.body;
+   database.ref('notificationUser').remove();
+   database.ref().child('notificationUser').push(data);
  });
+
 
  //Method for sending email and sending notification to the user (Real time)
  readBin.on("value", function(snapshot) {
   var data = snapshot.val();
-  var keys = Object.keys(data);
-  var binData = [];
-  var binIds = [];
-  var user = [];
-  for(var i = 0; i < keys.length; i++)
+  if(data != null)
   {
-     var x =  keys[i];
-     binData[i] = data[x];
-  }
+    var keys = Object.keys(data);
+    var binData = [];
+    var binIds = [];
+    var user = [];
+    for(var i = 0; i < keys.length; i++)
+    {
+       var x =  keys[i];
+       binData[i] = data[x];
+    }
 
-  for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing in binids array
-  {
-     var y =  keys[j];
-     binIds[j] = data[y].payload_fields.hardware_id;
-  }
+    for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing in binids array
+    {
+       var y =  keys[j];
+       binIds[j] = data[y].payload_fields.hardware_id;
+    }
 
-    const unique = (value, index, self) => {
-    return self.indexOf(value) === index;
-  }
-   const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+      const unique = (value, index, self) => {
+      return self.indexOf(value) === index;
+    }
+     const uniqueIds = binIds.filter(unique);      //Taking unique binIds
 
-   var count = 0;
-   var bin = [];
-   var bins = [];
+     var count = 0;
+     var bin = [];
+     var bins = [];
 
-   for(var i = 0; i < uniqueIds.length; i++)
-   {
-     var first=0;
-     for(var k = 0; k < binData.length; k++)
+     for(var i = 0; i < uniqueIds.length; i++)
      {
-       if(binData[k].payload_fields.hardware_id == uniqueIds[i])
+       var first=0;
+       for(var k = 0; k < binData.length; k++)
        {
-         if(first==0)
+         if(binData[k].payload_fields.hardware_id == uniqueIds[i])
          {
-           biggest = binData[k];
-           first = 1;
-         }
-         else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
-         {
-             biggest = binData[k];
-         }
-       }
-     }
-     bins[i] = biggest;
-   }
-
-       for(var j = 0; j < bins.length; j++)
-       {
-         if(bins[j].payload_fields.level <= 24)
-         {
-           bin[j] = bins[j];
-         }
-       }
-       bin = bin.filter(Boolean)
-       console.log(bin);
-
-       let promiseToGetUsers =  new Promise(function(resolve, reject){
-       notificationUser.once("value", function(snapshot){
-       var data = snapshot.val();
-       if(data != null)
-       {
-         var keys = Object.keys(data);
-
-       for(var i = 0; i < keys.length; i++)
-       {
-         var k =  keys[i];
-         user[i] = data[k];        //Storing the users in the array from object
-       }
-     }
-       resolve(user);
-
-     });
-   });
-
-
-    promiseToGetUsers.then(function(user){
-     function sendMail(id, level)
-     {
-       for(let j = 0; j < user.length; j++)
-       {
-           msg.to = user[j].email;
-           msg.text = `This is to inform you that BIN ID ${id} has ${level}% space left`;
-           //console.log(location);
-           smtpTransport.sendMail(msg, function(err){
-           if(!err)
+           if(first==0)
            {
-             console.log(`BIN ID ${id} has ${level}% space left`);
-             console.log('Sending to ' + to.email + ' success: ');
+             biggest = binData[k];
+             first = 1;
            }
-         });
-         notifications.push({
-         email: user[j].email,
-         status: msg.status,
-         message: `BIN ID ${id} has ${level}% space left`
-       });
-      }
+           else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
+           {
+               biggest = binData[k];
+           }
+         }
+       }
+       bins[i] = biggest;
      }
 
-     for(let i = 0; i < bin.length; i++)
-     {
-       var id = bin[i].payload_fields.hardware_id;
-       var level = Math.round((bin[i].payload_fields.level/120)*100);
-       let promiseToSendMail =  new Promise(function(resolve, reject){
-           sendMail(id, level);
-           resolve();
+         for(var j = 0; j < bins.length; j++)
+         {
+           if(bins[j].payload_fields.level <= 24)
+           {
+             bin[j] = bins[j];
+           }
+         }
+         bin = bin.filter(Boolean)
+         console.log(bin);
+
+         let promiseToGetUsers =  new Promise(function(resolve, reject){
+         notificationUser.once("value", function(snapshot){
+         var data = snapshot.val();
+         if(data != null)
+         {
+           var keys = Object.keys(data);
+
+         for(var i = 0; i < keys.length; i++)
+         {
+           var k =  keys[i];
+           user[i] = data[k];        //Storing the users in the array from object
+         }
+       }
+         resolve(user);
        });
-       promiseToSendMail.then(function(){
-       });
-     }
-   });
+     });
+
+
+      promiseToGetUsers.then(function(user){
+       function sendMail(id, level)
+       {
+         for(let j = 0; j < user.length; j++)
+         {
+             msg.to = user[j].email;
+             msg.text = `This is to inform you that BIN ID ${id} has ${level}% space left`;
+             //console.log(location);
+             smtpTransport.sendMail(msg, function(err){
+             if(!err)
+             {
+               console.log(`BIN ID ${id} has ${level}% space left`);
+               console.log('Sending to ' + to.email + ' success: ');
+             }
+           });
+           notifications.push({
+           email: user[j].email,
+           status: msg.status,
+           message: `BIN ID ${id} has ${level}% space left`
+         });
+        }
+       }
+
+       for(let i = 0; i < bin.length; i++)
+       {
+         var id = bin[i].payload_fields.hardware_id;
+         var level = Math.round((bin[i].payload_fields.level/120)*100);
+         let promiseToSendMail =  new Promise(function(resolve, reject){
+             sendMail(id, level);
+             resolve();
+         });
+         promiseToSendMail.then(function(){
+         });
+       }
+     });
+ }
  });
+
 
 
 //Api for getting the notifications
@@ -489,6 +473,7 @@ app.post('/api/updateProfile', function(req, res)
     }
   });
 });
+
 
 
 app.post('/api/readNotifications', function(req, res)
@@ -537,6 +522,8 @@ app.post("/api/pushBinData", function(req,res){
 
 });
 
+
+//database.ref(`notificationUser`).remove();
 
 //Api to push notification Users for testing
 app.post("/api/pushNotificationUser", function(req,res){
