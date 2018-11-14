@@ -1,12 +1,11 @@
 var app = require("express")();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-io.origins('*:*');
 var serviceAccount = require('./keys.json');
 var firebase = require("firebase");
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var port = process.env.PORT || 3000;
+var port = 3000;
 var nodemailer = require('nodemailer');
 var configuration = require("./configuration.js");
 var message = require("./message.js");
@@ -33,13 +32,16 @@ var config = {                                          //Setting up database
  var admin = database.ref("admins");
 
 
- app.use(function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-   next();
- });
- io.origins('*:*');
-
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+// io.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 
  app.use(morgan('dev'));                                         // log every request to the console
  app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
@@ -76,7 +78,7 @@ var msg = {
  function validateEmail(email)
   {
     var x = email;
-    console.log(x);
+    //console.log(x);
     var atpos = x.lastIndexOf('@');
     var dotpos = x.lastIndexOf(".");
     if (atpos < 1 || dotpos<atpos+2 || dotpos+2>=x.length)
@@ -91,9 +93,9 @@ var msg = {
   {
    var data = req.body;
    var email = req.body.email;
-   //console.log(data);
+   ////console.log(data);
    var val = validateEmail(email);      //Validating email if it is in the proper format
-   console.log("val is: " + val);
+   //console.log("val is: " + val);
    users.orderByChild('email').equalTo(req.body.email).once("value", snapshot => {  //Check if the email passed by the user already exists or not
     var value = snapshot.val();
     if (value == null && val == true)
@@ -116,7 +118,7 @@ app.post('/api/login', function(req, res)
   var pass = req.body.password;
   var emailCheck = false;
   var passCheck = false;
-  //console.log(data);
+  ////console.log(data);
 
   users.once("value",snapshot => {
    var data = snapshot.val();
@@ -126,13 +128,13 @@ app.post('/api/login', function(req, res)
      var k =  keys[i];
      if(data[k].email === email)     //Checking if email matches the email entered
      {
-       console.log('inside email check condition');
+       //console.log('inside email check condition');
        emailCheck = true;
      }
 
      if(data[k].password === pass)    //Checking if password matches the pass entered
      {
-       console.log('inside password check condition');
+       //console.log('inside password check condition');
        passCheck = true;
      }
    }
@@ -199,7 +201,7 @@ app.post('/api/login', function(req, res)
   });
 
    app.get("/api/getLatestData", function(req, res){
-     readBin.on("value", function(snapshot) {
+     readBin.once("value", function(snapshot) {
       var data = snapshot.val();
       var keys = Object.keys(data);
       var binData = [];
@@ -220,7 +222,7 @@ app.post('/api/login', function(req, res)
         return self.indexOf(value) === index;
       }
        const uniqueIds = binIds.filter(unique);      //Taking unique binIds
-       //console.log("Unique ids: " + uniqueIds);
+       ////console.log("Unique ids: " + uniqueIds);
 
        var count = 0;
        var bin = [];
@@ -273,7 +275,7 @@ readBin.on("value", function(snapshot) {
    return self.indexOf(value) === index;
  }
   const uniqueIds = binIds.filter(unique);      //Taking unique binIds
-  //console.log("Unique ids: " + uniqueIds);
+  ////console.log("Unique ids: " + uniqueIds);
 
   var count = 0;
   var bin = [];
@@ -297,7 +299,9 @@ readBin.on("value", function(snapshot) {
       }
     }
     bin[i] = biggest;
+
   }
+    console.log('got new reading');
     io.emit('binReadings', bin );
 });
 
@@ -371,7 +375,7 @@ readBin.on("value", function(snapshot) {
            }
          }
          bin = bin.filter(Boolean)
-         console.log(bin);
+         //console.log(bin);
 
          let promiseToGetUsers =  new Promise(function(resolve, reject){
          notificationUser.once("value", function(snapshot){
@@ -398,12 +402,12 @@ readBin.on("value", function(snapshot) {
          {
              msg.to = user[j].email;
              msg.text = `This is to inform you that BIN ID ${id} has ${level}% space left`;
-             //console.log(location);
+             ////console.log(location);
              smtpTransport.sendMail(msg, function(err){
              if(!err)
              {
-               console.log(`BIN ID ${id} has ${level}% space left`);
-               console.log('Sending to ' + to.email + ' success: ');
+               //console.log(`BIN ID ${id} has ${level}% space left`);
+               //console.log('Sending to ' + to.email + ' success: ');
              }
            });
            notifications.push({
@@ -451,7 +455,7 @@ app.get("/api/getnotifiedUsers", function(req,res){
 //Real time get notificationUser
   notifications.on("value", function(snapshot){
     var data = snapshot.val();
-    console.log(data);
+    //console.log(data);
     io.emit('notifications', data );
   });
 
@@ -519,7 +523,7 @@ app.post('/api/deleteNotifications', function(req, res)
 //Api to push the data in the bin reading for testing
 app.post("/api/pushBinData", function(req,res){
   var data = req.body;
-  console.log(data);
+  //console.log(data);
   readBin.push(data);
 
 });
@@ -530,7 +534,7 @@ app.post("/api/pushBinData", function(req,res){
 //Api to push notification Users for testing
 app.post("/api/pushNotificationUser", function(req,res){
   var data = req.body;
-  console.log(data);
+  //console.log(data);
   notificationUser.push(data);
 });
 

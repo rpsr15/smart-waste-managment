@@ -50,7 +50,7 @@ export class StatsComponent implements OnInit {
 
 
     onSelect(event) {
-        console.log(event);
+        //console.log(event);
     }
      normalizeArray<T>(array: Array<T>, indexKey: keyof T) {
         const normalizedObject: any = {}
@@ -84,7 +84,7 @@ export class StatsComponent implements OnInit {
       this.binService.getLocations().then((locations: [String]) => {
 
           this.locations = locations;
-         // console.log('got location', locations);
+         // //console.log('got location', locations);
           for (let i = 0; i < this.locations.length ; i++) {
               this.readings[i] = [ {
                   name: 'Monday',
@@ -120,15 +120,15 @@ export class StatsComponent implements OnInit {
                   this.staticBinInfo = binData;
                   this.allReadings = binData;
 
-                   // console.log('got static info', binData);
+                   // //console.log('got static info', binData);
                   this.binService.getAllReadings().then(
                       (readings) => {
-                          // console.log('got r eadigns', readings);
+                          // //console.log('got r eadigns', readings);
                           for (const key in readings) {
 
                               const date = new Date(readings[key].metadata.time);
                               if (date == null) {
-                                  console.log('date error');
+                                  //console.log('date error');
                                   // level = 0;
                               }
                               const hID = readings[key].payload_fields.hardware_id;
@@ -139,13 +139,13 @@ export class StatsComponent implements OnInit {
                               const binLocation = this.getBinLocation(hID);
                               const dayOfWeek = this.weekdays[date.getDay()];
                               const loc = this.getLocation(binLocation);
-                              //console.log(hID, level, binLocation, loc);
+                              ////console.log(hID, level, binLocation, loc);
                               for (const key in loc) {
-                                  // console.log(loc[key].name);
+                                  // //console.log(loc[key].name);
                                   if (loc[key].name === dayOfWeek) {
                                     let val = +loc[key].value;
                                     if (isNaN(val) || val == null) {
-                                        console.log('val error');
+                                        //console.log('val error');
                                         val = 0;
                                     }
                                     let cnt = +loc[key].count;
@@ -163,12 +163,12 @@ export class StatsComponent implements OnInit {
 
                           }
                           const dd = [];
-                          console.log(this.readings.length, 'readings lenghth');
+                          //console.log(this.readings.length, 'readings lenghth');
                           for (let i = 0; i < this.readings.length ; i++) {
-                              // console.log(this.readings[i]);
+                              // //console.log(this.readings[i]);
                               for (const key in this.readings[i]) {
                                   const dict = this.readings[i][key];
-                                  // console.log(dict);
+                                  // //console.log(dict);
                                    const val = +dict.value;
                                   const cnt = +dict.count;
                                   let avg = val / cnt;
@@ -176,16 +176,16 @@ export class StatsComponent implements OnInit {
                                       avg = 0;
                                   }
                                   dict.value = avg;
-                                 // console.log(val,cnt,avg);
+                                 // //console.log(val,cnt,avg);
                               }
                               dd.push({name: this.locations[i], series: this.readings[i]});
                           }
                           this.multi = dd;
-                          console.log(this.multi);
+                          //console.log(this.multi);
                       }
                   );
-                  // console.log('got static bin data');
-                  // console.log(binData);
+                  // //console.log('got static bin data');
+                  // //console.log(binData);
 
                   this.binService.getBinReadings().then(
                       (readings) => {
@@ -231,7 +231,7 @@ export class StatsComponent implements OnInit {
 
     }
     addLineData() {
-      console.log('here');
+      //console.log('here');
 
     }
 
@@ -251,7 +251,7 @@ export class StatsComponent implements OnInit {
             pData.push({name: this.locations[i], value: sum});
         }
 
-        // console.log('updating map');
+        // //console.log('updating map');
         this.pieData =  pData;
     }
 

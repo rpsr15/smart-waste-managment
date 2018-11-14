@@ -41,16 +41,16 @@ export class AppComponent implements OnInit{
 
     onSubmitLogin(form: NgForm){
        //this.logStatus = true;
-        console.log("Hello login");
+        //console.log("Hello login");
 
         this.authenticationService.login(form.value.email,form.value.your_pass)
-            .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
+            .subscribe(data => { //console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
                     let userEmail = form.value.email;
                     localStorage.setItem('currentUser', userEmail);
                     this.logStatus = true;
                     form.resetForm();
                 },
-                error => { console.log('IN RETURN COMPONENT error',error); // Error if any
+                error => { //console.log('IN RETURN COMPONENT error',error); // Error if any
                     form.resetForm();
                     this.msg = 'Email or Password is incorrect';
                     this.role = 'danger';
@@ -62,18 +62,18 @@ export class AppComponent implements OnInit{
     onSubmitSignUp(form: NgForm){
 
 
-        console.log("Hello signup");
-        console.log(form.value);
+        //console.log("Hello signup");
+        //console.log(form.value);
 
         this.authenticationService.signUp(form.value.name,form.value.email,form.value.your_pass)
-            .subscribe(data => { console.log('IN RETURN COMPONENT success',data); // Data which is returned by call
+            .subscribe(data => { //console.log('IN RETURN COMPONENT success',data); // Data which is returned by call
                     form.resetForm();
                     this.msg = 'SignUp Successful';
                     this.role = 'success';
                     this.showAlert  = true;
                     this.isSignUp = false;
                 },
-                error => { console.log('IN RETURN COMPONENT error',error); // Error if any
+                error => { //console.log('IN RETURN COMPONENT error',error); // Error if any
                     form.resetForm();
                     this.msg = 'User Already Exist';
                     this.role = 'danger';

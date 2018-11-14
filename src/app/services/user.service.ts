@@ -55,14 +55,14 @@ export class UserService {
     }
 
     postUserEmail(data:any){
-        console.log('IN SIGNUP');
+        //console.log('IN SIGNUP');
         return this.httpService.post("https://bindata-app.herokuapp.com/api/storeUser",data,this.httpOptions)
             .pipe(map((response: Response) => response));
 
     }
 
     getNotication(){
-        console.log('IN GET NOTIFICATION');
+        //console.log('IN GET NOTIFICATION');
         return this.httpService.get("https://bindata-app.herokuapp.com/api/getNotifications")
             .pipe(map((response: Response) => response));
     }

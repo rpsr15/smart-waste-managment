@@ -39,12 +39,12 @@ export class SidebarComponent implements OnInit {
     getAdmin(){
         this.userService.getAdmins()
             .subscribe(data =>{
-                console.log('ADMIN DATA --->',data);
+                //console.log('ADMIN DATA --->',data);
                 for (const key in data) {
                     const user = data[key];
                     this.adminEmails.push(user.email);
                 }
-                console.log('ADMIN ARRAY -->',this.adminEmails);
+                //console.log('ADMIN ARRAY -->',this.adminEmails);
                 this.checkIsAdmin();
             },
                 error =>{

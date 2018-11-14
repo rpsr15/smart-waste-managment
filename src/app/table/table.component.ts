@@ -34,9 +34,9 @@ export class TableComponent implements OnInit{
 
     getUser(email) {
         for (let i = 0; i < this.userAry.length ; i++) {
-            //console.log('matching',this.userAry[i].getEmail(),'with',email.email);
+            ////console.log('matching',this.userAry[i].getEmail(),'with',email.email);
             if (this.userAry[i].getEmail() === email) {
-                //console.log(this.userAry[i]);
+                ////console.log(this.userAry[i]);
                 return this.userAry[i];
             }
         }
@@ -44,22 +44,22 @@ export class TableComponent implements OnInit{
 
     ngOnInit(){
         this.userService.getUserData().then((userData: User[])=>{
-            //console.log(userData);
+            ////console.log(userData);
             this.userAry = userData;
 
-            console.log('USER DATA',this.userAry);
+            //console.log('USER DATA',this.userAry);
             this.userService.getNotifiedUsers().subscribe((data: Object) => {
-                //console.log(data);
+                ////console.log(data);
                 for( let key in data) {
 
                     const email = data[key];
-                    ///console.log('mf',email);
+                    /////console.log('mf',email);
                     const user = this.getUser(email.email);
-                    console.log('USER',user);
+                    //console.log('USER',user);
                     user.setNotifed(true);
 
                 }
-                //console.log('GETTING DATA',this.userAry);
+                ////console.log('GETTING DATA',this.userAry);
             });
 
 
@@ -78,7 +78,7 @@ export class TableComponent implements OnInit{
 
 
     handleChange(data){
-        console.log('DATA',data);
+        //console.log('DATA',data);
         // let temp = {email:data.email};
         if(data.notifed){
             data.setNotifed(false);
@@ -88,20 +88,20 @@ export class TableComponent implements OnInit{
             //this.notifyArray.push(data);
         }
 
-        // console.log(this.userAry);
+        // //console.log(this.userAry);
         // this.notifyArray = this.userAry;
         //
         // if(data.notifed == true){
-        //     console.log("in true that removing");
+        //     //console.log("in true that removing");
         //     this.notifyArray = this.notifyArray.filter(function (orgData) {
         //        return orgData.email != data.email;
         //     });
         // }else{
-        //     console.log("in false that adding");
+        //     //console.log("in false that adding");
         //     this.notifyArray.push(data);
         // }
         //
-        // console.log('change data',this.notifyArray);
+        // //console.log('change data',this.notifyArray);
     }
 
     enableEdit(){
@@ -119,11 +119,11 @@ export class TableComponent implements OnInit{
         // }
         this.notifyArray = {};
 
-        console.log("Here is data of users to be notified");
+        //console.log("Here is data of users to be notified");
 
         for (let i = 0; i < this.userAry.length ; i++) {
             if(this.userAry[i].getNotifed()==true){
-                // console.log('THIS-->',this.userAry[i]);
+                // //console.log('THIS-->',this.userAry[i]);
                 // this.notifyArray.push(this.userAry[i]);
                 var test = {
                     email:this.userAry[i].getEmail(),
@@ -140,17 +140,17 @@ export class TableComponent implements OnInit{
 
 
 
-        console.log('USER ARY SENDING',this.notifyArray);
+        //console.log('USER ARY SENDING',this.notifyArray);
 
         this.userService.postUserEmail(this.notifyArray)
-            .subscribe(data => { console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
+            .subscribe(data => { //console.log('IN RETURN COMPONENT success',data) // Data which is returned by call
                     this.notifyArray = [];
                     this.editMode = false;
                     this.msg = 'User are updated successfully';
                     this.notifySent = true;
                 },
-                error => { console.log('IN RETURN COMPONENT error',error); // Error if any
-                    console.log("ERROR USER ARRAY");
+                error => { //console.log('IN RETURN COMPONENT error',error); // Error if any
+                    //console.log("ERROR USER ARRAY");
                 });
 
     }

@@ -17,7 +17,7 @@ export class SocketService {
         return new Observable<Object>(observer => {
 
             this.socket.on('notifications', (data) => {
-                console.log('check chek');
+                //console.log('check chek');
                 observer.next(data);
             });
         });

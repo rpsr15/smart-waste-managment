@@ -2,116 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17ae089e-ebd4-494b-8ada-8048b7cb506c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/3rdpartylicenses.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/css/demo.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/css/paper-dashboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/css/paper-dashboard.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/css/themify-icons.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/fonts/themify.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/fonts/themify.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/fonts/themify.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/fonts/themify.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/angular.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/angular2-logo-white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/angular2-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/apple-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/bin1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/bin2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/bin3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/binimg1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/binimg2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/binimg2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/binimg3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/binimg3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/faces/face-0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/faces/face-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/faces/face-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/faces/face-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/garbage.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/logo_transparent.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/map-marker-red.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/marker-green.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/marker-icon-2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/marker-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/marker-orange.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/marker-shadow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/markers/final-marker-green.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/markers/final-marker-orange.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/markers/final-marker-red.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/markers/green-bloop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/markers/orange-bloop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/markers/red-bloop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/new_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/salman.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/signin-image.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/signup-image.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/img/tim_80x80.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/images/Archive/299087-256 (1).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/images/Archive/299087-256 (2).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/images/layers-2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/images/layers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/images/map-marker-red.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/images/marker-green.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/images/marker-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/images/marker-orange.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/images/marker-shadow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/leaflet-src.esm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/leaflet-src.esm.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/leaflet-src.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/leaflet-src.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/leaflet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/leaflet.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/leaflet/leaflet.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper-dashboard.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_alerts.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_animate.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_buttons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_cards.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_chartist.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_checkbox-radio.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_dropdown.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_footers.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_inputs.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_misc.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_mixins.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_navbars.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_responsive.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_sidebar-and-main-panel.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_tables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_typography.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/_variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_buttons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_cards.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_chartist.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_icons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_inputs.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_labels.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_navbars.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_sidebar.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_tabs.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_transparency.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/mixins/_vendor-prefixes.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/sass/paper/plugins/_fixed-plugin.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/polyfills.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/polyfills.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/runtime.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/runtime.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/scripts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/scripts.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/styles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/styles.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/vendor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/vendor.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stats/stats.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stats/stats.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/App/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/App/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/MongoDB/playground/mongodb-connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/MongoDB/playground/mongodb-connect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/MongoDB/playground/mongodb-delete.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/MongoDB/playground/mongodb-delete.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/MongoDB/playground/mongodb-find.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/MongoDB/playground/mongodb-find.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/MongoDB/playground/mongodb-update.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/MongoDB/playground/mongodb-update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/Playground/Testing.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/Playground/Testing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/Playground/arrow-funtion.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/Playground/arrow-funtion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/Playground/debugging.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/Playground/debugging.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/Playground/json.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/Playground/json.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/first_application/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/first_application/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/first_application/views/home.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/first_application/views/home.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/node_web_server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/node_web_server/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/notes.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/notes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/notes_node_app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/notes_node_app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/notes_node_app/notes.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/notes_node_app/notes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/weather-app/CallBacks.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/weather-app/CallBacks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/weather-app/app-promise.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/weather-app/app-promise.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/weather-app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/weather-app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/weather-app/async-basics.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/weather-app/async-basics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/weather-app/geocode/geocode.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/weather-app/geocode/geocode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/weather-app/playground/promise-2.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/weather-app/playground/promise-2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/jatin/weather-app/playground/promise.js" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/jatin/weather-app/playground/promise.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/authentication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/authentication.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/bin.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/bin.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/socket.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/socket.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/navbar/navbar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sidebar/sidebar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stats/stats.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stats/stats.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/table/table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/user/user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user/user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -161,24 +88,120 @@
     <session id="-1753650472">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.1" value="2" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="TypeScriptServerServiceImpl" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="js" value="48" />
+          <entry key="ts" value="29" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JavaScript" value="48" />
+          <entry key="TypeScript" value="29" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="js" value="1" />
+          <entry key="ts" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JavaScript" value="1" />
+          <entry key="TypeScript" value="1" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/stats/stats.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="78">
               <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/services/user.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-11">
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/services/socket.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/services/bin.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="128">
+              <caret line="203" column="17" selection-start-line="203" selection-start-column="17" selection-end-line="203" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-737">
+              <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>console.log</find>
+      <find>emit</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>//console.log</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -189,6 +212,9 @@
         <option value="$PROJECT_DIR$/goClean/src/app/models/bin-reading.model.ts" />
         <option value="$PROJECT_DIR$/goClean/src/app/maps/maps.component.ts" />
         <option value="$PROJECT_DIR$/src/app/stats/stats.component.html" />
+        <option value="$PROJECT_DIR$/src/app/services/bin.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" />
+        <option value="$PROJECT_DIR$/index.js" />
       </list>
     </option>
   </component>
@@ -200,6 +226,16 @@
   </component>
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/Documents/jatin/MongoDB/package.json" />
+      <path value="$PROJECT_DIR$/Documents/jatin/first_application/package.json" />
+      <path value="$PROJECT_DIR$/Documents/jatin/node_web_server/package.json" />
+      <path value="$PROJECT_DIR$/Documents/jatin/notes_node_app/package.json" />
+      <path value="$PROJECT_DIR$/Documents/jatin/weather-app/package.json" />
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1440" />
@@ -237,6 +273,20 @@
               <item name="public-waste-management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="public-waste-management" type="b2602c69:ProjectViewProjectNode" />
+              <item name="public-waste-management" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="public-waste-management" type="b2602c69:ProjectViewProjectNode" />
+              <item name="public-waste-management" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="stats" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -251,7 +301,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -277,22 +327,23 @@
       <updated>1538560457290</updated>
       <workItem from="1538560460268" duration="1363000" />
       <workItem from="1542168078034" duration="40000" />
+      <workItem from="1542176640376" duration="1267000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1403000" />
+    <option name="totallyTimeSpent" value="2670000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.28554216" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31932774" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -300,7 +351,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32871014" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.24789916" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -321,8 +372,56 @@
     <entry file="file://$PROJECT_DIR$/goClean/src/app/maps/maps.component.ts" />
     <entry file="file://$PROJECT_DIR$/src/app/stats/stats.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
+        <state relative-caret-position="78">
           <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/services/user.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11">
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/services/socket.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/services/bin.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-737">
+          <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="203" column="17" selection-start-line="203" selection-start-column="17" selection-end-line="203" selection-end-column="17" />
         </state>
       </provider>
     </entry>

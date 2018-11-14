@@ -69,6 +69,7 @@ export class DashboardComponent implements OnInit {
         this.ioConnection = this.socketService.onNewReading().subscribe(
             (readings) => {
                 // subscribe to real-time bin readings
+                console.log('koi mil gya');
 
                 //update readings
                 for (const key in readings) {
@@ -108,8 +109,8 @@ export class DashboardComponent implements OnInit {
 
             this.binService.getBinData().then(
                 (binData: Bin[]) => {
-                    //console.log('got static bin data');
-                    //console.log(binData);
+                    ////console.log('got static bin data');
+                    ////console.log(binData);
                     this.staticBinInfo = binData;
                     this.binService.getBinReadings().then(
                         (readings) => {
@@ -146,7 +147,7 @@ export class DashboardComponent implements OnInit {
 
         this.selectedBins = [];
         // filter bins for selected locations
-           // console.log(this.staticBinInfo.length);
+           // //console.log(this.staticBinInfo.length);
         for (let i = 0; i < this.staticBinInfo.length; i++) {
 
             const result = this.selectedAreas.indexOf(this.staticBinInfo[i].getLocationArea()) !== -1 ;
@@ -157,9 +158,9 @@ export class DashboardComponent implements OnInit {
 
         }
 
-        // console.log(this.selectedBins);
+        // //console.log(this.selectedBins);
         // //
-        console.log('update map based on zoom', this.zoom);
+        //console.log('update map based on zoom', this.zoom);
         if (this.zoom >= 13) {
 
             this.showZoomedMarkers();
@@ -169,9 +170,9 @@ export class DashboardComponent implements OnInit {
     }
 
     showAggregatedMarkers() {
-        console.log('show affrefated markers');
-        // console.log('selctd bins');
-        // console.log(this.selectedBins, this.selectedAreas);
+        //console.log('show affrefated markers');
+        // //console.log('selctd bins');
+        // //console.log(this.selectedBins, this.selectedAreas);
         this.aggregatedLayerGroup.clearLayers();
         this.layerGroup.removeFrom(this.map);
 
@@ -187,9 +188,9 @@ export class DashboardComponent implements OnInit {
             let sumPercent = 0.0;
             let locationCount = 0;
 
-            //console.log(location);
+            ////console.log(location);
             for (const k in binInfo) {
-                //console.log(binInfo[k]);
+                ////console.log(binInfo[k]);
                 if (binInfo[k].getLocationArea() === location) {
                     locationCount++;
                     const lat = +binInfo[k].getLocation().latitude;
@@ -207,8 +208,8 @@ export class DashboardComponent implements OnInit {
             const avgLon = sumLon / locationCount;
             const avgPercent = sumPercent / locationCount;
             const mapAccess = this.map;
-            // console.log('here');
-            // console.log(avgLat, avgLon, avgPercent, location);
+            // //console.log('here');
+            // //console.log(avgLat, avgLon, avgPercent, location);
             // add marker
             let iconPath = this.iconGreenBloop;
             if (avgPercent >= 50) {
@@ -254,7 +255,7 @@ export class DashboardComponent implements OnInit {
     }
 
     showZoomedMarkers() {
-       console.log('start zoomed');
+       //console.log('start zoomed');
         // use selectedBins to show markers
         this.aggregatedLayerGroup.removeFrom(this.map);
         this.layerGroup.clearLayers();
@@ -267,13 +268,13 @@ export class DashboardComponent implements OnInit {
 
             // check Nan
             if( lastTime == null) {
-                console.log('lastTime not defined for', binID);
+                //console.log('lastTime not defined for', binID);
                 lastTime = new Date();
             }
 
 
             if (isNaN(binCapacityLeft) || isNaN(binMax)) {
-                console.log('ERROR: Min capacity left invalid', binID, binMax, binCapacityLeft, lastTime);
+                //console.log('ERROR: Min capacity left invalid', binID, binMax, binCapacityLeft, lastTime);
                 binCapacityLeft = 56;
                 binMax = 120;
 
@@ -420,22 +421,22 @@ export class DashboardComponent implements OnInit {
     onZoomLevelChange(map) {
 
         const newZoom = +map.target._zoom;
-        console.log('old zoom', this.zoom, 'new zoom', newZoom);
+        //console.log('old zoom', this.zoom, 'new zoom', newZoom);
         // show zoomed if zoom changes from 12 to 13
         if ( (newZoom === 13) || (newZoom === 12)) {
             this.zoom = newZoom;
-            console.log('changing type');
+            //console.log('changing type');
             this.updateMap();
         }
     }
 
     testClick(x) {
-        console.log('onZoomLevelChangebutton clicked');
+        //console.log('onZoomLevelChangebutton clicked');
 
 
         this.binService.getBinData().then(
             (d) => {
-                console.log(d);
+                //console.log(d);
             }
         );
     }

@@ -62,7 +62,7 @@ var msg = {
 
 app.post("/api/pushNotificationUser", function(req,res){
   var data = req.body;
-  console.log(data);
+  //console.log(data);
   notificationUser.push(data);
 });
 
@@ -70,11 +70,11 @@ app.post("/api/pushNotificationUser", function(req,res){
 
 
 database.ref(`notifications`).remove();
-//console.log(Date.parse("31 October 2018"));
+////console.log(Date.parse("31 October 2018"));
 
 
 
-//console.log("31 October 2018" > "1 November 2018");
+////console.log("31 October 2018" > "1 November 2018");
 
 
 /*

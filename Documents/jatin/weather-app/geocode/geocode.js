@@ -4,7 +4,7 @@ var geocodeAddress = (address, callback) => {
 
   var encodedAddress = encodeURIComponent(address);
 
-  //console.log(encodedAddress); //for printing/testing the encoded address
+  ////console.log(encodedAddress); //for printing/testing the encoded address
 
   request({
     url: `https://maps.googleapis.com/maps/api/geocode/json?address= ${encodedAddress}`,

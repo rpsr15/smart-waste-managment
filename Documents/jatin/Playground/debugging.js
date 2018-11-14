@@ -8,4 +8,4 @@ debugger;
 person.name = 'andrew';
 
 
-console.log('name: ' + person.name  + ' Age: ' + person.age);
+//console.log('name: ' + person.name  + ' Age: ' + person.age);

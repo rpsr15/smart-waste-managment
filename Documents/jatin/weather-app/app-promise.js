@@ -26,19 +26,19 @@ axios.get(geocodeUrl).then((response) => {
   var lat = response.data.results[0].geometry.location.lat;
   var long = response.data.results[0].geometry.location.lng;
   var weatherUrl = `https://api.darksky.net/forecast/744b1c6d983b0972e7c4d7ea2a7c8fe9/${lat},${long}`;
-  console.log(response.data.results[0].formatted_address);
+  //console.log(response.data.results[0].formatted_address);
   return axios.get(weatherUrl);
 }).then((response) => {
     var temperature = response.data.currently.temperature;
     var apparentTemperature = response.data.currently.apparentTemperature;
-    console.log(`It's currently ${temperature}. It feels like ${apparentTemperature}.`);
+    //console.log(`It's currently ${temperature}. It feels like ${apparentTemperature}.`);
 }).catch((e) => {
   if(e.code === 'ENOTFOUND')
   {
-      console.log('Unable to connect to API server');
+      //console.log('Unable to connect to API server');
   }
   else
   {
-    console.log(e.message)
+    //console.log(e.message)
   }
 });

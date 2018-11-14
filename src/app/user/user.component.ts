@@ -85,8 +85,8 @@ export class UserComponent implements OnInit{
 
     getProfileData(){
         this.userService.getProfileData()
-            .subscribe(data => { console.log('IN RETURN PROFILE COMPONENT success',data) // Data which is returned by call
-                   // console.log("USER DETIAL DATA",data);
+            .subscribe(data => { //console.log('IN RETURN PROFILE COMPONENT success',data) // Data which is returned by call
+                   // //console.log("USER DETIAL DATA",data);
             let loggedInUser = localStorage.getItem('currentUser');
 
                 for (const key in data) {
@@ -109,10 +109,10 @@ export class UserComponent implements OnInit{
                     }
                 }
 
-                // console.log('User Detail array',this.showArray);
+                // //console.log('User Detail array',this.showArray);
 
                 },
-                error => { console.log('IN RETURN PROFILE COMPONENT error',error); // Error if any
+                error => { //console.log('IN RETURN PROFILE COMPONENT error',error); // Error if any
 
                 });
 
@@ -148,14 +148,14 @@ export class UserComponent implements OnInit{
         //         "postalCode": form.value.postalCode
         //     }
         // ];
-        // console.log('new one',form.value);
+        // //console.log('new one',form.value);
         this.userService.updateProfile(form)
-            .subscribe(data => { console.log('IN RETURN PROFILE COMPONENT success',data) // Data which is returned by call
+            .subscribe(data => { //console.log('IN RETURN PROFILE COMPONENT success',data) // Data which is returned by call
                     this.role = 'success';
                     this.showAlert  = true;
                     this.msg = "Profile has been updated successfully.";
                 },
-                error => { console.log('IN RETURN PROFILE COMPONENT error',error); // Error if any
+                error => { //console.log('IN RETURN PROFILE COMPONENT error',error); // Error if any
 
                 });
 

@@ -5,10 +5,10 @@ import {Bin} from '../models/bin.model';
 @Injectable()
 export class BinService {
 
-    binsURL = 'https://bindata-app.herokuapp.com/api/bins/data';
-    locationsURL = 'https://bindata-app.herokuapp.com/api/getLocations';
-    binReadingsURL = 'https://bindata-app.herokuapp.com/api/getLatestData';
-    allBinReadingsURL = 'https://bindata-app.herokuapp.com/api/allBins';
+    binsURL = 'http://localhost:3000/api/bins/data';
+    locationsURL = 'http://localhost:3000/api/getLocations';
+    binReadingsURL = 'http://localhost:3000/api/getLatestData';
+    allBinReadingsURL = 'http://localhost:3000/api/allBins';
 
     createBinFromJson(jsonObject: object) {
         const capacity = +jsonObject['capacity'];
@@ -33,7 +33,7 @@ export class BinService {
             this.httpService.get(this.locationsURL).subscribe(
                 (data: Object) => {
 
-                    //console.log('received loation at sevice', data);
+                    ////console.log('received loation at sevice', data);
                     resolve(this.parseObject(data));
                 }
             );
@@ -90,7 +90,7 @@ export class BinService {
                         const binObj = bins[strIndex] as Bin;
                         binsData.push(this.createBinFromJson(binObj));
                     }
-                    //console.log('data received at service', binsData);
+                    ////console.log('data received at service', binsData);
 
                     resolve(binsData);
 

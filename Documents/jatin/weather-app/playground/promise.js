@@ -6,9 +6,9 @@
 });
 
 somePromise.then((message) => {
-  console.log('Success: ' , message)
+  //console.log('Success: ' , message)
 }, (errorMessage) => {
-  console.log('error: ' , errorMessage);
+  //console.log('error: ' , errorMessage);
 }); */
 
 var async = (a,b) => {
@@ -20,17 +20,17 @@ var async = (a,b) => {
      }
      else
      {
-        console.log('Arguments should be number');
+        //console.log('Arguments should be number');
      }
    }, 1500);
   });
 };
 
 async(5,7).then((message) => {
-  console.log('Result: ' , message);
+  //console.log('Result: ' , message);
   return async(message, 33)
 }).then((message) => {
-  console.log('should be 45', message);
+  //console.log('should be 45', message);
 }).catch((errorMessage) => {
-  console.log(errorMessage);
+  //console.log(errorMessage);
 });

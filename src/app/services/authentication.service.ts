@@ -14,8 +14,8 @@ export class AuthenticationService {
     };
 
     login(email: string, password: string) {
-        console.log('IN LOGIN');
-        // console.log(email,password);
+        //console.log('IN LOGIN');
+        // //console.log(email,password);
 
 
         return this.http.post("https://bindata-app.herokuapp.com/api/login",{
@@ -34,11 +34,11 @@ export class AuthenticationService {
         //     },this.httpOptions)
         //     .subscribe(
         //         data => {
-        //             console.log("POST Request is successful ", data);
+        //             //console.log("POST Request is successful ", data);
         //             localStorage.setItem('currentUser', 'active');
         //         },
         //         error => {
-        //             console.log("Error", error);
+        //             //console.log("Error", error);
         //         }
         //     );
 
@@ -49,7 +49,7 @@ export class AuthenticationService {
         // return this.http.post<any>(`https://bindata-app.herokuapp.com/api/login`, { email: email, password: password })
         //     .pipe(map(user => {
         //         // login successful if there's a jwt token in the response
-        //         console.log('SUCCESS');
+        //         //console.log('SUCCESS');
         //         if (user && user.token) {
         //             // store user details and jwt token in local storage to keep user logged in between page refreshes
         //             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -61,13 +61,13 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage to log user out
-        console.log('loggging out');
+        //console.log('loggging out');
         localStorage.removeItem('currentUser');
     }
 
     signUp(name:string,email: string, password: string){
 
-        console.log('IN SIGNUP');
+        //console.log('IN SIGNUP');
 
         return this.http.post("https://bindata-app.herokuapp.com/api/signUp",{
             "name":name,
@@ -84,11 +84,11 @@ export class AuthenticationService {
         //     },this.httpOptions)
         //     .subscribe(
         //         data => {
-        //             console.log("POST Request is successful ", data);
+        //             //console.log("POST Request is successful ", data);
         //
         //         },
         //         error => {
-        //             console.log("Error", error);
+        //             //console.log("Error", error);
         //         }
         //     );
 

@@ -46,8 +46,8 @@ export class NavbarComponent implements OnInit{
                 this.unreadCount = 0;
                 for (const key in data) {
                     const notif = data[key];
-                    // console.log(key);
-                    // console.log(notif);
+                    // //console.log(key);
+                    // //console.log(notif);
                     let notification = {
                         "id":key,
                         "email":notif.email,
@@ -76,14 +76,14 @@ export class NavbarComponent implements OnInit{
     getNotification(){
         this.userService.getNotication()
             .subscribe(data => {
-                    // console.log('IN RETURN COMPONENT Notification success',data) // Data which is returned by call
-                    // console.log('GET DATA',data);
+                    // //console.log('IN RETURN COMPONENT Notification success',data) // Data which is returned by call
+                    // //console.log('GET DATA',data);
                     this.showArray = [];
                     this.unreadCount = 0;
                     for (const key in data) {
                         const notif = data[key];
-                        // console.log(key);
-                        // console.log(notif);
+                        // //console.log(key);
+                        // //console.log(notif);
                         let notification = {
                             "id":key,
                             "email":notif.email,
@@ -96,7 +96,7 @@ export class NavbarComponent implements OnInit{
                     }
 
                 },
-                error => { console.log('IN RETURN COMPONENT error',error); // Error if any
+                error => { //console.log('IN RETURN COMPONENT error',error); // Error if any
 
                 });
     }
@@ -104,13 +104,13 @@ export class NavbarComponent implements OnInit{
     filterNotification(notification){
         // this.notificationArray=[];
         let loggedInUser = localStorage.getItem('currentUser');
-        // console.log(this.notificationArray);
-       // console.log('ARRAY IN SHOW NOTI',this.notificationArray);
+        // //console.log(this.notificationArray);
+       // //console.log('ARRAY IN SHOW NOTI',this.notificationArray);
 
 
             let e = notification;
             if(loggedInUser == e.email){
-                //console.log('Before push ',e);
+                ////console.log('Before push ',e);
                 if(e.status=='Unread'){
                     this.unreadCount++;
                 }
@@ -122,36 +122,36 @@ export class NavbarComponent implements OnInit{
 }
 
     deleteNotification(noti){
-        //console.log(noti);
+        ////console.log(noti);
         let data = {
             "id":noti.id
         };
 
         this.userService.postReadNoti(data)
             .subscribe(data => {
-                    // console.log('IN RETURN COMPONENT post noti success',data) // Data which is returned by call
+                    // //console.log('IN RETURN COMPONENT post noti success',data) // Data which is returned by call
                     this.unreadCount=0;
                     this.showArray=[];
                     this.getNotification();
                 },
-                error => { console.log('IN RETURN COMPONENT post noti error',error); // Error if any
+                error => { //console.log('IN RETURN COMPONENT post noti error',error); // Error if any
 
                 });
 
     }
     crossNotification(noti){
-        //console.log(noti);
+        ////console.log(noti);
         let data = {
             "id":noti.id
         };
 
         this.userService.deleteNotification(data)
-            .subscribe(data => { console.log('IN RETURN COMPONENT DELETE noti success',data) // Data which is returned by call
+            .subscribe(data => { //console.log('IN RETURN COMPONENT DELETE noti success',data) // Data which is returned by call
                     this.unreadCount=0;
                     this.showArray=[];
                     this.getNotification();
                 },
-                error => { console.log('IN RETURN COMPONENT post DELETE error',error); // Error if any
+                error => { //console.log('IN RETURN COMPONENT post DELETE error',error); // Error if any
 
                 });
 
@@ -171,7 +171,7 @@ export class NavbarComponent implements OnInit{
     }
 
     logout(){
-        console.log('loggging out');
+        //console.log('loggging out');
         localStorage.removeItem('currentUser');
     }
 

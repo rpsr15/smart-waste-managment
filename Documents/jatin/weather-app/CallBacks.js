@@ -14,5 +14,5 @@ var getUser = (id, callback) =>
 
 getUser(31,(userObject) =>
 {
-  console.log(userObject);
+  //console.log(userObject);
 });
