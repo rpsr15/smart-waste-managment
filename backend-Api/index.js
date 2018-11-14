@@ -1,6 +1,7 @@
 var app = require("express")();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+io.origins('*:*');
 var serviceAccount = require('./keys.json');
 var firebase = require("firebase");
 var morgan = require('morgan');
@@ -27,9 +28,9 @@ var config = {                                          //Setting up database
  var user = database.ref("users");
  var readBin = database.ref("binReadings");
  var location = database.ref("locations");
- var notificationUsers = database.ref("notificationUser");
  var notifications = database.ref("notifications");
  var notificationUser = database.ref("notificationUser");
+ var admin = database.ref("admins");
 
 
  app.use(function(req, res, next) {
@@ -188,53 +189,62 @@ app.post('/api/login', function(req, res)
     });
   });
 
+  app.get("/api/getAdmins", function(req, res)
+   {
+    admin.once("value")
+    .then(function(snapshot)
+     {
+      res.send(snapshot.val());
+    });
+  });
+
    app.get("/api/getLatestData", function(req, res){
-    readBin.on("value", function(snapshot) {
-     var data = snapshot.val();
-     var keys = Object.keys(data);
-     var binData = [];
-     var binIds = [];
-     for(var i = 0; i < keys.length; i++)
-     {
-        var x =  keys[i];
-        binData[i] = data[x];
-     }
-
-     for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
-     {
-        var y =  keys[j];
-        binIds[j] = data[y].payload_fields.hardware_id;
-     }
-
-       const unique = (value, index, self) => {
-       return self.indexOf(value) === index;
-     }
-      const uniqueIds = binIds.filter(unique);      //Taking unique binIds
-
-      var count = 0;
-      var bin = [];
-
-
-      for(var i = 0; i < uniqueIds.length; i++)
+     readBin.on("value", function(snapshot) {
+      var data = snapshot.val();
+      var keys = Object.keys(data);
+      var binData = [];
+      var binIds = [];
+      for(var i = 0; i < keys.length; i++)
       {
-        var first = 0;
-        for(var k = 0; k < binData.length; k++)
-        {
-          if(binData[k].payload_fields.hardware_id == uniqueIds[i])
-          {
-            if(first == 0)
-            {
-              biggest = binData[k];
-              first = 1;
-            }
-            else if(binData[k].metadata.time >= biggest.metadata.time )
-            {
-              biggest = binData[k];
-            }
-          }
-        }
-        bin[i] = biggest;
+         var x =  keys[i];
+         binData[i] = data[x];
       }
+
+      for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
+      {
+         var y =  keys[j];
+         binIds[j] = data[y].payload_fields.hardware_id;
+      }
+
+        const unique = (value, index, self) => {
+        return self.indexOf(value) === index;
+      }
+       const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+       //console.log("Unique ids: " + uniqueIds);
+
+       var count = 0;
+       var bin = [];
+
+       for(var i = 0; i < uniqueIds.length; i++)
+       {
+         var first = 0;
+         for(var k = 0; k < binData.length; k++)
+         {
+           if(binData[k].payload_fields.hardware_id == uniqueIds[i])
+           {
+             if(first == 0)
+             {
+               biggest = binData[k];
+               first = 1;
+             }
+             else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
+             {
+               biggest = binData[k];      //Get the latest record
+             }
+           }
+         }
+         bin[i] = biggest;
+       }
       res.send(bin);
     });
 });
@@ -242,155 +252,146 @@ app.post('/api/login', function(req, res)
 
 //Read latest bin data real-time
 
-    readBin.on("value", function(snapshot) {
-     var data = snapshot.val();
-     var keys = Object.keys(data);
-     var binData = [];
-     var binIds = [];
-     for(var i = 0; i < keys.length; i++)
-     {
-        var x =  keys[i];
-        binData[i] = data[x];
-     }
+readBin.on("value", function(snapshot) {
+ var data = snapshot.val();
+ var keys = Object.keys(data);
+ var binData = [];
+ var binIds = [];
+ for(var i = 0; i < keys.length; i++)
+ {
+    var x =  keys[i];
+    binData[i] = data[x];
+ }
 
-     for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
-     {
-        var y =  keys[j];
-        binIds[j] = data[y].payload_fields.hardware_id;
-     }
+ for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
+ {
+    var y =  keys[j];
+    binIds[j] = data[y].payload_fields.hardware_id;
+ }
 
-       const unique = (value, index, self) => {
-       return self.indexOf(value) === index;
-     }
-      const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+   const unique = (value, index, self) => {
+   return self.indexOf(value) === index;
+ }
+  const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+  //console.log("Unique ids: " + uniqueIds);
 
-      var count = 0;
-      var bin = [];
+  var count = 0;
+  var bin = [];
 
-
-      for(var i = 0; i < uniqueIds.length; i++)
+  for(var i = 0; i < uniqueIds.length; i++)
+  {
+    var first = 0;
+    for(var k = 0; k < binData.length; k++)
+    {
+      if(binData[k].payload_fields.hardware_id == uniqueIds[i])
       {
-        var first=0;
-        for(var k = 0; k < binData.length; k++)
+        if(first == 0)
         {
-          if(binData[k].payload_fields.hardware_id == uniqueIds[i])
-          {
-            if(first==0)
-            {
-              biggest = binData[k];
-              first=1;
-            }
-            else if(binData[k].metadata.time >= biggest.metadata.time )
-            {
-              biggest = binData[k];
-            }
-          }
+          biggest = binData[k];
+          first = 1;
         }
-        bin[i] = biggest;
+        else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
+        {
+          biggest = binData[k];     //Get the latest record
+        }
       }
+    }
+    bin[i] = biggest;
+  }
     io.emit('binReadings', bin );
-    });
+});
 
 
 
 //API that stores the users in the notificationUser that will be passed by the admin
  app.post("/api/storeUser", function(req,res){
-   var emails = req.body;
-   var email;
-   var keys = Object.keys(emails);
-   var count = 0;
-   for(var i = 0; i < keys.length; i++)
-   {
-     var k =  keys[i];
-     email = emails[k];
-     notificationUsers.push(email);       //Pushing emails who are subscribed to notificationUser
-     if(count == 0)
-     {
-       res.status(200).json({message: "Success: User have been stored.", result: true})
-     }
-     count++;
-   }
+   var data = req.body;
+   database.ref('notificationUser').remove();
+   database.ref().child('notificationUser').set(data);
+   res.status(200).json({message: "Success: successfully stored the user", result: true});
  });
 
- //Method for sending email and sending notification to the user (Real time)
 
+ //Method for sending email and sending notification to the user (Real time)
  readBin.on("value", function(snapshot) {
   var data = snapshot.val();
-  var keys = Object.keys(data);
-  var binData = [];
-  var binIds = [];
-  var user = [];
-  for(var i = 0; i < keys.length; i++)
+  if(data != null)
   {
-     var x =  keys[i];
-     binData[i] = data[x];
-  }
+    var keys = Object.keys(data);
+    var binData = [];
+    var binIds = [];
+    var user = [];
+    for(var i = 0; i < keys.length; i++)
+    {
+       var x =  keys[i];
+       binData[i] = data[x];
+    }
 
-  for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing
-  {
-     var y =  keys[j];
-     binIds[j] = data[y].payload_fields.hardware_id;
-  }
+    for(var j = 0; j < keys.length; j++)     //taking all the bins ids and storing in binids array
+    {
+       var y =  keys[j];
+       binIds[j] = data[y].payload_fields.hardware_id;
+    }
 
-    const unique = (value, index, self) => {
-    return self.indexOf(value) === index;
-  }
-   const uniqueIds = binIds.filter(unique);      //Taking unique binIds
+      const unique = (value, index, self) => {
+      return self.indexOf(value) === index;
+    }
+     const uniqueIds = binIds.filter(unique);      //Taking unique binIds
 
-   var count = 0;
-   var bin = [];
-
-
-   for(var i = 0; i < uniqueIds.length; i++)
-   {
-     var first=0;
-     for(var k = 0; k < binData.length; k++)
-     {
-       if(binData[k].payload_fields.hardware_id == uniqueIds[i])
-       {
-         if(first==0)
-         {
-           biggest = binData[k];
-           first = 1;
-         }
-         else if(binData[k].metadata.time >= biggest.metadata.time)
-         {
-             biggest = binData[k];
-         }
-       }
-     }
-     bin[i] = biggest;
-   }
-
-       let promiseToGetUsers =  new Promise(function(resolve, reject){
-       notificationUsers.once("value", function(snapshot){
-       var data = snapshot.val();
-       var keys = Object.keys(data);
-       for(var i = 0; i < keys.length; i++)
-       {
-         var k =  keys[i];
-         user[i] = data[k];        //Storing the users in the array from object
-       }
-       resolve(user);
-     });
-   });
-
-
-   promiseToGetUsers.then(function(user){
      var count = 0;
-     var lowLevel = [];
-     for(var i = 0; i < bin.length; i++)
+     var bin = [];
+     var bins = [];
+
+     for(var i = 0; i < uniqueIds.length; i++)
      {
-       if(bin[i].payload_fields.level <= 24)
+       var first=0;
+       for(var k = 0; k < binData.length; k++)
        {
-         lowLevel[i] = bin[i];
+         if(binData[k].payload_fields.hardware_id == uniqueIds[i])
+         {
+           if(first==0)
+           {
+             biggest = binData[k];
+             first = 1;
+           }
+           else if(Date.parse(binData[k].metadata.time) >= Date.parse(biggest.metadata.time))
+           {
+               biggest = binData[k];
+           }
+         }
        }
+       bins[i] = biggest;
      }
 
-       var filteredLowLevel = lowLevel.filter(function (el) {
-       return el != null;
+         for(var j = 0; j < bins.length; j++)
+         {
+           if(bins[j].payload_fields.level <= 24)
+           {
+             bin[j] = bins[j];
+           }
+         }
+         bin = bin.filter(Boolean)
+         console.log(bin);
+
+         let promiseToGetUsers =  new Promise(function(resolve, reject){
+         notificationUser.once("value", function(snapshot){
+         var data = snapshot.val();
+         if(data != null)
+         {
+           var keys = Object.keys(data);
+
+         for(var i = 0; i < keys.length; i++)
+         {
+           var k =  keys[i];
+           user[i] = data[k];        //Storing the users in the array from object
+         }
+       }
+         resolve(user);
        });
-       //console.log(filteredLowLevel);
+     });
+
+
+      promiseToGetUsers.then(function(user){
        function sendMail(id, level)
        {
          for(let j = 0; j < user.length; j++)
@@ -408,16 +409,15 @@ app.post('/api/login', function(req, res)
            notifications.push({
            email: user[j].email,
            status: msg.status,
-           message: `BIN ID ${id} is ${level}% left `
+           message: `BIN ID ${id} has ${level}% space left`
          });
         }
        }
 
-
-       for(let i = 0; i < filteredLowLevel.length; i++)
+       for(let i = 0; i < bin.length; i++)
        {
-         var id = filteredLowLevel[i].payload_fields.hardware_id;
-         var level = Math.round((filteredLowLevel[i].payload_fields.level/120)*100);
+         var id = bin[i].payload_fields.hardware_id;
+         var level = Math.round((bin[i].payload_fields.level/120)*100);
          let promiseToSendMail =  new Promise(function(resolve, reject){
              sendMail(id, level);
              resolve();
@@ -425,9 +425,10 @@ app.post('/api/login', function(req, res)
          promiseToSendMail.then(function(){
          });
        }
-
-   });
+     });
+ }
  });
+
 
 
 //Api for getting the notifications
@@ -476,6 +477,7 @@ app.post('/api/updateProfile', function(req, res)
 });
 
 
+
 app.post('/api/readNotifications', function(req, res)
  {
   var id = req.body.id;
@@ -514,77 +516,24 @@ app.post('/api/deleteNotifications', function(req, res)
   });
 });
 
-/*
-app.get("/api/sendEmail", function(req,res){
-   readBin.once("value", function(snapshot, errorData) {
-   var data = snapshot.val();
-   var keys = Object.keys(data);
-   //var count = 0;
-   var user = [];
-   for(var i = 0; i < keys.length; i++)
-   {
-     var k =  keys[i];
-     var level = data[k].payload_fields.level;      //Getting level of the bins
-     var id = data[k].payload_fields.hardware_id;
+//Api to push the data in the bin reading for testing
+app.post("/api/pushBinData", function(req,res){
+  var data = req.body;
+  console.log(data);
+  readBin.push(data);
 
-
-     if(level <= 24)                                 //Check if it is greater than 80%
-     {
-       //if(count == 0)
-       //{
-         function getTheUsers()     //Getting all the users who are subsrcibed to notification
-         {
-             return new Promise(function(resolve, reject)
-             {
-               notificationUsers.once("value", function(snapshot){
-             var data = snapshot.val();
-             var keys = Object.keys(data);
-             //console.log( data);
-             for(var i = 0; i < keys.length; i++)
-             {
-               var k =  keys[i];
-               user[i] = data[k];        //Storing the users in the array from object
-             }
-             resolve(user);
-           });
-         })
-         }
-         getTheUsers().then(function(users){
-           users.forEach(function (to, i , array) {       //Loop thru array for sending emails to multiple users
-             msg.to = to.email;
-         smtpTransport.sendMail(msg, function (err) {
-            if (err)
-            {
-             console.log('Sending to ' + to + ' failed: ' + err);
-             return;
-            }
-            else
-            {
-              console.log(`${id} at the ${location} is above 80% full`);
-              console.log('Sending to ' + to.email + ' success: ');
-              res.status(200).json({message: "Success: Successfully sent the emails.", result: true});
-              var location;
-
-                notifications.push({
-                email: to.email,
-                status: msg.status,
-                message: `${id} at the ${location} is above 80% full `
-              });
-            }
-
-           if (i === maillist.length - 1)       //If the length of mail list gets finished, then closing the connection
-           {
-               msg.transport.close();
-           }
-         });
-         });
-
-         });
-     }
-   }
 });
+
+
+//database.ref(`notificationUser`).remove();
+
+//Api to push notification Users for testing
+app.post("/api/pushNotificationUser", function(req,res){
+  var data = req.body;
+  console.log(data);
+  notificationUser.push(data);
 });
-*/
+
 
 io.on('connection', function(socket){
     console.log('a user connected');
