@@ -54,6 +54,8 @@ export class NavbarComponent implements OnInit{
                         "message":notif.message,
                         "status":notif.status
                     };
+                    console.log('real time',notification);
+
                     this.filterNotification(notification);
 
 
@@ -118,6 +120,7 @@ export class NavbarComponent implements OnInit{
 
                 this.showArray.push(e);
             }
+            //console.log(this.showArray);
 
 }
 

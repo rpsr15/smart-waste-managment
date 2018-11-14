@@ -320,6 +320,7 @@ readBin.on("value", function(snapshot) {
 
 //Method for sending email and sending notification to the user (Real time)
 readBin.once("value", function(snapshot) {
+    database.ref('notifications').remove();
     var data = snapshot.val();
     if(data != null)
     {
@@ -388,18 +389,18 @@ readBin.once("value", function(snapshot) {
                         var hardware_id = bins[j].payload_fields.hardware_id;
                         var level = bins[j].payload_fields.level;
                         var levelFilled = 120 - bins[j].payload_fields.level;
-                        var percentFilled = (levelFilled*100)/120;
+                        var percentFilled = Math.trunc((levelFilled*100)/120);
 
                         if(percentFilled >= threshold)
                         {
                             console.log('% filled',percentFilled,'level left',level,'levelfill',levelFilled,'threshold' , threshold, hardware_id, email);
                             msg.to = email;
-                            msg.text = `This is to inform you that BIN ID ${hardware_id} is ${Math.round(percentFilled)}% filled`;
+                            msg.text = `This is to inform you that BIN ID ${hardware_id} is ${Math.trunc(percentFilled)}% filled`;
 
                             smtpTransport.sendMail(msg, function(err){
                                 if(!err)
                                 {
-                                    console.log(`here BIN ID ${hardware_id} is ${percentFilled}% filled`);
+                                    console.log(`here BIN ID ${hardware_id} is ${percentFilled}% `);
                                     console.log('Sending to ' + to.email + ' success: ');
                                     console.log('here');
                                 }
@@ -411,7 +412,7 @@ readBin.once("value", function(snapshot) {
                             notifications.push({
                                 email: email,
                                 status: msg.status,
-                                message: `BIN ID ${hardware_id} is ${percentFilled}% filled`
+                                message: `BIN ${hardware_id} is ${percentFilled}% `
                             });
                         }
                     }
@@ -451,17 +452,19 @@ let p = new Promise(function(res,rej){
 
                         //send email and generate notification
                         console.log(user.threshold,threshold,levelFilled,hardware_id);
-                        let percentFilled = Math.round((levelFilled*100)/120);
+                        let percentFilled = Math.trunc((levelFilled*100)/120);
+                        console.log('ravi wala',percentFilled);
                         //add notification
-                        console.log('sending notif');
+                        console.log('sending notification');
                         notifications.push({
                             email: user.email,
                             status: msg.status,
-                            message: `The binID${hardware_id} is ${percentFilled}% filled`
+                            message: `bin ${hardware_id} is ${percentFilled}% `
                         });
 
                         //send email
-                        let msgString = `The binID${hardware_id} is ${percentFilled}% filled`;
+                        msg.to = user.email;
+                        msg.text = `This is to inform you that BIN ID ${hardware_id} is ${percentFilled}% filled`;
                         smtpTransport.sendMail(msg, function(err){
                             if(!err)
                             {
