@@ -3,7 +3,7 @@ import { Observable, Observer } from 'rxjs';
 
 import * as socketIo from 'socket.io-client';
 
-const SERVER_URL = 'http://localhost:3001';
+const SERVER_URL = '/';
 
 @Injectable()
 export class SocketService {
