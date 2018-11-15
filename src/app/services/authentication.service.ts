@@ -18,7 +18,7 @@ export class AuthenticationService {
         // //console.log(email,password);
 
 
-        return this.http.post("http://localhost:3000/api/login",{
+        return this.http.post("/api/login",{
             "email": email,
             "password": password
         },this.httpOptions)
@@ -69,7 +69,7 @@ export class AuthenticationService {
 
         //console.log('IN SIGNUP');
 
-        return this.http.post("http://localhost:3000/api/signUp",{
+        return this.http.post("/api/signUp",{
             "name":name,
             "email": email,
             "password": password
