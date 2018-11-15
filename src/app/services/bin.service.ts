@@ -5,10 +5,10 @@ import {Bin} from '../models/bin.model';
 @Injectable()
 export class BinService {
 
-    binsURL = 'http://localhost:3000/api/bins/data';
-    locationsURL = 'http://localhost:3000/api/getLocations';
-    binReadingsURL = 'http://localhost:3000/api/getLatestData';
-    allBinReadingsURL = 'http://localhost:3000/api/allBins';
+    binsURL = '/api/bins/data';
+    locationsURL = '/api/getLocations';
+    binReadingsURL = '/api/getLatestData';
+    allBinReadingsURL = '/api/allBins';
 
     createBinFromJson(jsonObject: object) {
         const capacity = +jsonObject['capacity'];
