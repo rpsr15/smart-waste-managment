@@ -21,13 +21,13 @@ export class DashboardComponent implements OnInit {
      map: Map;
      ioConnection: any;
      zoom = 13;
-     iconGreenBloop = 'src/assets/img/markers/green-bloop.png';
-     iconOragneBloop = 'src/assets/img/markers/orange-bloop.png';
-     iconRedBloop = 'src/assets/img/markers/red-bloop.png';
-     iconGreen = 'src/assets/img/markers/final-marker-green.png';
-     iconOrange = 'src/assets/img/markers/final-marker-orange.png';
-     markerShadow = 'src/assets/img/marker-shadow.png';
-     iconRed = 'src/assets/img/markers/final-marker-red.png';
+     iconGreenBloop = '/assets/img/markers/green-bloop.png';
+     iconOragneBloop = '/assets/img/markers/orange-bloop.png';
+     iconRedBloop = '/assets/img/markers/red-bloop.png';
+     iconGreen = '/assets/img/markers/final-marker-green.png';
+     iconOrange = '/assets/img/markers/final-marker-orange.png';
+     markerShadow = '/assets/img/marker-shadow.png';
+     iconRed = '/assets/img/markers/final-marker-red.png';
         // iconOrange =
      areaList = [];
      locations: String[];
@@ -357,7 +357,7 @@ export class DashboardComponent implements OnInit {
             <div class="card" style="padding:5px;" >
               <div class="container">
                     <div class="container" style="float:left; width:50%">
-                        <img src="src/assets/img/binimg${randomImageNumber}.png" style="border-radius:5px" width="70" height="80"></img>
+                        <img src="/assets/img/binimg${randomImageNumber}.png" style="border-radius:5px" width="70" height="80"></img>
                     </div>
                     <div class="container" style="float:left; width:50%">
                     <div>Max Capacity:</div>
