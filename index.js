@@ -1,3 +1,4 @@
+const express = require('express');
 var app = require("express")();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -20,7 +21,7 @@ var config = {                                          //Setting up database
   };
 
 
-app.use(app.static(__dirname + '/dist/'));
+app.use(express.static(__dirname + '/dist/'));
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
  firebase.initializeApp(config);              //Initializing database
