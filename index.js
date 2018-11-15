@@ -5,11 +5,11 @@ var serviceAccount = require('./keys.json');
 var firebase = require("firebase");
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var port = 3000;
+var port = process.env.PORT || 3000;
 var nodemailer = require('nodemailer');
 var configuration = require("./configuration.js");
 var message = require("./message.js");
-
+var path = require('path');
 var config = {                                          //Setting up database
     apiKey: "AIzaSyARk5k9jBvqHHjniavl08r84ReHjYPBSYc",
     authDomain: "data-ccd0e.firebaseapp.com",
@@ -18,6 +18,10 @@ var config = {                                          //Setting up database
     storageBucket: "data-ccd0e.appspot.com",
     messagingSenderId: "262459432768"
   };
+
+
+app.use(app.static(__dirname + '/dist/'));
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
  firebase.initializeApp(config);              //Initializing database
  var database = firebase.database();
