@@ -1,7 +1,11 @@
-const express = require('express');
-var app = require("express")();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var express = require('express');
+var app = express();
+var server = app.listen(8810);
+var io = require('socket.io').listen(server);
+
+
+//var http = require('http').Server(app);
+//var io = require('socket.io')(http);
 var serviceAccount = require('./keys.json');
 var firebase = require("firebase");
 var morgan = require('morgan');
@@ -11,6 +15,32 @@ var nodemailer = require('nodemailer');
 var configuration = require("./configuration.js");
 var message = require("./message.js");
 var path = require('path');
+
+
+
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('chat message', function(msg){
+
+    });
+  socket.on('disconnect', function(){
+      console.log('user disconnected');
+    });
+});
+
+
+
+// app.listen(port, () =>
+// console.log(`listening on port ${port}!`)
+// );
+
+// http.listen(8080, function(){
+// console.log('http listening on *:3001');
+// });
+
+
+
 var config = {                                          //Setting up database
     apiKey: "AIzaSyARk5k9jBvqHHjniavl08r84ReHjYPBSYc",
     authDomain: "data-ccd0e.firebaseapp.com",
@@ -605,20 +635,4 @@ app.post("/api/pushNotificationUser", function(req,res){
 });
 
 
-io.on('connection', function(socket){
-    console.log('a user connected');
-    socket.on('chat message', function(msg){
 
-      });
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-      });
-  });
-
-http.listen(8080, function(){
-  console.log('http listening on *:3001');
-});
-
-app.listen(port, () =>
- console.log(`listening on port ${port}!`)
-);
