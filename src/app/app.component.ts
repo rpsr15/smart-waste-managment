@@ -13,7 +13,7 @@ declare var $:any;
 
 export class AppComponent implements OnInit{
 
-  logStatus:boolean = false;
+  logStatus:boolean = true;
   isSignUp:boolean = false;
   showAlert:boolean = false;
   msg:string;
