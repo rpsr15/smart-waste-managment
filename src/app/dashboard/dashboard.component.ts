@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
 
      map: Map;
      ioConnection: any;
-     zoom = 13;
+     zoom = 12.3;
      iconGreenBloop = '/assets/img/markers/green-bloop.png';
      iconOragneBloop = '/assets/img/markers/orange-bloop.png';
      iconRedBloop = '/assets/img/markers/red-bloop.png';
@@ -65,29 +65,29 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         // connect to the socket
-        this.socketService.initSocket();
-        this.ioConnection = this.socketService.onNewReading().subscribe(
-            (readings) => {
-                // subscribe to real-time bin readings
-                console.log('koi mil gya');
+        // this.socketService.initSocket();
+        // this.ioConnection = this.socketService.onNewReading().subscribe(
+        //     (readings) => {
+        //         // subscribe to real-time bin readings
+        //         console.log('koi mil gya');
 
-                //update readings
-                for (const key in readings) {
+        //         //update readings
+        //         for (const key in readings) {
 
-                    const date = new Date(readings[key].metadata.time);
-                    const hID = readings[key].payload_fields.hardware_id;
-                    const level = readings[key].payload_fields.level;
-                    const bin = this.getBin(hID);
-                    bin.setCurrentLevel(level);
-                    bin.setLastUpdated(date);
+        //             const date = new Date(readings[key].metadata.time);
+        //             const hID = readings[key].payload_fields.hardware_id;
+        //             const level = readings[key].payload_fields.level;
+        //             const bin = this.getBin(hID);
+        //             bin.setCurrentLevel(level);
+        //             bin.setLastUpdated(date);
 
 
 
-                }
+        //         }
 
-                this.updateMap();
-            }
-        );
+        //         this.updateMap();
+        //     }
+        // );
 
         this.dropdownSettings = {
             singleSelection: false,
@@ -106,31 +106,35 @@ export class DashboardComponent implements OnInit {
             this.locations = locations;
             this.areaList = this.locations;
             this.selectedAreas = this.locations;
-
             this.binService.getBinData().then(
                 (binData: Bin[]) => {
+
+                   // console.log(binData)
+                    this.staticBinInfo = binData;
+                    this.selectedBins = this.staticBinInfo;
+                    this.updateMap();
                     ////console.log('got static bin data');
                     ////console.log(binData);
-                    this.staticBinInfo = binData;
-                    this.binService.getBinReadings().then(
-                        (readings) => {
-                            for (const key in readings) {
+                    // this.staticBinInfo = binData;
+                    // this.binService.getBinReadings().then(
+                    //     (readings) => {
+                    //         for (const key in readings) {
 
-                                const date = new Date(readings[key].metadata.time);
-                                const hID = readings[key].payload_fields.hardware_id;
-                                const level = readings[key].payload_fields.level;
-                                 const bin = this.getBin(hID);
-                                 bin.setCurrentLevel(level);
-                                 bin.setLastUpdated(date);
+                    //             const date = new Date(readings[key].metadata.time);
+                    //             const hID = readings[key].payload_fields.hardware_id;
+                    //             const level = readings[key].payload_fields.level;
+                    //              const bin = this.getBin(hID);
+                    //              bin.setCurrentLevel(level);
+                    //              bin.setLastUpdated(date);
 
 
 
-                            }
-                            this.selectedBins = this.staticBinInfo;
+                    //         }
+                    //         this.selectedBins = this.staticBinInfo;
 
-                            this.updateMap();
-                        }
-                    );
+                    //         this.updateMap();
+                    //     }
+                    // );
 
                 });
 

@@ -13,13 +13,13 @@ export class Bin {
 
 
     constructor(capacity: number, location: {latitude: number, longitude: number},
-         hardwareId: string, location_area: string, tags: string[]) {
+         hardwareId: string, location_area: string, tags: string[],currentLevel = 0) {
         this.capacity = capacity;
         this.location = location;
         this.hardwareId = hardwareId;
         this.location_area = location_area;
         this.tags = tags;
-        this.currentLevel = 0;
+        this.currentLevel = currentLevel;
     }
 
     getLastUpdated() {

@@ -187,20 +187,9 @@ export class StatsComponent implements OnInit {
                   // //console.log('got static bin data');
                   // //console.log(binData);
 
-                  this.binService.getBinReadings().then(
+                  this.binService.getBinData().then(
                       (readings) => {
-                          for (const key in readings) {
-
-                              const date = new Date(readings[key].metadata.time);
-                              const hID = readings[key].payload_fields.hardware_id;
-                              const level = readings[key].payload_fields.level;
-                              const bin = this.getBin(hID);
-                              bin.setCurrentLevel(level);
-                              bin.setLastUpdated(date);
-
-
-
-                          }
+                          this.staticBinInfo = readings
 
                           this.addPieData();
                       }

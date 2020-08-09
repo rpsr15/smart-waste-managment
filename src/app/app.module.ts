@@ -27,7 +27,9 @@ import { StatsComponent } from './stats/stats.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from 'environments/environment';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase, 'goClean'),
+    AngularFireDatabaseModule,
     BrowserModule,
     RouterModule.forRoot(AppRoutes),
     SidebarModule,

@@ -1,4 +1,4 @@
-var port = process.env.PORT || 8810;
+var port =  8810;
 var express = require('express');
 var app = express();
 var server = app.listen(port);
@@ -193,8 +193,12 @@ app.post('/api/login', function(req, res)
 //Getting all the bin data and the filtered data according to the location
  app.get("/api/bins/data", function(req, res)
   {
-    var x = Object.keys(req.query).length;      //If user selects all the location, The whole snapshot will be displayed
+    console.log("here test2")
+    var x = Object.keys(req.query).length;  
+        //If user selects all the location, The whole snapshot will be displayed
+        console.log(x)
     var area = req.query.area;
+    console.log(area)
     if(x == 0)
     {
       bin.once("value").then(function(snapshot)

@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
 
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="#notificationMenu">
                          <div [ngStyle]="{'color': unreadCount>0 ? 'red':''}" >
                           <i class="ti-bell"></i>
@@ -21,7 +21,7 @@
                          </div>
                       </a>
                       <ul class="dropdown-menu ofix">
-                          <!--<div *ngFor="let noti of notificationArray ">-->
+                         
                         <li *ngFor="let noti of showArray">
                             <a [ngStyle]="{'background-color': noti.status=='Unread' ? 'antiquewhite':'white'}" role="button" (click)="deleteNotification(noti)" >{{noti.message}}  </a>
                         </li>
@@ -33,7 +33,8 @@
                         <i class="ti-share"></i>
                         <p>Log Out</p>
                     </a>
-                </li>
+                </li> -->
+           
             </ul>
 
         </div>
