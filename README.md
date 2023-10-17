@@ -8,23 +8,23 @@ This Angular application, developed as a part of a university project in collabo
    - The application utilizes Angular for the front-end and an Express server, which are connected through Socket.io.
    - The real-time data updates allow for the continuous tracking of the fill levels of public waste bins.
    
-   ![Real Time Bin Details](screenshots/pr1.png)
+   ![Real Time Bin Details](https://i.ibb.co/5kgp2PK/pr1.png)
 
 
 2. **Filter Areas (PR4)**
    - Users can filter and select specific areas to monitor for waste bin fill levels, providing a customized monitoring experience.
-   ![Image PR2](screenshots/pr4.png)
+   ![Image PR2](https://i.ibb.co/ScmZJ17/pr4.png)
 
 
 3. **Historical Data and Analytics (PR3)**
    - Gain valuable insights into waste collection operations with insightful charts and analytics.
    - Analyze garbage collection data area-wise, for different days, to make informed decisions about resource allocation.
-   ![Image PR2](screenshots/pr3.png)
+   ![Image PR2](https://i.ibb.co/v1VtHQT/pr3.png)
 
 
 4. **Zoom Out View (PR2)**
    - Zooming out provides an overview of the collected status of bins across a larger area, facilitating a comprehensive perspective on waste management.
-   ![Image PR2](screenshots/pr2.png)
+   ![Image PR2](https://i.ibb.co/5LTPR9Y/pr2.png)
 
 
 ## Installation
