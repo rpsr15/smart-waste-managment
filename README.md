@@ -7,7 +7,7 @@ This Angular application, developed as a part of a university project in collabo
 1. **Real-Time Monitoring (PR1)**
    - The application utilizes Angular for the front-end and an Express server, which are connected through Socket.io.
    - The real-time data updates allow for the continuous tracking of the fill levels of public waste bins.
-   ![Image PR2](screenshots/pr1.png)
+   ![Real Time Bin Details](./screenshots/pr1.png)
 
 
 2. **Filter Areas (PR4)**
